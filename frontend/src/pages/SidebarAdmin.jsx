@@ -9,7 +9,7 @@ import {
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom';
 
-const Sidebar = () => {
+const SidebarAdmin = () => {
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
       <CDBSidebar textColor="#fff" backgroundColor="#333">
@@ -45,4 +45,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default SidebarAdmin;

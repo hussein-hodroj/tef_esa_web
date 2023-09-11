@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
-function Navbarr() {
+function NavbarAdmin() {
   return (
     <Navbar className="bg-dark">
       <Container>
@@ -15,4 +15,4 @@ function Navbarr() {
   );
 }
 
-export default Navbarr;
+export default NavbarAdmin;
