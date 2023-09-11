@@ -3,7 +3,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 function NavbarAdmin() {
   return (
-    <Navbar className="bg-dark">
+    <Navbar className="bg-black">
       <Container>
         
         <Navbar.Toggle />
