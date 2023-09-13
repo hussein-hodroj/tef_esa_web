@@ -9,6 +9,10 @@ const mysql = require("mysql2");
 app.use(express.json());
 app.use(cors()); // Enable CORS middleware
 
+
+app.use('/home', require('./src/routes/homepage'));
+app.use('/info', require('./src/routes/homeinfo'));
+
 const cnx = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
