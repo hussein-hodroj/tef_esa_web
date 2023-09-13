@@ -8,8 +8,9 @@ import Register from './pages/Register.jsx';
 
 function App() {
   return (
-   <Home /> 
     <BrowserRouter>
+       <Home /> 
+
       <Routes>
         <Route path="/register" element={<Register />} />
       </Routes>
