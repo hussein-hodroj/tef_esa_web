@@ -1,13 +1,22 @@
-const express = require('express'); // Use require for CommonJS modules
-const cors = require('cors');
-const dotenv = require('dotenv');
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import mysql from 'mysql';
+import multer from 'multer';
+import registerRoute from './src/routes/registers.js';
+
 dotenv.config();
 
 const app = express();
-const mysql = require("mysql2");
+const upload = multer({ dest: '../frontend/public/uploads/' });
 
+
+app.use(cors()); 
 app.use(express.json());
-app.use(cors()); // Enable CORS middleware
+app.use('/register', registerRoute);
+
+
+ const cnx = mysql.createConnection({
 
 
 app.use('/home', require('./src/routes/homepage'));
@@ -40,5 +49,14 @@ app.use((err, req, res, next) => {
     });
 });
 
+
+app.post('../frontend/public/uploads/', upload.single('profileImage'), (req, res) => {
+    const imageUrl = req.file.path; 
+    res.json({ imageUrl });
+  });
+
+
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`));
+
+export default cnx;

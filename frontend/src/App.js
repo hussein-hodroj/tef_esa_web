@@ -1,14 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+
 import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Register from './pages/Register.jsx';
 
 function App() {
   return (
-    <div className="App">
-     <Home />
-    </div>
+   <Home /> 
+    <BrowserRouter>
+      <Routes>
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
