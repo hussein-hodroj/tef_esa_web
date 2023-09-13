@@ -1,9 +1,10 @@
 
-const express = require('express');
+import express from 'express';
+import {getHomepageData} from '../controllers/homepage.js';
+
 const router = express.Router();
-const homepageController = require('../controllers/homepage');
+
+router.get('/homepage', getHomepageData);
 
 
-router.get('/homepage', homepageController.getHomepageData);
-
-module.exports = router;
+export default router;

@@ -1,6 +1,6 @@
-
-const mysql = require('mysql2');
-const dotenv = require('dotenv');
+import mysql from 'mysql';
+import dotenv from 'dotenv';
+import asyncHandler from 'express-async-handler';
 dotenv.config();
 
 const cnx = mysql.createConnection({
@@ -11,7 +11,7 @@ const cnx = mysql.createConnection({
 });
 
 
-exports.getHomepageData = (req, res) => {
+export const getHomepageData = asyncHandler(async (req, res) => {
   const query = 'SELECT * FROM homepage';
   cnx.query(query, (err, results) => {
     if (err) {
@@ -21,4 +21,4 @@ exports.getHomepageData = (req, res) => {
       res.status(200).json(results);
     }
   });
-};
+});

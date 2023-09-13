@@ -1,6 +1,16 @@
 import multer from 'multer';
 import asyncHandler from 'express-async-handler';
-import cnx from '../../Connect.js';
+import mysql from 'mysql';
+import dotenv from 'dotenv';
+dotenv.config();
+
+
+const cnx = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+});
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
