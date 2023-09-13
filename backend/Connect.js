@@ -3,7 +3,9 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import mysql from 'mysql';
 import multer from 'multer';
-// import registerRoute from './src/routes/registers.js';
+import registerRoute from './src/routes/registers.js';
+import homeRoute from './src/routes/homepage.js';
+import infoRoute from './src/routes/homeinfo.js';
 
 dotenv.config();
 
@@ -13,10 +15,10 @@ const upload = multer({ dest: '../frontend/public/uploads/' });
 
 app.use(cors()); 
 app.use(express.json());
-// app.use('/register', registerRoute);
+app.use('/register', registerRoute);
 
-app.use('/home', require('./src/routes/homepage'));
-app.use('/info', require('./src/routes/homeinfo'));
+app.use('/home', homeRoute);
+app.use('/info', infoRoute);
 
 const cnx = mysql.createConnection({
     host: process.env.DB_HOST,
