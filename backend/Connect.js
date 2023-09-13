@@ -18,6 +18,11 @@ app.use('/register', registerRoute);
 
  const cnx = mysql.createConnection({
 
+
+app.use('/home', require('./src/routes/homepage'));
+app.use('/info', require('./src/routes/homeinfo'));
+
+const cnx = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     database: process.env.DB_NAME,
