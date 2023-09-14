@@ -6,6 +6,10 @@ import multer from 'multer';
 import registerRoute from './src/routes/registers.js';
 import homeRoute from './src/routes/homepage.js';
 import infoRoute from './src/routes/homeinfo.js';
+import TEFEtudes from './src/routes/TEFEtudes.js';
+import TEFCanada from './src/routes/TEFCanada.js';
+import TEFAQ from './src/routes/TEFAQ.js';
+import TEFCourse from './src/routes/TEFCourse.js';
 
 dotenv.config();
 
@@ -19,6 +23,12 @@ app.use('/register', registerRoute);
 
 app.use('/home', homeRoute);
 app.use('/info', infoRoute);
+
+app.use('/TEFEtudes', TEFEtudes);
+app.use('/TEFCanada', TEFCanada);
+app.use('/TEFAQ', TEFAQ);
+app.use('/TEFCourse', TEFCourse);
+
 
 const cnx = mysql.createConnection({
     host: process.env.DB_HOST,

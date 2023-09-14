@@ -1,8 +1,57 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Register() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: '',
+  });
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const selectedDateParam = queryParams.get('date');
+  const totalCostParam = queryParams.get('cost');
+  const feesParam = queryParams.get('fees');
+  const infoidParam = queryParams.get('infoid');
+  const CurrencyParam = queryParams.get('Currency');
+
+
+  const selectedDate = selectedDateParam
+    ? new Date(selectedDateParam).toLocaleDateString()
+    : '';
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  
+};
   return (
     <div style={{backgroundColor: 'whitesmoke'}}>
+    {/* exemple for taking the date */}
+
+        <div className="row">
+
+        <div className='col-12'> <label>Selected Date: {selectedDateParam}</label></div>
+              <div className='col-4'><label> infoidParam: {infoidParam}</label></div>
+              <div className='col-4'><label>totalCostParam: {totalCostParam}</label></div>
+              <div className='col-4'><label>feesParam: {feesParam}</label></div>
+              <div className='col-4'><label>CurrencyParam: {CurrencyParam}</label></div>
+             
+           
+      </div>
+
+
+
 
       <div className=" d-flex justify-content-start align-items-start m-5">
         <form className="col-xl-7 col-lg-7 col-md-7 col-sm-7" action="" >
