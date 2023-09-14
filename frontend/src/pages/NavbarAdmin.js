@@ -1,6 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 function NavbarAdmin() {
   return (
     <Navbar className="bg-black">

@@ -8,9 +8,15 @@ import {
   CDBSidebarMenuItem,
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom';
+import NavbarAdmin from './NavbarAdmin.js';
+
+
 
 const SidebarAdmin = () => {
   return (
+    <div>
+    <NavbarAdmin />
+    
     <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
       <CDBSidebar textColor="#fff" backgroundColor="#000">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
@@ -41,6 +47,7 @@ const SidebarAdmin = () => {
               
         </CDBSidebarFooter>
       </CDBSidebar>
+    </div>
     </div>
   );
 };
