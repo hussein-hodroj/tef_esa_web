@@ -1,0 +1,33 @@
+.motivation-section {
+    margin-top: 20px;
+  }
+  
+  .form-check-label {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    font-size: 16px;
+  }
+  
+  .form-check-input {
+    margin-right: 8px;
+    appearance: none; 
+    width: 20px;
+    height: 20px;
+    border: 2px solid #999;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  
+  
+  
+  
+  /* Style for radio button hover effect */
+  .form-check-input:hover + .form-check-label::before {
+    border: 2px solid #0056b3;
+    color: #0056b3; 
+  }
+  
