@@ -32,6 +32,7 @@ const [isProfessional, setIsProfessional] = useState(false);
 const [CourseDateID, setCourseDateID] = useState('');
 const [courseId, setCourseId] = useState('');
 
+
 const onChangeFile=e=>{
   setPassportPhoto(e.target.files[0])
 }
@@ -159,45 +160,25 @@ const countryOptions = countries.map((country) => ({
   const feesParam = queryParams.get('fees');
   const infoidParam = queryParams.get('infoid');
   const CurrencyParam = queryParams.get('Currency');
-
+  const titleParam = queryParams.get('title');
 
   const selectedDate = selectedDateParam
     ? new Date(selectedDateParam).toLocaleDateString()
     : '';
 
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  // };
-
   return (
    
 
-      //   <div className="row">
-
-      //   <div className='col-12'> <label>Selected Date: {selectedDateParam}</label></div>
-      //         <div className='col-4'><label> infoidParam: {infoidParam}</label></div>
-      //         <div className='col-4'><label>totalCostParam: {totalCostParam}</label></div>
-      //         <div className='col-4'><label>feesParam: {feesParam}</label></div>
-      //         <div className='col-4'><label>CurrencyParam: {CurrencyParam}</label></div>
-             
-           
-      // </div>
-
-
-
-
-
     <div style={{backgroundColor: 'whitesmoke'}}>
       <Header />
+
               <h1 className="d-flex justify-content-start align-items-start mt-5 ms-4">Inscription
 </h1> 
 <p className="d-flex justify-content-start align-items-start mt-2 ms-4">(veuillez remplir toutes les cases ci-dessous)
  </p>
-      <div className=" d-flex justify-content-start align-items-start m-4">
+<div className='row'>
+  <div className='col-8'>
+  <div className=" d-flex justify-content-start align-items-start m-4">
         <form className="col-xl-7 col-lg-7 col-md-7 col-sm-7" onSubmit={(e)=>handleSubmit(e)} >
             <div className="mb-3 px-2 row ">
           <label className="form-group mb-2" htmlFor="title">
@@ -533,6 +514,25 @@ setIsImmigrationtoQuebec(true);   setMotivation('Professional');
 
 </div>
 </form>
+        
+</div>
+  </div>
+
+  <div className='col-3'>
+  <h4>{titleParam}</h4>
+  <div>
+    <label>Cost:</label>
+    <strong>
+      {CurrencyParam}
+      {totalCostParam !== null ? (
+        <>{totalCostParam}</>
+      ) : (
+        feesParam
+      )}
+    </strong>
+  </div>
+</div>
+
 </div>
 
 <Footer/>

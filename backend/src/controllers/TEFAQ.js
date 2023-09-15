@@ -12,7 +12,7 @@ const cnx = mysql.createConnection({
 
 
 export const getTefQData = asyncHandler(async (req, res) => {
-  const query = 'SELECT fees , infoid,Currency  FROM homeinfo where infoid=4';
+  const query = 'SELECT fees ,title, infoid,Currency  FROM homeinfo where infoid=4';
   cnx.query(query, (err, results) => {
     if (err) {
       console.error("Error fetching data from MySQL:", err);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import 'react-calendar/dist/Calendar.css';
-import { useFetcher, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import './Calendar.css';
 import Calendar from 'react-calendar';
 import Axios from 'axios';
@@ -10,8 +10,10 @@ const TEFCourse = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [bookedDates, setBookedDates] = useState([]);
   const [infoid, setinfoid] = useState(null); 
+  
   const [isBookNowDisabled, setIsBookNowDisabled] = useState(true);
   const [Currency, setCurrency] = useState(null);
+  const [title, settitle] = useState(null);
   const navigate = useNavigate();
   const [fees, setFees] = useState(null); 
 
@@ -22,6 +24,7 @@ const TEFCourse = () => {
         setFees(response.data[0].fees); 
         setCurrency(response.data[0].Currency);
         setinfoid(response.data[0].infoid);
+        settitle(response.data[0].title); 
       })
       .catch((error) => {
         console.error('Error fetching fees data:', error);
@@ -43,7 +46,7 @@ const TEFCourse = () => {
   const handleBookNow = () => {
     if (selectedDate ) {
       const queryParams = `date=${selectedDate.toISOString()}
-      &fees=${fees}&infoid=${infoid}&Currency=${Currency}`;
+      &fees=${fees}&infoid=${infoid}&title=${title}&Currency=${Currency}`;
       navigate(`/register?${queryParams}`);
     } else {
       alert('You have to choose at least one test to book a time.');
@@ -57,9 +60,9 @@ const TEFCourse = () => {
     return day === 0 || day === 6;
   };
 
-  const filterWeekends = (date) => {
-    return !isWeekend(date);
-  };
+  // const filterWeekends = (date) => {
+  //   return !isWeekend(date);
+  // };
 
   return (
     <div className="d-flex justify-content-center align-items-center p-5 " style={{ backgroundColor: '#F7F8F9' }}>

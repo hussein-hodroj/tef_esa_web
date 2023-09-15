@@ -8,8 +8,9 @@ import Axios from 'axios';
 const TEFAQ = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [bookedDates, setBookedDates] = useState([]);
-  const [costPerBooking, setCostPerBooking] = useState(55); 
+  // const [costPerBooking, setCostPerBooking] = useState(55); 
   const [infoid, setinfoid] = useState(null); 
+  const [title, settitle] = useState(null);
   const [numBookings, setNumBookings] = useState(1);
   const [totalCost, setTotalCost] = useState(0); 
   const [Currency, setCurrency] = useState(null);
@@ -31,6 +32,7 @@ const TEFAQ = () => {
         setFees(response.data[0].fees); 
         setCurrency(response.data[0].Currency);
         setinfoid(response.data[0].infoid); 
+        settitle(response.data[0].title); 
       })
       .catch((error) => {
         console.error('Error fetching fees data:', error);
@@ -68,16 +70,10 @@ const TEFAQ = () => {
     navigate('/');
   };
 
-
-
-
-
-
-
   const handleBookNow = () => {
     if (selectedDate && totalCost > 0) {
       const queryParams = `date=${selectedDate.toISOString()}&tests=${JSON.stringify(
-        selectedTests)}&cost=${totalCost}&fees=${fees}&infoid=${infoid}&Currency=${Currency}`;
+        selectedTests)}&cost=${totalCost}&fees=${fees}&infoid=${infoid}&Currency=${Currency}&title=${title} `;
       navigate(`/register?${queryParams}`);
     } else {
       alert('You have to choose at least one test to book a time.');
@@ -92,14 +88,11 @@ const TEFAQ = () => {
     });
   };
 
-  const handleNumBookingsChange = (selectedOption) => {
-    setNumBookings(selectedOption.value);
-  };
+  // const handleNumBookingsChange = (selectedOption) => {
+  //   setNumBookings(selectedOption.value);
+  // };
 
   
-
-
- 
 
   const joinedDate = new Date();
   joinedDate.setDate(joinedDate.getDate() + 10);
@@ -109,9 +102,9 @@ const TEFAQ = () => {
     return day === 0 || day === 6;
   };
 
-  const filterWeekends = (date) => {
-    return !isWeekend(date);
-  };
+  // const filterWeekends = (date) => {
+  //   return !isWeekend(date);
+  // };
 
   return (
     <div className="d-flex justify-content-center align-items-center p-5" style={{ backgroundColor: '#F7F8F9' }}>
@@ -156,7 +149,7 @@ const TEFAQ = () => {
                   <div className="col-6">
                     <label className="checkbox-label">
                       <input type="checkbox" onChange={() => toggleTest('expressionOrale')} />
-                      Expression orale (({Currency}) {fees})
+                      Expression orale ({Currency} {fees})
                     </label>
                   </div>
                 </div>
