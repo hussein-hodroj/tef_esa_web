@@ -165,32 +165,27 @@ const countryOptions = countries.map((country) => ({
     ? new Date(selectedDateParam).toLocaleDateString()
     : '';
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   });
+  // };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  
-};
   return (
-    <div style={{backgroundColor: 'whitesmoke'}}>
-    {/* exemple for taking the date */}
+   
 
-        <div className="row">
+      //   <div className="row">
 
-        <div className='col-12'> <label>Selected Date: {selectedDateParam}</label></div>
-              <div className='col-4'><label> infoidParam: {infoidParam}</label></div>
-              <div className='col-4'><label>totalCostParam: {totalCostParam}</label></div>
-              <div className='col-4'><label>feesParam: {feesParam}</label></div>
-              <div className='col-4'><label>CurrencyParam: {CurrencyParam}</label></div>
+      //   <div className='col-12'> <label>Selected Date: {selectedDateParam}</label></div>
+      //         <div className='col-4'><label> infoidParam: {infoidParam}</label></div>
+      //         <div className='col-4'><label>totalCostParam: {totalCostParam}</label></div>
+      //         <div className='col-4'><label>feesParam: {feesParam}</label></div>
+      //         <div className='col-4'><label>CurrencyParam: {CurrencyParam}</label></div>
              
            
-      </div>
+      // </div>
 
 
 
