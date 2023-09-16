@@ -3,9 +3,11 @@ import { useLocation } from 'react-router-dom';
 import Header from './Header.js';
 import Footer from './Footer.js';
 import Axios from 'axios';
+import Select from 'react-select'; 
 import '../css.css';
 
 function Register() {
+const [informations, setInformations] = useState([]);
 const [Title, setTitle] = useState('');
 const [PassportNumber, setPassportNumber] = useState('');
 const [FirstName, setFirstName] = useState('');
@@ -104,6 +106,14 @@ const handleSubmit = (e) => {
       });
   }
 };
+useEffect(() => {
+  Axios
+    .get('http://localhost:8000/register/get')
+    .then((response) => setInformations(response.data))
+    .catch((error) => console.log(error));
+}, []);
+
+
 const countries = [
   'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia', 'Austria',
   'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan', 'Bolivia',
@@ -179,7 +189,7 @@ const countryOptions = countries.map((country) => ({
 <div className='row'>
   <div className='col-8'>
   <div className=" d-flex justify-content-start align-items-start m-4">
-        <form className="col-xl-7 col-lg-7 col-md-7 col-sm-7" onSubmit={(e)=>handleSubmit(e)} >
+        <form className="col-xl-8 col-lg-8 col-md-8 col-sm-8" onSubmit={(e)=>handleSubmit(e)} >
             <div className="mb-3 px-2 row ">
           <label className="form-group mb-2" htmlFor="title">
             Titre <span className="text-danger">*</span>
@@ -258,7 +268,7 @@ const countryOptions = countries.map((country) => ({
   <div className="col-xl-5 col-lg-5 col-md-5 col-sm-5">
     <label htmlFor="dateOfBirth" className="form-label mb-2">Date de naissance <span className="text-danger">*</span></label>
     <input
-      type="text"
+      type="date"
       className="form-control"
       name="dateOfBirth"
       id="dateOfBirth"
@@ -268,35 +278,47 @@ const countryOptions = countries.map((country) => ({
     {errors.DateOfBirth && <p className="text-danger m-1 ">{errors.DateOfBirth}</p>}
   </div>
   <div className="col-xl-5 col-lg-5 col-md-5 col-sm-5">
-    <label htmlFor="nationality" className="form-label mb-2">Nationalité <span className="text-danger">*</span></label>
-    <select
-      
-      className="form-control"
-      name="nationality"
-      id="nationalite"
-      options={nationalities.map(nat => ({ value: nat, label: nat }))}
-            onChange={(e) => setNationality(e.target.value)}
+          <label htmlFor="nationality" className="form-label mb-2">
+            Nationalité <span className="text-danger">*</span>
+          </label>
+          <Select
+            options={nationalities.map((nationality, index) => ({
+              value: nationality,
+              label: nationality,
+            }))}
+            value={{ value: Nationality, label: Nationality }}
+            onChange={(selectedOption) => setNationality(selectedOption.value)}
+            placeholder="Choisir..."
+            isSearchable={true} 
+          />
+          {errors.Nationality && <p className="text-danger m-1 ">{errors.Nationality}</p>}
+        </div>
 
-      placeholder="Enter your nationality"
-    />
-    {errors.Nationality && <p className="text-danger m-1 ">{errors.Nationality}</p>}
-  </div>
 </div>
 
 <div className="mb-3 px-2 d-flex justify-content-between">
   <div className="col-xl-5 col-lg-5 col-md-5 col-sm-5">
-    <label htmlFor="language" className="form-label mb-2">Langue maternelle <span className="text-danger">*</span></label>
-    <input
-      type="text"
-      className="form-control"
-      name="language"
-      id="language"
-            onChange={(e) => setTongueLanguage(e.target.value)}
+  <label htmlFor="language" className="form-label mb-2">
+    Langue maternelle <span className="text-danger">*</span>
+  </label>
+  <select
+  className="form-control"
+  name="language"
+  id="language"
+  value={TongueLanguage}
+  onChange={(e) => setTongueLanguage(e.target.value)}
+>
+  <option value="" disabled>
+  Choisir...
+  </option>
+  <option value="Arabic">Arabic</option>
+  <option value="English">English</option>
+  <option value="French">French</option>
+</select>
 
-      placeholder="Enter your tongue language"
-    />
-     {errors.TongueLanguage && <p className="text-danger m-1 ">{errors.TongueLanguage}</p>}
-  </div>
+  {errors.TongueLanguage && <p className="text-danger m-1 ">{errors.TongueLanguage}</p>}
+</div>
+
   <div className="col-xl-5 col-lg-5 col-md-5 col-sm-5">
     <label htmlFor="address" className="form-label mb-2">Adresse <span className="text-danger">*</span></label>
     <input
@@ -313,20 +335,20 @@ const countryOptions = countries.map((country) => ({
 </div>
 
 <div className="mb-3 px-2 d-flex justify-content-between">
-  <div className="col-xl-5 col-lg-5 col-md-5 col-sm-5">
-    <label htmlFor="country" className="form-label mb-2">Pays <span className="text-danger">*</span></label>
-    <select
-      
-      className="form-control"
-      name="country"
-      id="country"
-      options={countryOptions}
-            onChange={(e) => setCountry(e.target.value)}
+ <div className="col-xl-5 col-lg-5 col-md-5 col-sm-5">
+  <label htmlFor="country" className="form-label mb-2">
+    Pays <span className="text-danger">*</span>
+  </label>
+  <Select
+            options={countryOptions}
+            value={{ value: Country, label: Country }}
+            onChange={(selectedOption) => setCountry(selectedOption.value)}
+            placeholder="Choisir..."
+            isSearchable={true} // Enable search
+          />
+  {errors.Country && <p className="text-danger m-1 ">{errors.Country}</p>}
+</div>
 
-      placeholder="Enter your country"
-    />
-      {errors.Country && <p className="text-danger m-1 ">{errors.Country}</p>}
-  </div>
   <div className="col-xl-5 col-lg-5 col-md-5 col-sm-5">
     <label htmlFor="town" className="form-label mb-2">Ville <span className="text-danger">*</span></label>
     <input
@@ -518,7 +540,8 @@ setIsImmigrationtoQuebec(true);   setMotivation('Professional');
 </div>
   </div>
 
-  <div className='col-3'>
+ 
+   <div className='col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex justify-content-start align-items-start'>
   <h4>{titleParam}</h4>
   <div>
     <label>Cost:</label>
@@ -533,8 +556,16 @@ setIsImmigrationtoQuebec(true);   setMotivation('Professional');
   </div>
 </div>
 
+<div className='col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex justify-content-start align-items-start'>
+  {informations.map((information) => (
+    <p key={information._id}>{information.info.trim()}</p>
+  ))}
 </div>
 
+   
+
+
+</div>
 <Footer/>
 
     </div>
