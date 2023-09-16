@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Register from './pages/Register.jsx';
 import SidebarAdmin from './pages/SidebarAdmin.js';
 import HomeUpdate from './pages/updatehomepage.js';
-=import TEFEtudes from './pages/TEFEtudes.js';
+import TEFEtudes from './pages/TEFEtudes.js';
 import TEFCanada from './pages/TEFCanada.js';
 import TEFAQ from './pages/TEFAQ.js';
 import TEFCourse from './pages/TEFCourse.js'
