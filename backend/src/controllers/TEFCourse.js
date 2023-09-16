@@ -12,7 +12,7 @@ const cnx = mysql.createConnection({
 
 
 export const getTEFCourseData = asyncHandler(async (req, res) => {
-  const query = 'SELECT fees ,infoid,title, Currency  FROM homeinfo where infoid=1';
+  const query = 'SELECT * FROM courseinfo';
   cnx.query(query, (err, results) => {
     if (err) {
       console.error("Error fetching data from MySQL:", err);
@@ -22,4 +22,3 @@ export const getTEFCourseData = asyncHandler(async (req, res) => {
     }
   });
 });
-
