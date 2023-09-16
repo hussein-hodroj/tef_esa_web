@@ -5,7 +5,8 @@ import Home from './pages/Home.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Register from './pages/Register.jsx';
 import SidebarAdmin from './pages/SidebarAdmin.js';
-import TEFEtudes from './pages/TEFEtudes.js';
+import HomeUpdate from './pages/updatehomepage.js';
+=import TEFEtudes from './pages/TEFEtudes.js';
 import TEFCanada from './pages/TEFCanada.js';
 import TEFAQ from './pages/TEFAQ.js';
 import TEFCourse from './pages/TEFCourse.js'
@@ -16,6 +17,7 @@ function App() {
       <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/updatehome" element={<HomeUpdate />} />
       <Route path="/dashboard" element={<SidebarAdmin />} />
       <Route path="/TEFEtudes" element={<TEFEtudes/>}/>
       <Route path="/TEFCanada" element={< TEFCanada/>}/>

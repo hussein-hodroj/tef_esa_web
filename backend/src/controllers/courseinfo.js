@@ -11,8 +11,8 @@ const cnx = mysql.createConnection({
 });
 
 
-export const getHomeinfoData = asyncHandler(async (req, res) => {
-  const query = 'SELECT * FROM homeinfo';
+export const getCourseinfoData = asyncHandler(async (req, res) => {
+  const query = 'SELECT * FROM courseinfo';
   cnx.query(query, (err, results) => {
     if (err) {
       console.error("Error fetching data from MySQL:", err);
@@ -24,13 +24,13 @@ export const getHomeinfoData = asyncHandler(async (req, res) => {
 });
 
 
-export const updateHomeinfoData = asyncHandler(async (req, res) => {
+export const updateCourseinfoData = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const { title, information,Currency , fees, link  } = req.body;
-  const updateQuery = `UPDATE homeinfo SET title=?,Currency=? ,information=?, fees=?, link=? WHERE infoid=?, coursetitle=? ,courseinfo=?,coursefees=?,courselink=?,coursecurrency=? `;
+  const { coursetitle, courseinfo, coursefees, courselink, coursecurrency  } = req.body;
+  const updateQuery = `UPDATE courseinfo SET coursetitle=? ,courseinfo=?,coursefees=?,courselink=?,coursecurrency=? `;
   cnx.query(
     updateQuery,
-    [title, information,Currency  ,fees, link, id],
+    [coursetitle, courseinfo, coursefees, courselink, coursecurrency, id],
     (err, results) => {
       if (err) {
         console.error('Error updating data:', err);
@@ -43,9 +43,9 @@ export const updateHomeinfoData = asyncHandler(async (req, res) => {
 });
 
 
-export const deleteHomeinfoData = asyncHandler(async (req, res) => {
+export const deleteCourseinfoData = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const deleteQuery = `DELETE FROM homeinfo WHERE infoid=?`;
+  const deleteQuery = `DELETE FROM courseinfo WHERE courseid=?`;
   cnx.query(deleteQuery, [id], (err, results) => {
     if (err) {
       console.error('Error deleting data:', err);

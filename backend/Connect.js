@@ -6,6 +6,7 @@ import multer from 'multer';
 import registerRoute from './src/routes/registers.js';
 import homeRoute from './src/routes/homepage.js';
 import infoRoute from './src/routes/homeinfo.js';
+import courseRoute from './src/routes/courseinfo.js';
 import TEFEtudes from './src/routes/TEFEtudes.js';
 import TEFCanada from './src/routes/TEFCanada.js';
 import TEFAQ from './src/routes/TEFAQ.js';
@@ -23,6 +24,7 @@ app.use('/register', registerRoute);
 
 app.use('/home', homeRoute);
 app.use('/info', infoRoute);
+app.use('/course', courseRoute);
 
 app.use('/TEFEtudes', TEFEtudes);
 app.use('/TEFCanada', TEFCanada);
