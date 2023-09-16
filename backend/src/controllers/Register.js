@@ -69,3 +69,23 @@ export const registerCandidate = asyncHandler(async (req, res) => {
     res.status(500).json({ message: 'Failed to register candidate' });
   }
 });
+
+export const getInfo = asyncHandler(async (req, res) => {
+  try {
+    const sql = "SELECT info FROM registerinfo";
+
+    // Execute the SQL query
+    cnx.query(sql, (err, data) => {
+      if (err) {
+        console.error('Error retrieving data:', err);
+        return res.status(500).json({ message: 'Failed to retrieve data' });
+      }
+
+      // If the query was successful, return the data
+      return res.json(data);
+    });
+  } catch (error) {
+    console.error('Error retrieving data:', error);
+    res.status(500).json({ message: 'Failed to retrieve data' });
+  }
+});
