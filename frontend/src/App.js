@@ -5,6 +5,7 @@ import Home from './pages/Home.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Register from './pages/Register.jsx';
 import SidebarAdmin from './pages/SidebarAdmin.js';
+import HomeUpdate from './pages/updatehomepage.js';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/updatehome" element={<HomeUpdate />} />
       <Route path="/dashboard" element={<SidebarAdmin />} />
 
       </Routes>

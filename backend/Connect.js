@@ -6,6 +6,7 @@ import multer from 'multer';
 import registerRoute from './src/routes/registers.js';
 import homeRoute from './src/routes/homepage.js';
 import infoRoute from './src/routes/homeinfo.js';
+import courseRoute from './src/routes/courseinfo.js';
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use('/register', registerRoute);
 
 app.use('/home', homeRoute);
 app.use('/info', infoRoute);
+app.use('/course', courseRoute);
 
 const cnx = mysql.createConnection({
     host: process.env.DB_HOST,
