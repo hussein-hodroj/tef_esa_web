@@ -1,0 +1,36 @@
+
+.custom-calendar-container {
+    width: 80%; 
+    height: 80%; 
+  }
+  
+  .custom-calendar {
+   
+    width: 80%;
+    height: 80%;
+  }
+  .line {
+    border-bottom: 1px solid #000; 
+    margin-top: 5px; 
+    margin-bottom: 5px;
+}
+
+
+ 
+.btn-transparent:hover {
+    background-color: #F7F8F9; 
+    color: #000; 
+    
+  }
+  
+
+  
+.checkbox-label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .checkbox-label input[type="checkbox"] {
+    margin-right: 5px;
+  }
+  
