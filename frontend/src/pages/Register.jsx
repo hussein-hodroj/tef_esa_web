@@ -93,7 +93,7 @@ const handleSubmit = (e) => {
     formData.append('PassportPhoto', PassportPhoto);
 
     Axios
-      .post('http://localhost:8000/user/register/', formData, {
+      .post('http://localhost:8000/register/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -181,21 +181,38 @@ const countryOptions = countries.map((country) => ({
 
     <div style={{backgroundColor: 'whitesmoke'}}>
       <Header />
-
-              <h1 className="d-flex justify-content-start align-items-start mt-5 ms-4">Inscription
+                <div className="row d-flex">
+                  <div className="col-xl-7 col-lg-7 col-md-7 col-sm-7">
+              <h1 className="d-flex justify-content-center align-items-center mt-5 ">Inscription
 </h1> 
-<p className="d-flex justify-content-start align-items-start mt-2 ms-4">(veuillez remplir toutes les cases ci-dessous)
+<p className="d-flex justify-content-center align-items-center mt-2 ">(veuillez remplir toutes les cases ci-dessous)
  </p>
-<div className='row'>
-  <div className='col-8'>
-  <div className=" d-flex justify-content-start align-items-start m-4">
+ </div>
+ <div className="col-xl-5 col-lg-5 col-md-5 col-sm-5  mt-5 ">
+        <h4>{titleParam}</h4>
+        <div>
+          <label>Cost:</label>
+          <strong>
+          {CurrencyParam}
+      {totalCostParam !== null ? (
+        <>{totalCostParam}</>
+      ) : (
+        feesParam
+      )}
+          </strong>
+        </div>
+      </div>
+ </div>
+<div className='row d-flex justify-content-center'>
+  <div className="col-8">
+  <div className=" d-flex justify-content-center align-items-center m-4">
         <form className="col-xl-8 col-lg-8 col-md-8 col-sm-8" onSubmit={(e)=>handleSubmit(e)} >
             <div className="mb-3 px-2 row ">
-          <label className="form-group mb-2" htmlFor="title">
+          <h4 className="form-group mb-2" htmlFor="title">
             Titre <span className="text-danger">*</span>
             <div className="d-flex justify-content-start mt-2">
             <div className="form-check">
-  <input type="radio" className="form-check-input" id="titlecheck2" name="firstradio"
+  <input type="radio" className="form-check-input" id="titlecheck1" name="firstradio"
    checked={isMadamChecked}
    onChange={() => {
      setIsMisterChecked(false);
@@ -203,24 +220,25 @@ const countryOptions = countries.map((country) => ({
      setTitle('Madame');
    }}
     />
-  <label className="form-check-label" htmlFor="titlecheck2">Madame</label>
+  <label className="form-check-label" htmlFor="titlecheck1">Madame</label>
 
 </div>
             <div className="form-check">
-  <input type="radio" className="form-check-input" id="titlecheck1" name="firstradio"
+  <input type="radio" className="form-check-input" id="titlecheck2" name="firstradio"
  checked={isMisterChecked}
  onChange={() => {
+  console.log('Mister radio selected'); 
    setIsMisterChecked(true);
    setIsMadamChecked(false);
    setTitle('Monsieur');
  }}
   />
-  <label className="form-check-label me-4" htmlFor="titlecheck1">Monsieur</label>
+  <label className="form-check-label me-4" htmlFor="titlecheck2">Monsieur</label>
 </div>
 
 
 </div>
-          </label>
+          </h4>
         {errors.Title && <p className="text-danger m-1 ">{errors.Title}</p>}
             </div>            
             <div className="row mb-3 px-2">
@@ -536,33 +554,22 @@ setIsImmigrationtoQuebec(true);   setMotivation('Professional');
 
 </div>
 </form>
-        
 </div>
-  </div>
+</div>
+
+
 
  
-   <div className='col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex justify-content-start align-items-start'>
-  <h4>{titleParam}</h4>
-  <div>
-    <label>Cost:</label>
-    <strong>
-      {CurrencyParam}
-      {totalCostParam !== null ? (
-        <>{totalCostParam}</>
-      ) : (
-        feesParam
-      )}
-    </strong>
-  </div>
-</div>
+  <div className="col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex justify-content-start align-items-start ">
+      
+      <div className="d-flex justify-content-start align-items-start ">
+        {informations.map((information) => (
+          <p key={information._id}>{information.info.trim()}</p>
+        ))}
+      </div>
+    </div>
 
-<div className='col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex justify-content-start align-items-start'>
-  {informations.map((information) => (
-    <p key={information._id}>{information.info.trim()}</p>
-  ))}
-</div>
 
-   
 
 
 </div>
