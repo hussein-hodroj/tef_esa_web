@@ -177,8 +177,7 @@ const countryOptions = countries.map((country) => ({
     : '';
 
   return (
-   
-
+  
     <div style={{backgroundColor: 'whitesmoke'}}>
       <Header />
                 <div className="row d-flex">
@@ -362,7 +361,7 @@ const countryOptions = countries.map((country) => ({
             value={{ value: Country, label: Country }}
             onChange={(selectedOption) => setCountry(selectedOption.value)}
             placeholder="Choisir..."
-            isSearchable={true} // Enable search
+            isSearchable={true} 
           />
   {errors.Country && <p className="text-danger m-1 ">{errors.Country}</p>}
 </div>
