@@ -36,10 +36,10 @@ export const upload = multer({ storage: storage });
 export const registerCandidate = asyncHandler(async (req, res) => {
   try {
     const sql =
-      "INSERT INTO `registrations` (title, PassportNumber, FirstName, LastName, TongueLanguage, Nationality, Address, Country, Town, Email, Phone, Motivation, CourseDateID, RegistrationDate, PaymentStatus, PassportPhoto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      "INSERT INTO `registrations` (Title, PassportNumber, FirstName, LastName, TongueLanguage, Nationality, Address, Country, Town, Email, Phone, Motivation, CourseDateID, DateOfBirth, PaymentStatus, PassportPhoto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     const values = [
-      req.body.title,
+      req.body.Title,
       req.body.PassportNumber,
       req.body.FirstName,
       req.body.LastName,
