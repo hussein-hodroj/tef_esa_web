@@ -6,7 +6,10 @@ import multer from 'multer';
 import registerRoute from './src/routes/registers.js';
 import homeRoute from './src/routes/homepage.js';
 import infoRoute from './src/routes/homeinfo.js';
-
+import loginRoute from './src/routes/login.js';
+import protectedRoute from './src/routes/protected.js';
+import forgotPasswordRoute from './src/routes/forgotpassword.js';
+import resetPasswordRoute from './src/routes/resetPassword.js';
 dotenv.config();
 
 const app = express();
@@ -19,6 +22,11 @@ app.use('/register', registerRoute);
 
 app.use('/home', homeRoute);
 app.use('/info', infoRoute);
+app.use('/',loginRoute);
+app.use('/protected',protectedRoute);
+app.use('/',forgotPasswordRoute);
+app.use('/',resetPasswordRoute);
+
 
 const cnx = mysql.createConnection({
     host: process.env.DB_HOST,
