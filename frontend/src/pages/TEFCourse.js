@@ -9,25 +9,25 @@ import Axios from 'axios';
 const TEFCourse = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [bookedDates, setBookedDates] = useState([]);
-  const [infoid, setinfoid] = useState(null); 
+  const [courseinfo, setcourseinfo] = useState(null); 
   
   const [isBookNowDisabled, setIsBookNowDisabled] = useState(true);
-  const [Currency, setCurrency] = useState(null);
-  const [title, settitle] = useState(null);
+  const [coursecurrency, setcoursecurrency] = useState(null);
+  const [coursetitle, setcoursetitle] = useState(null);
   const navigate = useNavigate();
-  const [fees, setFees] = useState(null); 
+  const [coursefees, setcoursefees] = useState(null); 
 
   useEffect(() => {
    
     Axios.get('http://localhost:8000/TEFCourse/TEFCourse') 
       .then((response) => {
-        setFees(response.data[0].fees); 
-        setCurrency(response.data[0].Currency);
-        setinfoid(response.data[0].infoid);
-        settitle(response.data[0].title); 
+        setcoursefees(response.data[0].coursefees); 
+        setcoursecurrency(response.data[0].coursecurrency);
+        setcourseinfo(response.data[0].courseinfo);
+        setcoursetitle(response.data[0].coursetitle); 
       })
       .catch((error) => {
-        console.error('Error fetching fees data:', error);
+        console.error('Error fetching coursefees data:', error);
       });
   }, []);
 
@@ -44,9 +44,9 @@ const TEFCourse = () => {
   };
 
   const handleBookNow = () => {
-    if (selectedDate ) {
-      const queryParams = `date=${selectedDate.toISOString()}
-      &fees=${fees}&infoid=${infoid}&title=${title}&Currency=${Currency}`;
+
+    if (selectedDate) {
+      const queryParams = `date=${selectedDate.toISOString()}&fees=${coursefees}&title=${coursetitle}&Currency=${coursecurrency}&infoId=${courseinfo}`;
       navigate(`/register?${queryParams}`);
     } else {
       alert('You have to choose at least one test to book a time.');
@@ -99,7 +99,7 @@ const TEFCourse = () => {
               <div className="col-6 px-5 pb-2">
                 <div className=" inline text-end ">
                 <strong>
-                {Currency ? `${Currency} ${fees ? fees : 'Loading...'} ` : 'Loading...'} 
+                {coursecurrency ? `${coursecurrency} ${coursefees ? coursefees : 'Loading...'} ` : 'Loading...'} 
                 
                
                   </strong>

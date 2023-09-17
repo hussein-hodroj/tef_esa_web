@@ -61,9 +61,7 @@ const TEFCanada = () => {
     return day === 0 || day === 6;
   };
 
-  // const filterWeekends = (date) => {
-  //   return !isWeekend(date);
-  // };
+
 
   return (
     <div className="d-flex justify-content-center align-items-center p-5" style={{ backgroundColor: '#F7F8F9' }}>
