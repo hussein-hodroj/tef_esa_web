@@ -5,9 +5,16 @@ import Home from './pages/Home.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Register from './pages/Register.jsx';
 import SidebarAdmin from './pages/SidebarAdmin.js';
+
 import LoginAdmin from './pages/LoginAdmin.js';
 import ForgotPassword from './pages/ForgotPassword.js';
 import ResetPassword from './pages/ResetPassword.js';
+import HomeUpdate from './pages/updatehomepage.js';
+import TEFEtudes from './pages/TEFEtudes.js';
+import TEFCanada from './pages/TEFCanada.js';
+import TEFAQ from './pages/TEFAQ.js';
+import TEFCourse from './pages/TEFCourse.js'
+
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +25,12 @@ function App() {
       <Route path="/dashboard" element={<SidebarAdmin />} />
       <Route path='/forgotpassword' element={<ForgotPassword/>} />
       <Route path="/reset-password/:userID/:resetToken" element={<ResetPassword />} />
+      <Route path="/updatehome" element={<HomeUpdate />} />
+      <Route path="/dashboard" element={<SidebarAdmin />} />
+      <Route path="/TEFEtudes" element={<TEFEtudes/>}/>
+      <Route path="/TEFCanada" element={< TEFCanada/>}/>
+      <Route path="/TEFAQ" element={< TEFAQ/>}/>
+      <Route path="/TEFCourse" element={< TEFCourse/>}/>
       </Routes>
     </BrowserRouter>
   );

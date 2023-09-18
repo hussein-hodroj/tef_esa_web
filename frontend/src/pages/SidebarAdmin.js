@@ -56,6 +56,7 @@ const SidebarAdmin = () => {
             <div onClick={() => navigate('/analytics')} className="activeClicked">
               <CDBSidebarMenuItem icon="chart-line" className='bg-black text-white'>Analytics</CDBSidebarMenuItem>
             </div>
+
           </CDBSidebarMenu>
         </CDBSidebarContent>
 

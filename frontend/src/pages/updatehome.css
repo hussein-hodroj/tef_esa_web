@@ -1,0 +1,49 @@
+.home-update-container{
+  margin-left: 10%;
+}
+.section h1 {
+  color: blue;
+  margin-top: 60px;
+  margin-right: 20px; 
+  text-align: left; 
+  font-size: large;
+ 
+}
+
+.input-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.input-row {
+  width: calc(50% - 10px);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px; 
+}
+
+.input-row label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input-row input,
+.input-row textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+button {
+  background-color: #fff;
+  color: #000;
+  padding: 10px 20px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}

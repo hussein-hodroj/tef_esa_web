@@ -10,6 +10,12 @@ import loginRoute from './src/routes/login.js';
 import protectedRoute from './src/routes/protected.js';
 import forgotPasswordRoute from './src/routes/forgotpassword.js';
 import resetPasswordRoute from './src/routes/resetPassword.js';
+import courseRoute from './src/routes/courseinfo.js';
+import TEFEtudes from './src/routes/TEFEtudes.js';
+import TEFCanada from './src/routes/TEFCanada.js';
+import TEFAQ from './src/routes/TEFAQ.js';
+import TEFCourse from './src/routes/TEFCourse.js';
+
 dotenv.config();
 
 const app = express();
@@ -26,6 +32,11 @@ app.use('/',loginRoute);
 app.use('/protected',protectedRoute);
 app.use('/',forgotPasswordRoute);
 app.use('/',resetPasswordRoute);
+app.use('/course', courseRoute);
+app.use('/TEFEtudes', TEFEtudes);
+app.use('/TEFCanada', TEFCanada);
+app.use('/TEFAQ', TEFAQ);
+app.use('/TEFCourse', TEFCourse);
 
 
 const cnx = mysql.createConnection({
