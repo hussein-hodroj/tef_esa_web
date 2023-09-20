@@ -22,3 +22,16 @@ export const getTefQData = asyncHandler(async (req, res) => {
     }
   });
 });
+
+export const getTEFAQDate = asyncHandler(async (req, res) => {
+  // const query = 'SELECT date FROM lockdates WHERE status=1';
+  const query = 'SELECT DATE_FORMAT(date, "%Y-%m-%d") AS day FROM lockdates WHERE status = 1';
+  cnx.query(query, (err, results) => {
+    if (err) {
+      console.error("Error fetching data from MySQL:", err);
+      res.status(500).json({ message: "Something went wrong" });
+    } else {
+      res.status(200).json(results);
+    }
+  });
+});

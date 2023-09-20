@@ -4,33 +4,57 @@ import {  useNavigate } from 'react-router-dom';
 import './Calendar.css';
 import Calendar from 'react-calendar';
 import Axios from 'axios';
-
+import Header from '../pages/Header.js';
+import Footer from '../pages/Footer.js';
 
 const TEFCourse = () => {
+
   const [selectedDate, setSelectedDate] = useState(null);
   const [bookedDates, setBookedDates] = useState([]);
-  const [courseinfo, setcourseinfo] = useState(null); 
-  
+  const [infoid, setinfoid] = useState(null); 
+  const [type, settype] = useState(null); 
+  const [Currency, setCurrency] = useState(null);
+ 
+
+  const [date, setdate] = useState(null);
+  const [title, settitle] = useState(null);
   const [isBookNowDisabled, setIsBookNowDisabled] = useState(true);
-  const [coursecurrency, setcoursecurrency] = useState(null);
-  const [coursetitle, setcoursetitle] = useState(null);
+  const [fees, setFees] = useState(null);
+  const [disabledDates, setDisabledDates] = useState([]);
+
+
   const navigate = useNavigate();
-  const [coursefees, setcoursefees] = useState(null); 
+
 
   useEffect(() => {
    
     Axios.get('http://localhost:8000/TEFCourse/TEFCourse') 
       .then((response) => {
-        setcoursefees(response.data[0].coursefees); 
-        setcoursecurrency(response.data[0].coursecurrency);
-        setcourseinfo(response.data[0].courseinfo);
-        setcoursetitle(response.data[0].coursetitle); 
+        setFees(response.data[0].fees);
+        setCurrency(response.data[0].Currency); 
+        setinfoid(response.data[0].infoid);
+        settype(response.data[0].settype);
+        settitle(response.data[0].title); 
       })
       .catch((error) => {
-        console.error('Error fetching coursefees data:', error);
+        console.error('Error fetching fees data:', error);
+      });
+  }, []);
+  useEffect(() => {
+    Axios.get('http://localhost:8000/TEFCourse/TEFCourse-date')
+      .then((response) => {
+        const disabledDates = response.data.map((item) => new Date(item.day));
+        setDisabledDates(disabledDates);
+        setdate(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching fees data:', error);
       });
   }, []);
 
+  useEffect(() => {
+    console.log('***********', date);
+  }, [date]);
 
   const handleDateClick = (date) => {
     setSelectedDate(date);
@@ -45,27 +69,33 @@ const TEFCourse = () => {
 
   const handleBookNow = () => {
 
-    if (selectedDate) {
-      const queryParams = `date=${selectedDate.toISOString()}&fees=${coursefees}&title=${coursetitle}&Currency=${coursecurrency}&infoId=${courseinfo}`;
+    if (selectedDate ) {
+      const queryParams = `date=${selectedDate.toISOString()}
+      &fees=${fees}&infoid=${infoid}&Currency=${Currency}&title=${title}&type=${type}`;
       navigate(`/register?${queryParams}`);
     } else {
       alert('You have to choose at least one test to book a time.');
     }
   };
-  const joinedDate = new Date();
-  joinedDate.setDate(joinedDate.getDate() + 10);
-
-  const isWeekend = (date) => {
-    const day = date.getDay();
-    return day === 0 || day === 6;
+  
+  const tileDisabled = ({ date, view }) => {
+    if (view === 'month') {
+     
+      return !disabledDates.some((disabledDate) => {
+        return (
+          date.getDate() === disabledDate.getDate() &&
+          date.getMonth() === disabledDate.getMonth() &&
+          date.getFullYear() === disabledDate.getFullYear()
+        );
+      });
+    }
+    return false;
   };
-
-  // const filterWeekends = (date) => {
-  //   return !isWeekend(date);
-  // };
-
+ 
   return (
-    <div className="d-flex justify-content-center align-items-center p-5 " style={{ backgroundColor: '#F7F8F9' }}>
+    <div className='container-fluid'>
+       <Header/>
+       <div className="d-flex justify-content-center align-items-center p-5 " style={{ backgroundColor: '#F7F8F9' }}>
       <div className="card m-3">
         <div className="row">
           <div className="col d-flex align-items-center">
@@ -81,14 +111,13 @@ const TEFCourse = () => {
           <h5 className="h5 m-3">Prière de choisir la date de votre examen</h5>
           <div className="card-body custom-calendar-container p-3 ">
             <div className="calendar d-flex justify-content-center align-items-center  ">
-              <Calendar
-                value={selectedDate}
-                onChange={handleDateClick}
-                minDate={joinedDate}
-                tileDisabled={({ date }) => isWeekend(date)}
-                className="custom-calendar"
-              />
-            </div>
+            <Calendar
+                  className="custom-calendar"
+                  onClickDay={handleDateClick}
+                  value={selectedDate}
+                  tileDisabled={tileDisabled} 
+                />
+              </div>
             <div className="line my-5"></div>
             <div className="row p-2">
               <div className="col-6">
@@ -99,7 +128,7 @@ const TEFCourse = () => {
               <div className="col-6 px-5 pb-2">
                 <div className=" inline text-end ">
                 <strong>
-                {coursecurrency ? `${coursecurrency} ${coursefees ? coursefees : 'Loading...'} ` : 'Loading...'} 
+                {Currency ? `${Currency} ${fees ? fees : 'Loading...'} ` : 'Loading...'} 
                 
                
                   </strong>
@@ -117,6 +146,9 @@ const TEFCourse = () => {
         </div>
       </div>
     </div>
+    <Footer/>
+    </div>
+   
   );
 };
 

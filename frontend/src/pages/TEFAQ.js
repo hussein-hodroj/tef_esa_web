@@ -4,17 +4,22 @@ import { useNavigate } from 'react-router-dom';
 import './Calendar.css';
 import Calendar from 'react-calendar';
 import Axios from 'axios';
+import Header from '../pages/Header.js';
+import Footer from '../pages/Footer.js';
 
 const TEFAQ = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [bookedDates, setBookedDates] = useState([]);
-  // const [costPerBooking, setCostPerBooking] = useState(55); 
   const [infoid, setinfoid] = useState(null); 
+  const [type, settype] = useState(null); 
+  const [Currency, setCurrency] = useState(null);
+  const [date, setdate] = useState(null);
   const [title, settitle] = useState(null);
+  const [isBookNowDisabled, setIsBookNowDisabled] = useState(true);
+  const [disabledDates, setDisabledDates] = useState([]);
   const [numBookings, setNumBookings] = useState(1);
   const [totalCost, setTotalCost] = useState(0); 
-  const [Currency, setCurrency] = useState(null);
-  const [isBookNowDisabled, setIsBookNowDisabled] = useState(true);
+ 
   const [selectedTests, setSelectedTests] = useState({
     comprehensionEcrite: false,
     comprehensionOrale: false,
@@ -31,6 +36,7 @@ const TEFAQ = () => {
       .then((response) => {
         setFees(response.data[0].fees); 
         setCurrency(response.data[0].Currency);
+        settype(response.data[0].settype);
         setinfoid(response.data[0].infoid); 
         settitle(response.data[0].title); 
       })
@@ -39,6 +45,22 @@ const TEFAQ = () => {
       });
     
   }, []);
+  useEffect(() => {
+    Axios.get('http://localhost:8000/TEFAQ/TEFAQ-date')
+      .then((response) => {
+        const disabledDates = response.data.map((item) => new Date(item.day));
+        setDisabledDates(disabledDates);
+        setdate(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching fees data:', error);
+      });
+  }, []);
+
+  useEffect(() => {
+    console.log('***********', date);
+  }, [date]);
+
   console.log("=>fees",fees)
   useEffect(() => {
     let newTotalCost = 0;
@@ -73,7 +95,7 @@ const TEFAQ = () => {
   const handleBookNow = () => {
     if (selectedDate && totalCost > 0) {
       const queryParams = `date=${selectedDate.toISOString()}&tests=${JSON.stringify(
-        selectedTests)}&cost=${totalCost}&fees=${fees}&infoid=${infoid}&Currency=${Currency}&title=${title} `;
+        selectedTests)}&cost=${totalCost}&fees=${fees}&infoid=${infoid}&Currency=${Currency}&title=${title}&type=${type} `;
       navigate(`/register?${queryParams}`);
     } else {
       alert('You have to choose at least one test to book a time.');
@@ -87,27 +109,44 @@ const TEFAQ = () => {
       [testName]: !selectedTests[testName],
     });
   };
-
-  // const handleNumBookingsChange = (selectedOption) => {
-  //   setNumBookings(selectedOption.value);
+  // const tileDisabled = ({ date, view }) => {
+  //   if (view === 'month') {
+     
+  //     return !disabledDates.some((disabledDate) => {
+  //       return (
+  //         date.getDate() === disabledDate.getDate() &&
+  //         date.getMonth() === disabledDate.getMonth() &&
+  //         date.getFullYear() === disabledDate.getFullYear()
+  //       );
+  //     });
+  //   }
+  //   return false;
   // };
-
+  const tileDisabled = ({ date, view }) => {
+    if (view === 'month') {
   
-
-  const joinedDate = new Date();
-  joinedDate.setDate(joinedDate.getDate() + 10);
-
-  const isWeekend = (date) => {
-    const day = date.getDay();
-    return day === 0 || day === 6;
+      const currentDate = new Date();
+      const timeDifference = date.getTime() - currentDate.getTime();
+      const daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
+  
+      return (
+        daysDifference < 10 ||
+        !disabledDates.some((disabledDate) => {
+          return (
+            date.getDate() === disabledDate.getDate() &&
+            date.getMonth() === disabledDate.getMonth() &&
+            date.getFullYear() === disabledDate.getFullYear()
+          );
+        })
+      );
+    }
+    return false;
   };
 
-  // const filterWeekends = (date) => {
-  //   return !isWeekend(date);
-  // };
-
   return (
-    <div className="d-flex justify-content-center align-items-center p-5" style={{ backgroundColor: '#F7F8F9' }}>
+    <div className='container-fluid'>
+       <Header/>
+       <div className="d-flex justify-content-center align-items-center p-5" style={{ backgroundColor: '#F7F8F9' }}>
       <div className="card m-3">
         <div className="row">
           <div className="col d-flex align-items-center">
@@ -123,14 +162,13 @@ const TEFAQ = () => {
           <h5 className="h5 m-3">Prière de choisir la date de votre examen</h5>
           <div className="card-body custom-calendar-container p-3">
             <div className="calendar d-flex justify-content-center align-items-center">
-              <Calendar
-                value={selectedDate}
-                onChange={handleDateClick}
-                minDate={joinedDate}
-                tileDisabled={({ date }) => isWeekend(date)}
-                className="custom-calendar"
-              />
-            </div>
+            <Calendar
+                  className="custom-calendar"
+                  onClickDay={handleDateClick}
+                  value={selectedDate}
+                  tileDisabled={tileDisabled} 
+                />
+              </div>
             <div className="line my-5"></div>
             <div className="row p-2">
               <div className="col">
@@ -194,6 +232,9 @@ const TEFAQ = () => {
         </div>
       </div>
     </div>
+    <Footer/>
+    </div>
+   
   );
 };
 

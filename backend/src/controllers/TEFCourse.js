@@ -12,7 +12,21 @@ const cnx = mysql.createConnection({
 
 
 export const getTEFCourseData = asyncHandler(async (req, res) => {
-  const query = 'SELECT * FROM courseinfo';
+  const query = 'SELECT *  FROM homeinfo where infoid=6';
+  cnx.query(query, (err, results) => {
+    if (err) {
+      console.error("Error fetching data from MySQL:", err);
+      res.status(500).json({ message: "Something went wrong" });
+    } else {
+      res.status(200).json(results);
+    }
+  });
+});
+
+
+export const getTefCourseDate = asyncHandler(async (req, res) => {
+ 
+  const query = 'SELECT DATE_FORMAT(date, "%Y-%m-%d") AS day FROM coursedates';
   cnx.query(query, (err, results) => {
     if (err) {
       console.error("Error fetching data from MySQL:", err);
