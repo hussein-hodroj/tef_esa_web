@@ -8,7 +8,7 @@ import {
 const router = express.Router();
 
 
-router.get('/courseinfo', getCourseinfoData);
+router.get('/getcourseinfoData/:type', getCourseinfoData);
 
 
 router.put('/courseinfo/:id', updateCourseinfoData);

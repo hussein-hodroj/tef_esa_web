@@ -8,7 +8,8 @@ import {
 const router = express.Router();
 
 
-router.get('/homeinfo', getHomeinfoData);
+router.get('/getHomeinfoData/:type', getHomeinfoData); 
+
 
 
 router.put('/homeinfo/:id', updateHomeinfoData);

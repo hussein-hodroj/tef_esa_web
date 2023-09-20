@@ -10,6 +10,8 @@ import TEFEtudes from './pages/TEFEtudes.js';
 import TEFCanada from './pages/TEFCanada.js';
 import TEFAQ from './pages/TEFAQ.js';
 import TEFCourse from './pages/TEFCourse.js'
+import HomeInfo from './pages/examupdate.js';
+import CourseInfo from './pages/courseupdate.js';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/register" element={<Register />} />
       <Route path="/updatehome" element={<HomeUpdate />} />
+      <Route path="/updateexam" element={<HomeInfo />} />
+      <Route path="/updatecourse" element={<CourseInfo />} />
       <Route path="/dashboard" element={<SidebarAdmin />} />
       <Route path="/TEFEtudes" element={<TEFEtudes/>}/>
       <Route path="/TEFCanada" element={< TEFCanada/>}/>
