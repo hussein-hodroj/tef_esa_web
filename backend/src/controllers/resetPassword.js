@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import mysql from 'mysql';
 import dotenv from 'dotenv';
 
@@ -35,17 +35,17 @@ const resetPassword = async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    // Decode and verify the token
+
     const decodedToken = jwt.verify(decodeURIComponent(resetToken), process.env.JWT_SECRET);
 
     if (decodedToken.userID !== user.UserID) {
       return res.status(400).json({ message: 'Invalid or expired reset token' });
     }
 
-    // Hash the new password
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Update the password in the database
+
     await new Promise((resolve, reject) => {
       dbConnection.query(
         'UPDATE `users` SET `Password` = ? WHERE `UserID` = ?',
