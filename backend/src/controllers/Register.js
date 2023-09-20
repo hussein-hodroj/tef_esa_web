@@ -36,7 +36,7 @@ export const upload = multer({ storage: storage });
 export const registerCandidate = asyncHandler(async (req, res) => {
   try {
     const sql =
-      "INSERT INTO `registrations` (Title, PassportNumber, FirstName, LastName, TongueLanguage, Nationality, Address, Country, Town, Email, Phone, Motivation, CourseDateID, DateOfBirth, PaymentStatus, PassportPhoto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      "INSERT INTO `registrations` (Title, PassportNumber, FirstName, LastName, TongueLanguage, Nationality, Address, Country, Town, Email, Phone, Motivation, CourseDateID, examId, DateOfBirth, PassportPhoto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     const values = [
       req.body.Title,
@@ -52,11 +52,11 @@ export const registerCandidate = asyncHandler(async (req, res) => {
       req.body.Phone,
       req.body.Motivation,
       req.body.CourseDateID,
+      req.body.examId,
       req.body.DateOfBirth,
-      req.body.PaymentStatus,
       req.file.filename, 
     ];
-
+if(req.body.accept===true){
     cnx.query(sql, values, (err, data) => {
       if (err) {
         console.error('Error inserting data:', err);
@@ -64,24 +64,27 @@ export const registerCandidate = asyncHandler(async (req, res) => {
       }
       return res.json(data);
     });
+  }else{
+    res.status(500).json({ message: 'please accept the terms' });
+  }
   } catch (error) {
     console.error('Error registering candidate:', error);
     res.status(500).json({ message: 'Failed to register candidate' });
   }
+
+
 });
 
 export const getInfo = asyncHandler(async (req, res) => {
   try {
-    const sql = "SELECT info FROM registerinfo";
+    const sql = "SELECT * FROM registerinfo";
 
-    // Execute the SQL query
     cnx.query(sql, (err, data) => {
       if (err) {
         console.error('Error retrieving data:', err);
         return res.status(500).json({ message: 'Failed to retrieve data' });
       }
 
-      // If the query was successful, return the data
       return res.json(data);
     });
   } catch (error) {
