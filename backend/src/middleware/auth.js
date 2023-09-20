@@ -1,5 +1,3 @@
-// authenticateToken.js
-
 import jwt from 'jsonwebtoken';
 
 const authenticateToken = (req, res, next) => {
@@ -19,8 +17,7 @@ const authenticateToken = (req, res, next) => {
     if (err) {
       return res.status(403).json({ message: 'Invalid token.' });
     }
-
-    // Check the user's role here
+    
     if (user.role !== 'admin') {
       return res.status(403).json({ message: 'Access denied. Admin role required.' });
     }
