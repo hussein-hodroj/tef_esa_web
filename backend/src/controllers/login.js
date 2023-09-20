@@ -1,11 +1,10 @@
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import mysql from 'mysql';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Import necessary libraries and setup your environment
 
 const cnx = mysql.createConnection({
   host: process.env.DB_HOST,
