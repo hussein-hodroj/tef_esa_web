@@ -39,8 +39,6 @@
     border: none;
     padding: 10px 30px; 
     margin-top: 20px;
-    
-    
   }
 
   .register-a {
@@ -57,10 +55,21 @@
     
   }
   
-.card-body {
-  padding: 10px; 
- 
+.title {
+  height: 60px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; 
+}
+
 
 
   .card {
@@ -89,13 +98,7 @@
   }
   
 
-.title {
-  color: black;
-  text-align: center;
-  font-size: large;
-  padding: 20px;
-  margin-bottom: 4%;
-}
+
 
 
 .card p {

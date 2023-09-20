@@ -1,5 +1,5 @@
 import React from 'react';
-import canadaFlag from '../assets/download1.jpg';
+import canadaFlag from '../assets/canada.jpg';
 import logo from '../assets/logo.PNG';
 
 function Header() {
