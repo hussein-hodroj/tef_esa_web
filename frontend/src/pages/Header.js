@@ -1,6 +1,6 @@
 import React from 'react';
 import canadaFlag from '../assets/canada.jpg';
-import logo from '../assets/logo.PNG';
+import logo from '../assets/logo1.png';
 
 function Header() {
   const headerStyle = {
@@ -10,10 +10,10 @@ function Header() {
   };
 
   const logoStyle = {
-    maxWidth: '50%',
+    maxWidth: '80%',
     height: '25vh',
     maxHeight: '50%',
-    marginTop: '100px',
+    marginTop: '130px',
     marginLeft: '85px',
   };
 

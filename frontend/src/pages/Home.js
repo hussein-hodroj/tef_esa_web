@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Header from '../pages/Header.js';
 import Footer from '../pages/Footer.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Home.css';
 import axios from 'axios'; 
 
 function Home() {
@@ -11,7 +10,6 @@ function Home() {
   const [courseData, setCourseData] = useState([]);
 
   useEffect(() => {
-    
     axios.get('http://localhost:8000/home/homepage')
       .then((response) => {
         if (response.status !== 200) {
@@ -58,135 +56,131 @@ function Home() {
       });
   }, []);
 
-
   return (
     <div className="home-container">
       <Header />
       
-      <main className="container mb-4">
-        <div className='infosection'>
-        {homepageData.map((item) => (
-          <div key={item.homeid} className="row">
-            <div className="col-sm-1"></div> 
-            <div className="col-md-8">
-              <h2>{item.exams}</h2>
-              <hr />
-              {item.body.split('.').map((paragraph, index) => (
-          <p key={index}>{paragraph.trim()}</p>
-        ))}
-              <h5>{item.usefullinks}</h5>
-              <h6>
-                {item.titlelink1}{' '}
-                <a href="https://www.lefrancaisdesaffaires.fr/"  rel="noopener noreferrer">
-                Cliquez ici
-                </a>
-              </h6>
-              <h6>
-                {item.titlelink2}{' '}
-                <a href="https://www.lefrancaisdesaffaires.fr/tests-diplomes/se-preparer/francais-3-0/"  rel="noopener noreferrer">
-                Cliquez ici
-                </a>
-              </h6>
-              <h6>
-                {item.titlelink3}{' '}
-                <a href="https://www.lefrancaisdesaffaires.fr/tests-diplomes/se-preparer/tutoriels-tef/"  rel="noopener noreferrer">
-                Cliquez ici
-                </a>
-              </h6>
-              <h6>
-                {item.titlelink4}{' '}
-                <a href="https://www.lefrancaisdesaffaires.fr/tests-diplomes/outils-preparation-tef/"  rel="noopener noreferrer">
-                Cliquez ici
-                </a>
-              </h6>
-              <h6>
-                {item.titlelink5}{' '}
-                <a href="https://prepmyfuture.com/fr/tef"  rel="noopener noreferrer">
-                Cliquez ici
-                </a>
-              </h6>
-              <h6>
-                {item.titlelink6}{' '}
-                <a href="http://tef.esa.edu.lb/wp-content/themes/esa/inc/assets/pdfs/depliant_tef.pdf"  rel="noopener noreferrer">
-                Cliquez ici
-                </a>
-              </h6>
-              <h6>
-                {item.titlelink7}{' '}
-                <a href="https://www.youtube.com/watch?v=Mvv2yLfbXHw&feature=youtu.be"  rel="noopener noreferrer">
-                https://youtu.be/Mvv2yLfbXHw
-                </a>
-              </h6>
+      <main className="container mb-4 mt-4">
+       
+          {homepageData.map((item) => (
+            <div key={item.homeid} className="row"> 
+              <div className="col-md-8">
+              <h2 className="text-muted small mt-5">{item.exams}</h2>
+
+
+                <hr className="my-4" />
+                {item.body.split('.').map((paragraph, index) => (
+                  <p key={index} className="text-left ">{paragraph.trim()}</p>
+                ))}
+                <h5 class="text-decoration-underline mt-5">{item.usefullinks}</h5>
+
+                <h6>
+                  {item.titlelink1}{' '}
+                  <a href="https://www.lefrancaisdesaffaires.fr/" rel="noopener noreferrer">
+                    Cliquez ici
+                  </a>
+                </h6>
+                <h6>
+                  {item.titlelink2}{' '}
+                  <a href="https://www.lefrancaisdesaffaires.fr/tests-diplomes/se-preparer/francais-3-0/" rel="noopener noreferrer">
+                    Cliquez ici
+                  </a>
+                </h6>
+                <h6>
+                  {item.titlelink3}{' '}
+                  <a href="https://www.lefrancaisdesaffaires.fr/tests-diplomes/se-preparer/tutoriels-tef/" rel="noopener noreferrer">
+                    Cliquez ici
+                  </a>
+                </h6>
+                <h6>
+                  {item.titlelink4}{' '}
+                  <a href="https://www.lefrancaisdesaffaires.fr/tests-diplomes/outils-preparation-tef/" rel="noopener noreferrer">
+                    Cliquez ici
+                  </a>
+                </h6>
+                <h6>
+                  {item.titlelink5}{' '}
+                  <a href="https://prepmyfuture.com/fr/tef" rel="noopener noreferrer">
+                    Cliquez ici
+                  </a>
+                </h6>
+                <h6>
+                  {item.titlelink6}{' '}
+                  <a href="http://tef.esa.edu.lb/wp-content/themes/esa/inc/assets/pdfs/depliant_tef.pdf" rel="noopener noreferrer">
+                    Cliquez ici
+                  </a>
+                </h6>
+                <h6>
+                  {item.titlelink7}{' '}
+                  <a href="https://www.youtube.com/watch?v=Mvv2yLfbXHw&feature=youtu.be" rel="noopener noreferrer">
+                    Cliquez ici
+                  </a>
+                </h6>
+              </div>
+              <div className="col-md-2"></div> 
             </div>
-            <div className="col-md-2 "></div> 
-           
-          </div>
-        ))}
-        </div>
+          ))}
+      
       </main>
      
-      <main className="container mb-4">
-  <div className="row">
-  <div className='examsection'>
-    {homeinfoData.map((item) => (
-      <div key={item.infoid} className="col-md-4">
-        
-        <div className="card mb-4">
-  <h2 className="title">{item.title}</h2>
-  <div className="card-body">
-    {item.information.split('.').map((paragraph, index) => (
-      <p key={index}>{paragraph.trim()}</p>
-    ))}
-    <div className='testsfees'>
-      <h5><strong style={{color : 'black'}}> Frais : </strong>  (  {item.fees}  )</h5>
-      <h5>{item.Currency}</h5>
-    </div>
-    <div className="button-container">
-      <button className="register-button">
-        <a href={item.link}  rel="noopener noreferrer" className="register-a">
-          Register
-        </a>
-      </button>
-    </div>
-  </div>
-</div>
-
-      </div>
      
-    ))}
-
+      <main className="container mb-4">
+  <div className="row examsection">
+    {homeinfoData.map((item) => (
+      <div key={item.infoid} className="col-sm-4 mb-4">
+        <div className="card mb-4 h-100">
+          <h2 className="title text-center my-2" style={{ fontSize: '18px', padding: '10px' }}>
+            {item.title}
+          </h2>
+          <div className="card-body">
+            {item.information.split('.').map((paragraph, index) => (
+              <p key={index} className="text-left">{paragraph.trim()}</p>
+            ))}
+            <div className="d-flex justify-content-between align-items-center mt-3">
+              <h5 className="text-primary"><strong style={{ color: 'black' }}>Frais :</strong> {item.fees} {item.Currency}</h5>
+            </div>
+            
+          </div>
+          <div className="button-container my-2 text-center"> 
+  <a href={item.link} rel="noopener noreferrer" className="btn btn-primary btn-md w-75 text-white" style={{ textDecoration: 'none' }}>
+    Register
+  </a>
 </div>
+
+        </div>
+        
+      </div>
+      
+    ))}
   </div>
-  </main>
-  <main className="container mb-4">
+</main>
+
+
+
+
+      <main className="container mb-4 ">
         <div className="row">
-          <div className='coursesection'>
+          <div className="col-md-8 ">
             {courseData.map((item) => (
-              <div key={item.infoid} className="card">
-                <h2>{item.title}</h2>
-                <hr />
-                <div className="courseinfo">
-                  {item.information.split('.').map((paragraph, index) => (
-                    <p key={index}>{paragraph.trim()}</p>
-                  ))}
-                  <div className='coursefees'>
-                    <p><strong style={{color: 'black'}}>Frais :</strong> {item.fees}</p>
-                    <p>{item.Currency}</p>
-                  </div>
-                  <div className="button-container">
-                    <button className="coursebutton">
-                      <a href={item.link}  rel="noopener noreferrer" className="register-a">
-                        Register
-                      </a>
-                    </button>
-                  </div>
+              <div key={item.infoid} className='mb-5'>
+                <h2 className="text-muted">{item.title}</h2>
+                <hr className="my-3" />
+                {item.information.split('.').map((paragraph, index) => (
+                  <p key={index} className="text-left">{paragraph.trim()}</p>
+                ))}
+                <div className="d-flex justify-content-between align-items-center mt-3">
+                  <h5 className="text-primary"><strong style={{ color: 'black' }}>Frais :</strong> {item.fees} {item.Currency}</h5>
+                </div>
+                <div className="button-container mt-4">
+                  <a href={item.link} rel="noopener noreferrer" className="btn btn-primary btn-lg">
+                    Register
+                  </a>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </main>
-
 
       <Footer />
     </div>

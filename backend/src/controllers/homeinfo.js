@@ -26,6 +26,29 @@ export const getHomeinfoData = asyncHandler(async (req, res) => {
   });
 });
 
+export const createHomeinfoData = asyncHandler(async (req, res) => {
+  const {
+    title, information, Currency, fees, link, type
+  } = req.body;
+
+  const insertQuery = `
+    INSERT INTO homeinfo (title, information, Currency, fees, link, type)
+    VALUES (?, ?, ?, ?, ?, ?)
+  `;
+
+  cnx.query(
+    insertQuery,
+    [title, information, Currency, fees, link, type], 
+    (err, results) => {
+      if (err) {
+        console.error('Error creating data:', err);
+        res.status(500).json({ message: 'Error creating data' });
+      } else {
+        res.status(201).json({ message: 'Data created successfully', insertedId: results.insertId });
+      }
+    }
+  );
+});
 
 
 export const updateHomeinfoData = asyncHandler(async (req, res) => {
@@ -36,26 +59,30 @@ export const updateHomeinfoData = asyncHandler(async (req, res) => {
 
   const updateQuery = `
     UPDATE homeinfo
-    SET title=?, information=?, usefullinks=?, Currency=?, fees=?, link=?, type=?
+    SET title=?, information=?, Currency=?, fees=?, link=?, type=?
     WHERE infoid=?
   `;
 
   cnx.query(
     updateQuery,
-    [
-      title, information, Currency, fees, link, type,
-      id,
-    ],
+    [title, information, Currency, fees, link, type, id], 
     (err, results) => {
       if (err) {
         console.error('Error updating data:', err);
         res.status(500).json({ message: 'Error updating data' });
       } else {
-        res.status(200).json({ message: 'Data updated successfully' });
+        if (results.affectedRows > 0) {
+          res.status(200).json({ message: 'Data updated successfully' });
+        } else {
+          res.status(404).json({ message: 'Data not found' });
+        }
       }
     }
   );
+  
 });
+
+
 
 
 

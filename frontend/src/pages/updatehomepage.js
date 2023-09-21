@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './updatehome.css';
 import SidebarAdmin from '../pages/SidebarAdmin.js';
 import axios from 'axios';
+import NavbarAdmin from './NavbarAdmin.js';
 
 function HomeUpdate() {
   const [exams, setExams] = useState('');
@@ -22,6 +23,7 @@ function HomeUpdate() {
   const [titlelink7, setTitleLink7] = useState('');
   const [link7, setLink7] = useState('');
   const [id, setId] = useState(null);
+  const [isUpdateSuccessful, setUpdateSuccessful] = useState(false);
 
   useEffect(() => {
     fetch('http://localhost:8000/home/homepage')
@@ -84,8 +86,9 @@ function HomeUpdate() {
       .put(`http://localhost:8000/home/homepage/${id}`, updatedData)
       .then((response) => {
         if (response.status === 200) {
+          setUpdateSuccessful(true); 
           console.log('Update successful');
-          // Update state with the updated data here
+        
         } else {
           console.error('Update error:', response.statusText);
         }
@@ -95,20 +98,34 @@ function HomeUpdate() {
       });
   };
 
+  useEffect(() => {
+    if (isUpdateSuccessful) {
+      
+      const timeout = setTimeout(() => {
+        setUpdateSuccessful(false); 
+      }, 4000); 
+
+      return () => clearTimeout(timeout); 
+    }
+  }, [isUpdateSuccessful]);
+
   return (
+
+<div>
+<NavbarAdmin />
+
+
     <div className="d-flex">
-      <div>
+     
         <SidebarAdmin />
-      </div>
+      
 
       <div className="home-update-container">
-
-        
         <div className="section">
           <h1>Home Information</h1>
           <div className="input-grid">
             <div className="input-row">
-              <label htmlFor="exams">Title of home information</label>
+              <label htmlFor="exams">Title of home information :</label>
               <input type="text" id="exams" value={exams} onChange={(e) => setExams(e.target.value)} />
             </div>
             <div className="input-row">
@@ -122,7 +139,7 @@ function HomeUpdate() {
             <h1>Useful Links</h1>
             <div className="input-grid">
               <div className="input-row">
-                <label htmlFor="usefullinks">Useful Links:</label>
+                <label htmlFor="usefullinks">Title2 of home information :</label>
                 <input type="text" id="usefullinks" value={usefullinks} onChange={(e) => setUsefulLinks(e.target.value)} />
               </div>
               <div className="input-row">
@@ -182,10 +199,16 @@ function HomeUpdate() {
                 <input type="text" id="link7" value={link7} onChange={(e) => setLink7(e.target.value)} />
               </div>
             </div>
+            {isUpdateSuccessful && (
+          <div className="update-success-alert text-success">
+            Update successful! 
+          </div>
+        )}
             <button onClick={handleHomepageUpdate}>Update links</button>
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
