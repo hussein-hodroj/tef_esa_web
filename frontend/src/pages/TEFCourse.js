@@ -33,7 +33,7 @@ const TEFCourse = () => {
         setFees(response.data[0].fees);
         setCurrency(response.data[0].Currency); 
         setinfoid(response.data[0].infoid);
-        settype(response.data[0].settype);
+        settype(response.data[0].type);
         settitle(response.data[0].title); 
       })
       .catch((error) => {

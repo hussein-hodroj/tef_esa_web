@@ -36,7 +36,7 @@ const TEFAQ = () => {
       .then((response) => {
         setFees(response.data[0].fees); 
         setCurrency(response.data[0].Currency);
-        settype(response.data[0].settype);
+        settype(response.data[0].type);
         setinfoid(response.data[0].infoid); 
         settitle(response.data[0].title); 
       })
