@@ -193,21 +193,20 @@ const countryOptions = countries.map((country) => ({
     <div style={{backgroundColor: 'whitesmoke'}}>
       
       <Header />
-       <div className = "container d-flex justify-content-evenly">
-
-                  <div className="row">
-                  <div className="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+       <div className = "container">
+       <div className="row">
+        
+             <div className="col-md-6 ">
               <h1 className="mt-5">Inscription</h1> 
 <p className="mt-2 ">(veuillez remplir toutes les cases ci-dessous)
  </p>
  </div>
- 
- 
-        <form className="col-xl-7 col-lg-7 col-md-7 col-sm-7" onSubmit={(e)=>handleSubmit(e)} >
+        <form className=" d-flex justify-content-around" onSubmit={(e)=>handleSubmit(e)} >
+        <div className="col-md-6 d-block ">
             <div className="mb-3 px-2 row ">
           <h4 className="form-group mb-2" htmlFor="title">
             Titre <span className="text-danger">*</span>
-            <div className="d-flex justify-content-start mt-2">
+            <div className="d-flex justify-content-start ">
             <div className="form-check">
   <input type="radio" className="form-check-input" id="titlecheck1" name="firstradio"
    checked={isMadamChecked}
@@ -238,10 +237,10 @@ const countryOptions = countries.map((country) => ({
           </h4>
         {errors.Title && <p className="text-danger m-1 ">{errors.Title}</p>}
             </div>    
-              <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 px-2 mb-1">        
+              <div className=" mb-1">        
           <label className="form-label mb-2 " htmlFor="passportNumber"> 
           Numéro passeport ou Titre de séjour ou Carte nationale d'identité <span className="text-danger">*</span> </label></div>
-          <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 px-2 mb-3">
+          <div className=" mb-3">
             <input type="text" className="form-control mb-2" name="PassportNumber" id="PassportNumber"
             onChange={(e) => setPassportNumber(e.target.value)}
             placeholder="Enter your passport number" />
@@ -251,8 +250,8 @@ const countryOptions = countries.map((country) => ({
 
 
             <div className="mb-3 px-2 d-flex justify-content-between">
-  <div className="col-xl-7 col-lg-7 col-md-7 col-sm-7">
-    <label htmlFor="firstName" className="form-label mb-2">Prenom <span className="text-danger">*</span></label>
+  <div className="">
+    <label htmlFor="firstName" className="form-label mb-2 me-2">Prenom <span className="text-danger">*</span></label>
     <input
       type="text"
       className="form-control"
@@ -264,7 +263,7 @@ const countryOptions = countries.map((country) => ({
                         {errors.FirstName && <p className="text-danger m-1 ">{errors.FirstName}</p>}
 
   </div>
-  <div className="col-xl-7 col-lg-7 col-md-7 col-sm-7">
+  <div className="">
     <label htmlFor="lastName" className="form-label mb-2">Nom de Famille <span className="text-danger">*</span></label>
     <input
       type="text"
@@ -280,7 +279,7 @@ const countryOptions = countries.map((country) => ({
 
 
 <div className="mb-3 px-2 d-flex justify-content-between">
-  <div className="col-xl-7 col-lg-7 col-md-7 col-sm-7">
+  <div className="">
     <label htmlFor="dateOfBirth" className="form-label mb-2">Date de naissance <span className="text-danger">*</span></label>
     <input
       type="date"
@@ -292,7 +291,7 @@ const countryOptions = countries.map((country) => ({
     />
     {errors.DateOfBirth && <p className="text-danger m-1 ">{errors.DateOfBirth}</p>}
   </div>
-  <div className="col-xl-7 col-lg-7 col-md-7 col-sm-7">
+  <div className="">
           <label htmlFor="nationality" className="form-label mb-2">
             Nationalité <span className="text-danger">*</span>
           </label>
@@ -312,7 +311,7 @@ const countryOptions = countries.map((country) => ({
 </div>
 
 <div className="mb-3 px-2 d-flex justify-content-between">
-  <div className="col-xl-7 col-lg-7 col-md-7 col-sm-7">
+  <div className="">
   <label htmlFor="language" className="form-label mb-2">
     Langue maternelle <span className="text-danger">*</span>
   </label>
@@ -334,7 +333,7 @@ const countryOptions = countries.map((country) => ({
   {errors.TongueLanguage && <p className="text-danger m-1 ">{errors.TongueLanguage}</p>}
 </div>
 
-  <div className="col-xl-7 col-lg-7 col-md-7 col-sm-7">
+  <div className="">
     <label htmlFor="address" className="form-label mb-2">Adresse <span className="text-danger">*</span></label>
     <input
       type="text"
@@ -350,7 +349,7 @@ const countryOptions = countries.map((country) => ({
 </div>
 
 <div className="mb-3 px-2 d-flex justify-content-between">
- <div className="col-xl-7 col-lg-7 col-md-7 col-sm-7">
+ <div className="">
   <label htmlFor="country" className="form-label mb-2">
     Pays <span className="text-danger">*</span>
   </label>
@@ -364,7 +363,7 @@ const countryOptions = countries.map((country) => ({
   {errors.Country && <p className="text-danger m-1 ">{errors.Country}</p>}
 </div>
 
-  <div className="col-xl-7 col-lg-7 col-md-7 col-sm-7">
+  <div className="">
     <label htmlFor="town" className="form-label mb-2">Ville <span className="text-danger">*</span></label>
     <input
       type="text"
@@ -380,7 +379,7 @@ const countryOptions = countries.map((country) => ({
 </div>
 
 <div className="mb-3 px-2 d-flex justify-content-between">
-  <div className="col-xl-7 col-lg-7 col-md-7 col-sm-7">
+  <div className="">
     <label htmlFor="email" className="form-label mb-2">Email <span className="text-danger">*</span></label>
     <input
       type="text"
@@ -393,7 +392,7 @@ const countryOptions = countries.map((country) => ({
     />
      {errors.Email && <p className="text-danger m-1 ">{errors.Email}</p>}
   </div>
-  <div className="col-xl-7 col-lg-7 col-md-7 col-sm-7">
+  <div className="">
     <label htmlFor="phonenumber" className="form-label mb-2">Téléphone <span className="text-danger">*</span></label>
     <input
       type="text"
@@ -608,7 +607,7 @@ const countryOptions = countries.map((country) => ({
     {errors.PassportPhoto && <p className="text-danger m-1 mb-3 ">{errors.PassportPhoto}</p>}
 
 </div>
-<div className=" d-flex col-xl-8 col-lg-8 col-md-8 col-sm-8 ">
+<div className="">
   <button
     className="bg-primary text-white rounded font-bold py-2 px-4 shadow-outline"
     type="submit"
@@ -617,18 +616,15 @@ const countryOptions = countries.map((country) => ({
   </button>
 
 </div>
-</form>
+
 </div>
 
-
-
-
-  <div className="row"> 
-  <div className="col-xl-5 col-lg-5 col-md-5 col-sm-5 mt-5 bg-white "  style={{ border: '1px solid runded #000 ' }}>
-        <h4>{titleParam}</h4>
+  <div className="col-md-6 d-block mb-5 ms-4"> 
+  <div className=" bg-white "  style={{ border: '1px solid runded #000 ' }}>
+        <h4 className=" p-2">{titleParam}</h4>
         <div>
-          <label className="font-bold">Total:</label>
-          <strong>
+          <label className=" p-2">Total:</label>
+          <strong className=" p-2">
           {CurrencyParam}
       {totalCostParam !== null ? (
         <>{totalCostParam}</>
@@ -639,37 +635,42 @@ const countryOptions = countries.map((country) => ({
         </div>
       </div>
 
-  <div className="col-xl-5 col-lg-5 col-md-5 col-sm-5 bg-white mt-4"  style={{ border: '1px solid rounded #000' }}>
+  <div className=" bg-white mt-4"  style={{ border: '1px solid rounded #000' }}>
       
   {informations.map((information) => (
     <div key={information._id}>
-      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.info}</p>
-      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p1}</p>
-      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p2}</p>
-      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p3}</p>
-      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p4}</p>
-      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p5}</p>
-      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p6}</p>
-      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p7}</p>
-      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p8}</p>
-      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p9}</p>
-      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p10}</p>
-      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p11}</p>
-      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p12}</p>
-      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p13}</p>
+      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.info}</p>
+      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p1}</p>
+      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p2}</p>
+      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p3}</p>
+      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p4}</p>
+      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p5}</p>
+      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p6}</p>
+      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p7}</p>
+      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p8}</p>
+      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p9}</p>
+      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p10}</p>
+      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p11}</p>
+      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p12}</p>
+      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p13}</p>
     </div>
   ))}
       <div> 
         <hr/> 
-        <div>
-        <input type="checkbox" id="acceptTerms" value={accept} required onChange={(e) => setAccept(e.target.value)} />
-  <label htmlFor="acceptTerms" style={{ marginLeft: '8px' }}>
+        <div className='p-1'>
+        <input type="checkbox"  id="acceptTerms" value={accept} required onChange={(e) => setAccept(e.target.value)} />
+  <label htmlFor="acceptTerms" style={{ marginLeft: '8px' }} >
   J'ai lu et j'accepte les conditions générales du site terms and conditions <span className="text-danger">*</span>  </label>
         </div>
       </div>
     </div>
+    
 </div>
+</form>
 </div>
+
+</div>
+
 <Footer/>
     </div>
 );
