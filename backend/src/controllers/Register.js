@@ -134,10 +134,13 @@ cnx.query(getEmailContentSQL, [TemplateID], async (err, templateData) => {
 });
 
       });
-    //  else {
-    //   res.status(500).json({ message: 'please accept the terms' });
-    // }
-  } catch (error) {
+    
+  // }
+  // else {
+  //   res.status(500).json({ message: 'please accept the terms' });
+  // } 
+}
+   catch (error) {
     console.error('Error registering candidate:', error);
     res.status(500).json({ message: 'Failed to register candidate' });
   }
