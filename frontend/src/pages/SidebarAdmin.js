@@ -9,7 +9,7 @@ import {
   CDBSidebarMenuItem,
 } from 'cdbreact';
 import { useNavigate } from 'react-router-dom';
-import NavbarAdmin from './NavbarAdmin.js';
+
 
 const SidebarAdmin = () => {
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ const SidebarAdmin = () => {
 
   return (
     <div>
-    <NavbarAdmin />
+    
     <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
       <CDBSidebar textColor="#fff" backgroundColor="#000">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
@@ -56,6 +56,9 @@ const SidebarAdmin = () => {
             <div onClick={() => navigate('/analytics')} className="activeClicked">
               <CDBSidebarMenuItem icon="chart-line" className='bg-black text-white'>Analytics</CDBSidebarMenuItem>
             </div>
+            <div onClick={() => navigate('/profile')} className="activeClicked">
+                <CDBSidebarMenuItem icon="user" className='bg-black text-white'>Update Admin Profile</CDBSidebarMenuItem>
+              </div>
 
           </CDBSidebarMenu>
         </CDBSidebarContent>

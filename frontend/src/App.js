@@ -16,6 +16,7 @@ import TEFAQ from './pages/TEFAQ.js';
 import TEFCourse from './pages/TEFCourse.js'
 import HomeInfo from './pages/examupdate.js';
 import CourseInfo from './pages/courseupdate.js';
+import AdminProfileUpdate from './pages/AdminProfileUpdate.js';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
       <Route path="/TEFCanada" element={< TEFCanada/>}/>
       <Route path="/TEFAQ" element={< TEFAQ/>}/>
       <Route path="/TEFCourse" element={< TEFCourse/>}/>
+      <Route path='/profile' element={<AdminProfileUpdate />} />
       </Routes>
     </BrowserRouter>
   );
