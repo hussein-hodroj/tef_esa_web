@@ -31,10 +31,7 @@ const [isIndividual, setIsIndividual] = useState(false);
 const [isStudiesinFrance, setIsStudiesinFrance] = useState(false);
 const [isAccesstoFrenchnationality, setIsAccesstoFrenchnationality] = useState(false);
 const [isProfessional, setIsProfessional] = useState(false);
-const [CourseDateID, setCourseDateID] = useState('');
-const [infoid, setInfoid] = useState('');
-const [accept, setAccept] = useState(false);
-
+// const [accept, setAccept] = useState(false);
 
 const location = useLocation();
 const queryParams = new URLSearchParams(location.search);
@@ -50,6 +47,8 @@ const selectedDate = selectedDateParam
   ? new Date(selectedDateParam).toLocaleDateString()
   : '';
 
+  const [BookDate, setBookDate] = useState(selectedDateParam ? new Date(selectedDateParam).toString() : '');
+  const [examId, setExamId] = useState(infoidParam);
 
 const onChangeFile=e=>{
   setPassportPhoto(e.target.files[0])
@@ -76,7 +75,7 @@ const validateForm = () => {
   if (!Address) newErrors.Address = 'Veuillez entrer votre Adresse';
   if (!PassportPhoto) newErrors.PassportPhoto = 'La photo est nécessaire!';
   if (!Email) newErrors.Email = 'Veuillez entrer votre Email';
-  if (!accept) newErrors.accept = 'Veuillez entrer votre accept';
+  // if (!accept) newErrors.accept = 'Veuillez entrer votre accept';
 
 
 
@@ -109,9 +108,9 @@ const handleSubmit = (e) => {
     formData.append('DateOfBirth', DateOfBirth);
     formData.append('Address', Address);
     formData.append('PassportPhoto', PassportPhoto);
-    formData.append('CourseDateID', CourseDateID);
-    formData.append('infoid', infoid);
-        formData.append('accept', accept);
+    formData.append('BookDate', BookDate);
+    formData.append('examId', examId);
+    // formData.append('accept', accept);
 
 
 
@@ -658,7 +657,9 @@ const countryOptions = countries.map((country) => ({
       <div> 
         <hr/> 
         <div className='p-1'>
-        <input type="checkbox"  id="acceptTerms" value={accept} required onChange={(e) => setAccept(e.target.value)} />
+        <input type="checkbox"  id="acceptTerms" required />
+         {/* checked={accept}
+          onChange={() => setAccept(!accept)}  */}
   <label htmlFor="acceptTerms" style={{ marginLeft: '8px' }} >
   J'ai lu et j'accepte les conditions générales du site terms and conditions <span className="text-danger">*</span>  </label>
         </div>
