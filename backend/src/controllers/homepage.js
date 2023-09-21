@@ -48,16 +48,15 @@ export const updateHomepageData = asyncHandler(async (req, res) => {
   } = req.body;
 
   const updateQuery = `
-    UPDATE homepage
-    SET exams=?, body=?, usefullinks=?, titlelink1=?, link1=?, titlelink2=?, link2=?, titlelink3=?, link3=?,
-        titlelink4=?, link4=?, titlelink5=?, link5=?, titlelink6=?, link6=?, titlelink7=?, link7=?
-    WHERE homeid=?
+  UPDATE homepage
+  SET exams=?, body=?, usefullinks=?, titlelink1=?, link1=?, titlelink2=?, link2=?, titlelink3=?, link3=?,
+      titlelink4=?, link4=?, titlelink5=?, link5=?, titlelink6=?, link6=?, titlelink7=?, link7=?
+  WHERE homeid=?
   `;
 
   cnx.query(
     updateQuery,
-    [
-      exams,
+    [exams,
       body,
       usefullinks,
       titlelink1,
@@ -74,19 +73,22 @@ export const updateHomepageData = asyncHandler(async (req, res) => {
       link6,
       titlelink7,
       link7,
-      id,
-    ],
+      id,], 
     (err, results) => {
       if (err) {
         console.error('Error updating data:', err);
         res.status(500).json({ message: 'Error updating data' });
       } else {
-        res.status(200).json({ message: 'Data updated successfully' });
+        if (results.affectedRows > 0) {
+          res.status(200).json({ message: 'Data updated successfully' });
+        } else {
+          res.status(404).json({ message: 'Data not found' });
+        }
       }
     }
   );
+  
 });
-
 
 export const deleteHomepageData = asyncHandler(async (req, res) => {
   const { id } = req.params;

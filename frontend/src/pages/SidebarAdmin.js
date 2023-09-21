@@ -9,7 +9,7 @@ import {
   CDBSidebarMenuItem,
 } from 'cdbreact';
 import { useNavigate } from 'react-router-dom';
-import NavbarAdmin from './NavbarAdmin.js';
+
 
 const SidebarAdmin = () => {
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ const SidebarAdmin = () => {
 
   return (
     <div>
-    <NavbarAdmin />
+    
     <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
       <CDBSidebar textColor="#fff" backgroundColor="#000">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
@@ -50,11 +50,14 @@ const SidebarAdmin = () => {
             <div onClick={() => navigate('/')} className="activeClicked">
               <CDBSidebarMenuItem icon="columns" className='bg-black text-white'>Dashboard</CDBSidebarMenuItem>
             </div>
-            <div onClick={() => navigate('/tables')} className="activeClicked">
-              <CDBSidebarMenuItem icon="table" className='bg-black text-white'>Tables</CDBSidebarMenuItem>
+            <div onClick={() => navigate('/updatehome')} className="activeClicked">
+              <CDBSidebarMenuItem icon="table" className='bg-black text-white'>Home Update</CDBSidebarMenuItem>
             </div>
-            <div onClick={() => navigate('/analytics')} className="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line" className='bg-black text-white'>Analytics</CDBSidebarMenuItem>
+            <div onClick={() => navigate('/updateexam')} className="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line" className='bg-black text-white'>Exam update</CDBSidebarMenuItem>
+            </div>
+            <div onClick={() => navigate('/updatecourse')} className="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line" className='bg-black text-white'>Course update</CDBSidebarMenuItem>
             </div>
 
           </CDBSidebarMenu>
