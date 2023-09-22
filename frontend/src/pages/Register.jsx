@@ -5,6 +5,8 @@ import Footer from './Footer.js';
 import Axios from 'axios';
 import Select from 'react-select'; 
 import '../css.css';
+import { format, parseISO } from 'date-fns';
+
 
 function Register() {
 const [informations, setInformations] = useState([]);
@@ -31,7 +33,7 @@ const [isIndividual, setIsIndividual] = useState(false);
 const [isStudiesinFrance, setIsStudiesinFrance] = useState(false);
 const [isAccesstoFrenchnationality, setIsAccesstoFrenchnationality] = useState(false);
 const [isProfessional, setIsProfessional] = useState(false);
-// const [accept, setAccept] = useState(false);
+const [accept, setAccept] = useState(false);
 
 const location = useLocation();
 const queryParams = new URLSearchParams(location.search);
@@ -43,11 +45,13 @@ const infoidParam = queryParams.get('infoid');
 const CurrencyParam = queryParams.get('Currency');
 const titleParam = queryParams.get('title');
 
-const selectedDate = selectedDateParam
-  ? new Date(selectedDateParam).toLocaleDateString()
-  : '';
 
-  const [BookDate, setBookDate] = useState(selectedDateParam ? new Date(selectedDateParam).toString() : '');
+const dateParts = selectedDateParam.split('T');
+const formattedDate = dateParts[0]; 
+
+
+const [BookDate, setBookDate] = useState(formattedDate);
+
   const [examId, setExamId] = useState(infoidParam);
 
 const onChangeFile=e=>{
@@ -75,7 +79,7 @@ const validateForm = () => {
   if (!Address) newErrors.Address = 'Veuillez entrer votre Adresse';
   if (!PassportPhoto) newErrors.PassportPhoto = 'La photo est nécessaire!';
   if (!Email) newErrors.Email = 'Veuillez entrer votre Email';
-  // if (!accept) newErrors.accept = 'Veuillez entrer votre accept';
+  if (!accept) newErrors.accept = 'Veuillez entrer votre accept';
 
 
 
@@ -108,9 +112,9 @@ const handleSubmit = (e) => {
     formData.append('DateOfBirth', DateOfBirth);
     formData.append('Address', Address);
     formData.append('PassportPhoto', PassportPhoto);
-    formData.append('BookDate', BookDate);
+    formData.append('BookDate', formattedDate);
     formData.append('examId', examId);
-    // formData.append('accept', accept);
+    formData.append('accept', accept);
 
 
 
@@ -192,21 +196,21 @@ const countryOptions = countries.map((country) => ({
     <div style={{backgroundColor: 'whitesmoke'}}>
       
       <Header />
-       <div className = "container">
-       <div className="row">
-        
-             <div className="col-md-6 ">
-              <h1 className="mt-5">Inscription</h1> 
-<p className="mt-2 ">(veuillez remplir toutes les cases ci-dessous)
- </p>
- </div>
-        <form className=" d-flex justify-content-around" onSubmit={(e)=>handleSubmit(e)} >
-        <div className="col-md-6 d-block ">
-            <div className="mb-3 px-2 row ">
-          <h4 className="form-group mb-2" htmlFor="title">
-            Titre <span className="text-danger">*</span>
-            <div className="d-flex justify-content-start ">
-            <div className="form-check">
+       <div className="container mt-3">
+                <form  onSubmit={(e)=>handleSubmit(e)} >
+	<div className="row">
+		<div className="col-xl-6 col-l-12">
+			<div className="row">
+				<div className="col mb-3 mt-5">
+					<h1>Inscription</h1>
+					(veuillez remplir toutes les cases ci-dessous)
+				</div>
+			</div>
+        	<div className="row mt-3">
+				<div className="col">
+					<div className="form-outline">
+                  	<label className="form-label">Titre<span className="text-danger">*</span></label><br/>
+                    <div className="form-check form-check-inline">
   <input type="radio" className="form-check-input" id="titlecheck1" name="firstradio"
    checked={isMadamChecked}
    onChange={() => {
@@ -215,10 +219,11 @@ const countryOptions = countries.map((country) => ({
      setTitle('Madame');
    }}
     />
-  <label className="form-check-label" htmlFor="titlecheck1">Madame</label>
-
-</div>
-            <div className="form-check">
+   <label className="form-check-label">
+					    Madame
+					  </label>
+					</div>
+<div className="form-check form-check-inline">
   <input type="radio" className="form-check-input" id="titlecheck2" name="firstradio"
  checked={isMisterChecked}
  onChange={() => {
@@ -228,32 +233,35 @@ const countryOptions = countries.map((country) => ({
    setTitle('Monsieur');
  }}
   />
-  <label className="form-check-label me-4" htmlFor="titlecheck2">Monsieur</label>
-</div>
-
-
-</div>
-          </h4>
-        {errors.Title && <p className="text-danger m-1 ">{errors.Title}</p>}
-            </div>    
-              <div className=" mb-1">        
-          <label className="form-label mb-2 " htmlFor="passportNumber"> 
-          Numéro passeport ou Titre de séjour ou Carte nationale d'identité <span className="text-danger">*</span> </label></div>
-          <div className=" mb-3">
-            <input type="text" className="form-control mb-2" name="PassportNumber" id="PassportNumber"
+  <label className="form-check-label">
+					    Monsieur
+					  </label>
+					</div>
+                  </div>
+        		</div>
+                    {errors.Title && <p className="text-danger m-1 ">{errors.Title}</p>}
+			</div>
+          
+             
+             <div className="row mt-3">
+				<div className="col">
+					 <label className="form-label">Numéro passeport ou Titre de séjour ou Carte nationale d'identité <span className="text-danger">*</span></label>
+            <input type="text"  className="form-control form-control-md" name="PassportNumber" id="PassportNumber"
             onChange={(e) => setPassportNumber(e.target.value)}
             placeholder="Enter your passport number" />
-
+</div>
         {errors.PassportNumber && <p className="text-danger m-1 ">{errors.PassportNumber}</p>}
-        </div>  
+
+			</div>
+        
 
 
-            <div className="mb-3 px-2 d-flex justify-content-between">
-  <div className="">
-    <label htmlFor="firstName" className="form-label mb-2 me-2">Prenom <span className="text-danger">*</span></label>
+            <div className="row mt-3">
+				<div className="col-xl-6 col-l-12">
+					 <label className="form-label">Prenom <span className="text-danger">*</span></label>
     <input
       type="text"
-      className="form-control"
+      className="form-control form-control-md"
       name="firstName"
       id="firstName"
       onChange={(e) => setFirstName(e.target.value)}
@@ -261,61 +269,64 @@ const countryOptions = countries.map((country) => ({
     />
                         {errors.FirstName && <p className="text-danger m-1 ">{errors.FirstName}</p>}
 
-  </div>
-  <div className="">
-    <label htmlFor="lastName" className="form-label mb-2">Nom de Famille <span className="text-danger">*</span></label>
+</div>
+  <div className="col-xl-6 col-l-12">
+					 <label className="form-label">Nom de Famille <span className="text-danger">*</span></label>
     <input
       type="text"
-      className="form-control"
+className="form-control form-control-md"
       name="lastName"
       id="lastName"
             onChange={(e) => setLastName(e.target.value)}
       placeholder="Enter your lastName"
     />
-    {errors.LastName && <p className="text-danger m-1 ">{errors.LastName}</p>}
+          {errors.LastName && <p className="text-danger m-1 ">{errors.LastName}</p>}
+
   </div>
+
 </div>
 
 
-<div className="mb-3 px-2 d-flex justify-content-between">
-  <div className="">
-    <label htmlFor="dateOfBirth" className="form-label mb-2">Date de naissance <span className="text-danger">*</span></label>
+<div className="row mt-3">
+				<div className="col">
+					 <label className="form-label">Date de naissance <span className="text-danger">*</span></label>
     <input
       type="date"
-      className="form-control"
+className="form-control form-control-md"
       name="dateOfBirth"
       id="dateOfBirth"
             onChange={(e) => setDateOfBirth(e.target.value)}
       placeholder="Enter your date of birth"
     />
-    {errors.DateOfBirth && <p className="text-danger m-1 ">{errors.DateOfBirth}</p>}
   </div>
-  <div className="">
-          <label htmlFor="nationality" className="form-label mb-2">
-            Nationalité <span className="text-danger">*</span>
-          </label>
+      {errors.DateOfBirth && <p className="text-danger m-1 ">{errors.DateOfBirth}</p>}
+			</div>
+  <div className="row mt-3">
+				<div className="col">
+					<div className="form-outline">
+                 <label className="form-label" >Nationalité<span className="text-danger">*</span></label>
           <Select
+          className="form-select-md"
             options={nationalities.map((nationality, index) => ({
               value: nationality,
               label: nationality,
             }))}
             value={{ value: Nationality, label: Nationality }}
             onChange={(selectedOption) => setNationality(selectedOption.value)}
-            placeholder="Choisir..."
             isSearchable={true} 
           />
-          {errors.Nationality && <p className="text-danger m-1 ">{errors.Nationality}</p>}
         </div>
+				</div>
+          {errors.Nationality && <p className="text-danger m-1 ">{errors.Nationality}</p>}
 
-</div>
+			</div>
 
-<div className="mb-3 px-2 d-flex justify-content-between">
-  <div className="">
-  <label htmlFor="language" className="form-label mb-2">
-    Langue maternelle <span className="text-danger">*</span>
-  </label>
+<div className="row mt-3">
+				<div className="col">
+					<div className="form-outline">
+                 <label className="form-label" >Langue maternelle<span className="text-danger">*</span></label>
   <select
-  className="form-control"
+className="form-select form-select-md removeSelect"
   name="language"
   id="language"
   value={TongueLanguage}
@@ -329,95 +340,109 @@ const countryOptions = countries.map((country) => ({
   <option value="French">French</option>
 </select>
 
-  {errors.TongueLanguage && <p className="text-danger m-1 ">{errors.TongueLanguage}</p>}
 </div>
+				</div>
+  {errors.TongueLanguage && <p className="text-danger m-1 ">{errors.TongueLanguage}</p>}
+			</div>
 
-  <div className="">
-    <label htmlFor="address" className="form-label mb-2">Adresse <span className="text-danger">*</span></label>
+  <div className="row mt-3">
+				<div className="col">
+					 <label className="form-label" placeholder="House number and street name">Adresse <span className="text-danger">*</span></label>
     <input
       type="text"
-      className="form-control"
+className="form-control form-control-md"
       name="address"
       id="address"
             onChange={(e) => setAddress(e.target.value)}
 
       placeholder="Enter your address"
     />
- {errors.Address && <p className="text-danger m-1 ">{errors.Address}</p>}
   </div>
-</div>
+   {errors.Address && <p className="text-danger m-1 ">{errors.Address}</p>}
 
-<div className="mb-3 px-2 d-flex justify-content-between">
- <div className="">
-  <label htmlFor="country" className="form-label mb-2">
-    Pays <span className="text-danger">*</span>
-  </label>
+			</div>
+
+<div className="row mt-3">
+				<div className="col">
+					<div className="form-outline">
+                 <label className="form-label" >Pays<span className="text-danger">*</span></label>
+  
   <Select
+  className="form-select-md"
             options={countryOptions}
             value={{ value: Country, label: Country }}
             onChange={(selectedOption) => setCountry(selectedOption.value)}
             placeholder="Choisir..."
             isSearchable={true} 
           />
+ </div>
+				</div>
   {errors.Country && <p className="text-danger m-1 ">{errors.Country}</p>}
-</div>
 
-  <div className="">
-    <label htmlFor="town" className="form-label mb-2">Ville <span className="text-danger">*</span></label>
+			</div>
+
+  <div className="row mt-3">
+				<div className="col">
+					 <label className="form-label" >Ville <span className="text-danger">*</span></label>
     <input
       type="text"
-      className="form-control"
+className="form-control form-control-md"
       name="town"
       id="town"
             onChange={(e) => setTown(e.target.value)}
 
       placeholder="Enter your town"
     />
-    {errors.Town && <p className="text-danger m-1 ">{errors.Town}</p>}
   </div>
-</div>
+      {errors.Town && <p className="text-danger m-1 ">{errors.Town}</p>}
 
-<div className="mb-3 px-2 d-flex justify-content-between">
-  <div className="">
-    <label htmlFor="email" className="form-label mb-2">Email <span className="text-danger">*</span></label>
+			</div>
+
+<div className="row mt-3">
+				<div className="col">
+					 <label className="form-label">Email <span className="text-danger">*</span></label>
     <input
       type="text"
-      className="form-control"
+className="form-control form-control-md"
       name="email"
       id="email"
             onChange={(e) => setEmail(e.target.value)}
 
       placeholder="Enter your email"
     />
+</div>
      {errors.Email && <p className="text-danger m-1 ">{errors.Email}</p>}
-  </div>
-  <div className="">
-    <label htmlFor="phonenumber" className="form-label mb-2">Téléphone <span className="text-danger">*</span></label>
+
+			</div>
+        <div className="row mt-3">
+				<div className="col">
+					 <label className="form-label fw-bold">Téléphone <span className="text-danger">*</span></label>
     <input
       type="text"
-      className="form-control"
+      className="form-control form-control-md"
       name="phonenumber"
       id="phonenumber"
             onChange={(e) => setPhone(e.target.value)}
 
       placeholder="Enter your phone number"
     />
-        {errors.Phone && <p className="text-danger m-1 ">{errors.Phone}</p>}
   </div>
-</div>
+          {errors.Phone && <p className="text-danger m-1 ">{errors.Phone}</p>}
+
+			</div>
 
 
-<div className="mb-3 px-2 row">
-  <h3 className="form-group mb-4" htmlFor="motivation">
-    Motivation <span className="text-danger">*</span>
-  </h3>
-
-  {/* First pair of radio buttons - Academic */}
-  <div className="col-md-6">
-    <div className="form-check">
+<div className="row mt-3">
+				<div className="col">
+          			<h1>Motivation <span className="text-danger">*</span></h1>
+          		</div>
+          	</div>
+ <div className="row">
+          		<div className="col-xl-6 col-l-12">
+          			<div className="form-check form-check-inline ">
       <input
         type="radio"
-        className="form-check-input"
+         className="form-check-input"
         id="titlecheck3"
         name="secondradio"
         checked={isAcademic}
@@ -431,14 +456,12 @@ const countryOptions = countries.map((country) => ({
           setMotivation('Academic');
         }}
       />
-      <label className="form-check-label mt-2" htmlFor="titlecheck3">
-        Academic
-      </label>
-    </div>
-  </div>
+     <label className="form-check-label"> Académique </label>
+					</div>
+          		</div>
 
-  <div className="col-md-6">
-    <div className="form-check">
+  <div className="col-xl-6 col-l-12">
+          			<div className="form-check form-check-inline">
       <input
         type="radio"
         className="form-check-input"
@@ -456,15 +479,14 @@ const countryOptions = countries.map((country) => ({
           setMotivation('Immigration to Quebec');
         }}
       />
-      <label className="form-check-label mt-2" htmlFor="titlecheck4">
-        Immigration to Quebec
-      </label>
-    </div>
-  </div>
+      <label className="form-check-label"> Immigration au Québec </label>
+					</div>
+          		</div>
+          	</div>
 
-  {/* Third pair of radio buttons - Immigration to Canada */}
-  <div className="col-md-6">
-    <div className="form-check">
+  <div className="row">
+          		<div className="col-xl-6 col-l-12">
+          			<div className="form-check form-check-inline">
       <input
         type="radio"
         className="form-check-input"
@@ -482,15 +504,12 @@ const countryOptions = countries.map((country) => ({
           setMotivation('Immigration to Canada');
         }}
       />
-      <label className="form-check-label mt-4" htmlFor="titlecheck5">
-        Immigration to Canada
-      </label>
-    </div>
-  </div>
+     <label className="form-check-label"> Immigration au Canada </label>
+					</div>
+          		</div>
 
-  {/* Fourth pair of radio buttons - Individual */}
-  <div className="col-md-6">
-    <div className="form-check">
+  <div className="col-xl-6 col-l-12">
+          			<div className="form-check form-check-inline">
       <input
         type="radio"
         className="form-check-input"
@@ -508,15 +527,14 @@ const countryOptions = countries.map((country) => ({
           setMotivation('Individual');
         }}
       />
-      <label className="form-check-label mt-4" htmlFor="titlecheck6">
-        Individual
-      </label>
-    </div>
-  </div>
+      <label className="form-check-label"> Individuelle </label>
+					</div>
+          		</div>
+          	</div>
 
-  {/* Fifth pair of radio buttons - Studies in France */}
-  <div className="col-md-6">
-    <div className="form-check">
+  <div className="row">
+          		<div className="col-xl-6 col-l-12">
+          			<div className="form-check form-check-inline">
       <input
         type="radio"
         className="form-check-input"
@@ -534,18 +552,15 @@ const countryOptions = countries.map((country) => ({
           setMotivation('Studies in France');
         }}
       />
-      <label className="form-check-label mt-2" htmlFor="titlecheck7">
-        Studies in France
-      </label>
-    </div>
-  </div>
+      <label className="form-check-label"> Etudes en France </label>
+					</div>
+          		</div>
 
-  {/* Sixth pair of radio buttons - Access to French nationality */}
-  <div className="col-md-6">
-    <div className="form-check">
+  <div className="col-xl-6 col-l-12">
+          			<div className="form-check form-check-inline">
       <input
         type="radio"
-        className="form-check-input mt-4"
+        className="form-check-input"
         id="titlecheck8"
         name="secondradio"
         checked={isAccesstoFrenchnationality}
@@ -560,15 +575,14 @@ const countryOptions = countries.map((country) => ({
           setMotivation('Access to French nationality');
         }}
       />
-      <label className="form-check-label mt-2" htmlFor="titlecheck8">
-        Access to French nationality
-      </label>
-    </div>
-  </div>
+     <label className="form-check-label"> Accès à la nationalité française </label>
+					</div>
+          		</div>
+          	</div>
 
-  {/* Seventh pair of radio buttons - Professional */}
-  <div className="col-md-6">
-    <div className="form-check">
+  <div className="row">
+          		<div className="col">
+          			<div className="form-check form-check-inline ">
       <input
         type="radio"
         className="form-check-input "
@@ -586,92 +600,105 @@ const countryOptions = countries.map((country) => ({
           setMotivation('Professional');
         }}
       />
-      <label className="form-check-label mt-2" htmlFor="titlecheck9">
-        Professional
-      </label>
-    </div>
-  </div>
-
-          {errors.Motivation && <p className="text-danger m-1 ">{errors.Motivation}</p>}
-
-            </div> 
-<div className="mb-3 px-2 row d-flex justify-content-start ">
-<h3 className="mb-4 text-black">Photo de la carte d’identité ou du passeport  <span className="text-danger">*</span></h3>
-<h4 className="mb-4 ">veuillez télécharger une photo de votre carte d'identité ou de votre passeport.</h4>
+      <label className="form-check-label"> Professionnelle </label>
+					</div>
+          		</div>
+              {errors.Motivation && <p className="text-danger m-1 ">{errors.Motivation}</p>}
+          	</div>
+				
+                  <div className="row mt-4 mb-5">
+			<div className="col">
+			<h3>Photo de la carte d’identité ou du passeport <span className="text-danger">*</span> </h3>
+			<p className="mt-3">veuillez télécharger une photo de votre carte d'identité ou de votre passeport.</p>
+			<br/>
 <input type="file" 
   onChange={onChangeFile}
-  className = "mb-2"
+ className="form-control"/>
+			</div>
+          {errors.PassportPhoto && <p className="text-danger m-1 mb-3 ">{errors.PassportPhoto}</p>}
+		</div>
+		</div>
 
-/>
-    {errors.PassportPhoto && <p className="text-danger m-1 mb-3 ">{errors.PassportPhoto}</p>}
 
-</div>
-<div className="">
-  <button
-    className="bg-primary text-white rounded font-bold py-2 px-4 shadow-outline"
-    type="submit"
-  >
-    Submit
-  </button>
+<div className="col-xl-6 col-l-12 mb-3">
+			<div className="row mt-3">
+				<div className="col">
+					<div className="card">
+          <div className="card-header bg-white mt-1 ">
 
-</div>
-
-</div>
-
-  <div className="col-md-6 d-block mb-5 ms-4"> 
-  <div className=" bg-white "  style={{ border: '1px solid runded #000 ' }}>
-        <h4 className=" p-2">{titleParam}</h4>
-        <div>
-          <label className=" p-2">Total:</label>
-          <strong className=" p-2">
-          {CurrencyParam}
+          <span>{titleParam}</span>
+           </div>
+            <div className="card-body" >
+              <div className="row">
+        <div className="col-7">
+        <b>Total</b>
+        </div>
+        <div className="col-5 ">
+          <b>{CurrencyParam}
       {totalCostParam !== null ? (
         <>{totalCostParam}</>
       ) : (
         feesParam
-      )}
-          </strong>
-        </div>
+      )}</b>
       </div>
-
-  <div className=" bg-white mt-4"  style={{ border: '1px solid rounded #000' }}>
+      </div>
+            </div>
+          
+            </div>
       
-  {informations.map((information) => (
-    <div key={information._id}>
-      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.info}</p>
-      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p1}</p>
-      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p2}</p>
-      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p3}</p>
-      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p4}</p>
-      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p5}</p>
-      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p6}</p>
-      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p7}</p>
-      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p8}</p>
-      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p9}</p>
-      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p10}</p>
-      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p11}</p>
-      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p12}</p>
-      <p  className="p-2" style={{ fontFamily: 'Times New Roman', textAlign: 'justify' }}>{information.p13}</p>
-    </div>
-  ))}
-      <div> 
-        <hr/> 
-        <div className='p-1'>
-        <input type="checkbox"  id="acceptTerms" required />
-         {/* checked={accept}
-          onChange={() => setAccept(!accept)}  */}
-  <label htmlFor="acceptTerms" style={{ marginLeft: '8px' }} >
-  J'ai lu et j'accepte les conditions générales du site terms and conditions <span className="text-danger">*</span>  </label>
         </div>
+				</div>
+
+<div className="row mt-2">
+				<div className="col">
+					<div className="card">
+          {informations.map((information) => (
+            <div className="card-body" key={information._id}>
+        <p  className="ms-1" style={{fontSize: '20px'}}>{information.info}</p>
+
+             <div className="m-1 text-justify p-3" style={{ backgroundColor: "#eeeff0", color: "#515151", fontSize: "15px" }}
+>
+      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify', fontSize: '15px',}}>{information.p1}</p>
+      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify', fontSize: '15px',}} >{information.p2}</p>
+      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify', fontSize: '15px',}}>{information.p3}</p>
+      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify', fontSize: '15px',}}>{information.p4}</p>
+      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify', fontSize: '15px',}}>{information.p5}</p>
+      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify', fontSize: '15px',}}>{information.p6}</p>
+      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify', fontSize: '15px',}}>{information.p7}</p>
+      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify', fontSize: '15px',}}>{information.p8}</p>
+      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify', fontSize: '15px',}}>{information.p9}</p>
+      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify', fontSize: '15px',}}>{information.p10}</p>
+      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify', fontSize: '15px',}}>{information.p11}</p>
+      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify', fontSize: '15px',}}>{information.p12}</p>
+      <p style={{ fontFamily: 'Times New Roman', textAlign: 'justify', fontSize: '15px',}}>{information.p13}</p>
+ </div>
+            </div>
+ ))}
+ <div className="card-footer bg-white">
+            	<div className="form-check mt-1 ms-1">
+                <input className="form-check-input" type="checkbox" required
+                value={accept} 
+                onChange={(e) => setAccept(e.target.value)}/>
+                <label className="form-check-label">
+           J'ai lu et j'accepte les conditions générales du site<span className="text-danger">*</span>
+          </label>
+              </div>
+              <button type="submit" className="btn btn-primary mb-2 mt-3 fw-bold" style={{width: "200px" , height: "50px"}}>Submit</button>
+            </div>
+          
+            </div>
+      
+        </div>
+				</div>
+			</div>
+		</div>
+
+
+          
+
+     </form>
       </div>
-    </div>
-    
-</div>
-</form>
-</div>
-
-</div>
-
+      
 <Footer/>
     </div>
 );

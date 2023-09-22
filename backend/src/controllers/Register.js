@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
       if (file) {
         cb(null, file.originalname);
       } else {
-        cb(null, null); // Set filename to null if no file
+        cb(null, null); 
       }
     } catch (error) {
       console.error('Error:', error.message);
@@ -83,7 +83,7 @@ export const registerCandidate = asyncHandler(async (req, res) => {
       
     ];
 
-    // if (req.body.accept === true) {
+    if (req.body.accept === true) {
       cnx.query(sql, values, async (err, data) => {
         if (err) {
           console.error('Error inserting data:', err);
@@ -135,10 +135,10 @@ cnx.query(getEmailContentSQL, [TemplateID], async (err, templateData) => {
 
       });
     
-  // }
-  // else {
-  //   res.status(500).json({ message: 'please accept the terms' });
-  // } 
+  }
+  else {
+    res.status(500).json({ message: 'please accept the terms' });
+  } 
 }
    catch (error) {
     console.error('Error registering candidate:', error);
