@@ -125,11 +125,11 @@ function HomeUpdate() {
           <h1>Home Information</h1>
           <div className="input-grid">
             <div className="input-row">
-              <label htmlFor="exams">Title of home information :</label>
+              <label htmlFor="exams " className='mb-3'>Title of home information :</label>
               <input type="text" id="exams" value={exams} onChange={(e) => setExams(e.target.value)} />
             </div>
             <div className="input-row">
-              <label htmlFor="body">Body:</label>
+              <label htmlFor="body" className='mb-3'>Body:</label>
               <textarea id="body" value={body} onChange={(e) => setBody(e.target.value)} />
             </div>
           </div>
@@ -139,63 +139,63 @@ function HomeUpdate() {
             <h1>Useful Links</h1>
             <div className="input-grid">
               <div className="input-row">
-                <label htmlFor="usefullinks">Title2 of home information :</label>
+                <label htmlFor="usefullinks" className='mb-3'>Title2 of home information :</label>
                 <input type="text" id="usefullinks" value={usefullinks} onChange={(e) => setUsefulLinks(e.target.value)} />
               </div>
               <div className="input-row">
-                <label htmlFor="titlelink1">Title Link 1:</label>
+                <label htmlFor="titlelink1" className='mb-3'>Title Link 1:</label>
                 <input type="text" id="titlelink1" value={titlelink1} onChange={(e) => setTitleLink1(e.target.value)} />
               </div>
               <div className="input-row">
-                <label htmlFor="link1">Link 1:</label>
+                <label htmlFor="link1" className='mb-3'>Link 1:</label>
                 <input type="text" id="link1" value={link1} onChange={(e) => setLink1(e.target.value)} />
               </div>
               <div className="input-row">
-                <label htmlFor="titlelink2">Title Link 2:</label>
+                <label htmlFor="titlelink2" className='mb-3'>Title Link 2:</label>
                 <input type="text" id="titlelink2" value={titlelink2} onChange={(e) => setTitleLink2(e.target.value)} />
               </div>
               <div className="input-row">
-                <label htmlFor="link2">Link 2:</label>
+                <label htmlFor="link2" className='mb-3'>Link 2:</label>
                 <input type="text" id="link2" value={link2} onChange={(e) => setLink2(e.target.value)} />
               </div>
               <div className="input-row">
-                <label htmlFor="titlelink3">Title Link 3:</label>
+                <label htmlFor="titlelink3" className='mb-3'>Title Link 3:</label>
                 <input type="text" id="titlelink3" value={titlelink3} onChange={(e) => setTitleLink3(e.target.value)} />
               </div>
               <div className="input-row">
-                <label htmlFor="link3">Link 3:</label>
+                <label htmlFor="link3" className='mb-3'>Link 3:</label>
                 <input type="text" id="link3" value={link3} onChange={(e) => setLink3(e.target.value)} />
               </div>
               <div className="input-row">
-                <label htmlFor="titlelink4">Title Link 4:</label>
+                <label htmlFor="titlelink4" className='mb-3'>Title Link 4:</label>
                 <input type="text" id="titlelink4" value={titlelink4} onChange={(e) => setTitleLink4(e.target.value)} />
               </div>
               <div className="input-row">
-                <label htmlFor="link4">Link 4:</label>
+                <label htmlFor="link4" className='mb-3'>Link 4:</label>
                 <input type="text" id="link4" value={link4} onChange={(e) => setLink4(e.target.value)} />
               </div>
               <div className="input-row">
-                <label htmlFor="titlelink5">Title Link 5:</label>
+                <label htmlFor="titlelink5" className='mb-3'>Title Link 5:</label>
                 <input type="text" id="titlelink5" value={titlelink5} onChange={(e) => setTitleLink5(e.target.value)} />
               </div>
               <div className="input-row">
-                <label htmlFor="link5">Link 5:</label>
+                <label htmlFor="link5" className='mb-3'>Link 5:</label>
                 <input type="text" id="link5" value={link5} onChange={(e) => setLink5(e.target.value)} />
               </div>
               <div className="input-row">
-                <label htmlFor="titlelink6">Title Link 6:</label>
+                <label htmlFor="titlelink6" className='mb-3'>Title Link 6:</label>
                 <input type="text" id="titlelink6" value={titlelink6} onChange={(e) => setTitleLink6(e.target.value)} />
               </div>
               <div className="input-row">
-                <label htmlFor="link6">Link 6:</label>
+                <label htmlFor="link6" className='mb-3'>Link 6:</label>
                 <input type="text" id="link6" value={link6} onChange={(e) => setLink6(e.target.value)} />
               </div>
               <div className="input-row">
-                <label htmlFor="titlelink7">Title Link 7:</label>
+                <label htmlFor="titlelink7" className='mb-3'>Title Link 7:</label>
                 <input type="text" id="titlelink7" value={titlelink7} onChange={(e) => setTitleLink7(e.target.value)} />
               </div>
               <div className="input-row">
-                <label htmlFor="link7">Link 7:</label>
+                <label htmlFor="link7" className='mb-3'>Link 7:</label>
                 <input type="text" id="link7" value={link7} onChange={(e) => setLink7(e.target.value)} />
               </div>
             </div>
@@ -204,7 +204,7 @@ function HomeUpdate() {
             Update successful! 
           </div>
         )}
-            <button onClick={handleHomepageUpdate}>Update links</button>
+            <button onClick={handleHomepageUpdate} className="btn btn-primary mb-4">Update links</button>
           </div>
         </div>
       </div>
