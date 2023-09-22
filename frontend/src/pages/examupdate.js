@@ -4,7 +4,7 @@ import axios from 'axios';
 import AddHomeInfoModal from './AddHomeInfoModal.js'; 
 import './homeinfomodal.css';
 import NavbarAdmin from './NavbarAdmin.js';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function HomeInfo() {
   const [editableInfo, setEditableInfo] = useState([]);
@@ -78,24 +78,21 @@ function HomeInfo() {
         console.error('Error deleting home info data:', error);
       });
   };
+
   useEffect(() => {
     if (isUpdateSuccessful) {
-      
       const timeout = setTimeout(() => {
         setUpdateSuccessful(false); 
       }, 4000); 
-
       return () => clearTimeout(timeout); 
     }
   }, [isUpdateSuccessful]);
 
   useEffect(() => {
     if (isDeleteSuccessful) {
-      
       const timeout = setTimeout(() => {
         setDeleteSuccessful(false); 
       }, 4000); 
-
       return () => clearTimeout(timeout); 
     }
   }, [isDeleteSuccessful]);
@@ -103,122 +100,119 @@ function HomeInfo() {
   return (
     <div>
       <NavbarAdmin />
-      <div  className="d-flex">
-      
-      <SidebarAdmin />
-      
-
-      <div className="home-info-container mt-4">
-      <div className="d-flex justify-content-between mb-3">
-        <h2>Exam Information</h2>
-        <button
-          className="btn btn-primary btn-md"
-          onClick={() => setIsModalOpen(true)}
-        >
-          <i className="bi bi-plus"></i> Add
-        </button>
-      </div>
-      {isDeleteSuccessful && (
-          <div className="alert alert-danger" role="alert">
-            Item deleted successfully.
+      <div className="d-flex">
+        <SidebarAdmin />
+        <div className="home-info-container my-4">
+          <div className="d-flex justify-content-between mb-3">
+            <h2>Exam Information</h2>
+            <button
+              className="btn btn-secondary btn-md"
+              onClick={() => setIsModalOpen(true)}
+            >
+              <i className="bi bi-plus"></i> Add
+            </button>
           </div>
-        )}
-        {isUpdateSuccessful && (
-  <div className="alert alert-success" role="alert">
-    Item updated successfully.
-  </div>
-)}
-        <table className="table table-bordered table-sm custom-table my-4">
-
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Information</th>
-              <th>Currency</th>
-              <th>Fees</th>
-              <th>Link</th>
-              <th>type</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {editableInfo.map((info) => (
-              <tr key={info.infoid}>
-                <td>
-                  <input
-                    type="text"
-                    name="title"
-                    value={info.title}
-                    className="form-control"
-                    onChange={(event) => handleRowInputChange(event, info.infoid)}
-                  />
-                </td>
-                <td>
-                  <textarea
-                    type="text"
-                    name="information"
-                    value={info.information}
-                    className="form-control"
-                    onChange={(event) => handleRowInputChange(event, info.infoid)}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    name="Currency"
-                    value={info.Currency}
-                    className="form-control"
-                    onChange={(event) => handleRowInputChange(event, info.infoid)}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    name="fees"
-                    value={info.fees}
-                    className="form-control"
-                    onChange={(event) => handleRowInputChange(event, info.infoid)}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    name="link"
-                    value={info.link}
-                    className="form-control"
-                    onChange={(event) => handleRowInputChange(event, info.infoid)}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    name="type"
-                    value={info.type}
-                    className="form-control"
-                    onChange={(event) => handleRowInputChange(event, info.infoid)}
-                  />
-                </td>
-                <td>
+          {isDeleteSuccessful && (
+            <div className="alert alert-danger" role="alert">
+              Item deleted successfully.
+            </div>
+          )}
+          {isUpdateSuccessful && (
+            <div className="alert alert-success" role="alert">
+              Item updated successfully.
+            </div>
+          )}
+          <table className="table table-bordered table-sm custom-table my-4">
+            <thead className="thead-dark">
+              <tr>
+                <th>Title</th>
+                <th>Information</th>
+                <th>Currency</th>
+                <th>Fees</th>
+                <th>Link</th>
+                <th>Type</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {editableInfo.map((info) => (
+                <tr key={info.infoid}>
+                  <td>
+                    <input
+                      type="text"
+                      name="title"
+                      value={info.title}
+                      className="form-control"
+                      onChange={(event) => handleRowInputChange(event, info.infoid)}
+                    />
+                  </td>
+                  <td>
+                    <textarea
+                      type="text"
+                      name="information"
+                      value={info.information}
+                      className="form-control"
+                      onChange={(event) => handleRowInputChange(event, info.infoid)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      name="Currency"
+                      value={info.Currency}
+                      className="form-control"
+                      onChange={(event) => handleRowInputChange(event, info.infoid)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      name="fees"
+                      value={info.fees}
+                      className="form-control"
+                      onChange={(event) => handleRowInputChange(event, info.infoid)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      name="link"
+                      value={info.link}
+                      className="form-control"
+                      onChange={(event) => handleRowInputChange(event, info.infoid)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      name="type"
+                      value={info.type}
+                      className="form-control"
+                      onChange={(event) => handleRowInputChange(event, info.infoid)}
+                    />
+                  </td>
+                  <td className='d-flex '>
                   <button
-                    className="btn btn-primary"
+                    className="btn btn-secondary button-spacing"
                     onClick={() => handleUpdate(info.infoid)}
                   >
-                    Update
+                    <i className="bi bi-pencil"></i> 
                   </button>
                   <button
-                    className="btn btn-danger"
+                    className="btn btn-danger button-spacing"
                     onClick={() => handleDelete(info.infoid)}
                   >
-                    Delete
+                    <i className="bi bi-trash"></i> 
                   </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <AddHomeInfoModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <AddHomeInfoModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        </div>
       </div>
-    </div>
     </div>
   );
 }

@@ -112,11 +112,11 @@ function HomeInfo() {
       
         <SidebarAdmin />
    
-      <div className="home-info-container ">
+      <div className="home-info-container my-4">
       <div className="d-flex justify-content-between mb-3">
         <h2>Course Information</h2>
         <button
-          className="btn btn-primary btn-md"
+          className="btn btn-secondary btn-md"
           onClick={() => setIsModalOpen(true)}
         >
           <i className="bi bi-plus"></i> Add
@@ -204,17 +204,17 @@ function HomeInfo() {
                 </td>
                 <td className='d-flex'>
                 <button
-                    className="btn btn-primary btn-md"
-                    onClick={() => handleUpdate(info.infoid)}
-                  >
-                    <i className="bi bi-pencil-fill"></i> 
-                  </button>
-                  <button
-                    className="btn btn-danger btn-sm ml-2"
-                    onClick={() => handleDelete(info.infoid)}
-                  >
-                    <i className="bi bi-trash-fill"></i> 
-                  </button>
+                  className="btn btn-secondary button-spacing"
+                  onClick={() => handleUpdate(info.infoid)}
+                >
+                  <i className="bi bi-pencil"></i> 
+                </button>
+                <button
+                  className="btn btn-danger button-spacing"
+                  onClick={() => handleDelete(info.infoid)}
+                >
+                  <i className="bi bi-trash"></i> 
+                </button>
                 </td>
               </tr>
             ))}

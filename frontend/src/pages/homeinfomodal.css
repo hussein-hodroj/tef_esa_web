@@ -1,26 +1,48 @@
+.home-info-container{
+  margin: 5%;
+}
+.table {
+  font-size: 14px; 
+}
+
+.table th,
+.table td {
+  padding: 0.5rem; 
+}
+
+
+.table input[type="text"],
+.table textarea {
+  height: 70px; 
+}
+
+
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .modal {
-    background-color: white;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 400px;
-    max-width: 90%;
-    position: relative;
-    display: block; 
-    z-index: 1100; 
-    height: 600px;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 500px;
+  max-width: 90%;
+  position: relative;
+  display: block;
+  z-index: 1100;
+  height: 700px;
+}
+
+
+.button-spacing {
+  margin-right: 10px; 
+}

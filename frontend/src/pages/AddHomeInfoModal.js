@@ -20,41 +20,39 @@ function AddHomeInfoModal({ isOpen, onClose }) {
     event.preventDefault();
   
     axios.post('http://localhost:8000/info/createHomeinfoData', formData)
-  .then((response) => {
-    if (response.status === 201) { 
-      console.log('Data added successfully');
-      setFormData({
-        title: '',
-        information: '',
-        Currency: '',
-        fees: '',
-        link: '',
-        type: '',
+      .then((response) => {
+        if (response.status === 201) { 
+          console.log('Data added successfully');
+          setFormData({
+            title: '',
+            information: '',
+            Currency: '',
+            fees: '',
+            link: '',
+            type: '',
+          });
+          onClose();
+          window.location.reload();
+        } else {
+          console.error('Error adding data:', response.status, response.statusText);
+        }
+      })
+      .catch((error) => {
+        console.error('Error adding data:', error);
       });
-      onClose();
-      
-      window.location.reload();
-    } else {
-      console.error('Error adding data:', response.status, response.statusText);
-    }
-  })
-  .catch((error) => {
-    console.error('Error adding data:', error);
-  });
-
   };
-  
 
   if (!isOpen) return null;
 
   return (
     <div className="modal-overlay">
       <div className="modal">
-        <div className="modal-content">
-          <h2>Add Home Info</h2>
+          <h2 className="mb-4 my-2">Add Home Info</h2>
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="title">Title:</label>
+            <div className="mb-3">
+              <label htmlFor="title" className="form-label">
+                Title:
+              </label>
               <input
                 type="text"
                 id="title"
@@ -65,8 +63,10 @@ function AddHomeInfoModal({ isOpen, onClose }) {
                 required
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="information">Information:</label>
+            <div className="mb-3">
+              <label htmlFor="information" className="form-label">
+                Information:
+              </label>
               <textarea
                 id="information"
                 name="information"
@@ -76,8 +76,10 @@ function AddHomeInfoModal({ isOpen, onClose }) {
                 required
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="Currency">Currency:</label>
+            <div className="mb-3">
+              <label htmlFor="Currency" className="form-label">
+                Currency:
+              </label>
               <input
                 type="text"
                 id="Currency"
@@ -88,8 +90,10 @@ function AddHomeInfoModal({ isOpen, onClose }) {
                 required
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="fees">Fees:</label>
+            <div className="mb-3">
+              <label htmlFor="fees" className="form-label">
+                Fees:
+              </label>
               <input
                 type="text"
                 id="fees"
@@ -100,8 +104,10 @@ function AddHomeInfoModal({ isOpen, onClose }) {
                 required
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="link">Link:</label>
+            <div className="mb-3">
+              <label htmlFor="link" className="form-label">
+                Link:
+              </label>
               <input
                 type="text"
                 id="link"
@@ -112,8 +118,10 @@ function AddHomeInfoModal({ isOpen, onClose }) {
                 required
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="type">Type:</label>
+            <div className="mb-3">
+              <label htmlFor="type" className="form-label">
+                Type:
+              </label>
               <input
                 type="text"
                 id="type"
@@ -124,17 +132,16 @@ function AddHomeInfoModal({ isOpen, onClose }) {
                 required
               />
             </div>
-            <div className="text-center">
-              
-              <button type="button" className="btn btn-secondary " onClick={onClose}>
+            <div className="text-center mb-2">
+              <button type="button" className="btn btn-secondary" onClick={onClose}>
                 Cancel
               </button>
-              <button type="submit" className="btn btn-success mr-2">
+              {' '}
+              <button type="submit" className="btn btn-primary">
                 Add
               </button>
             </div>
           </form>
-        </div>
       </div>
     </div>
   );
