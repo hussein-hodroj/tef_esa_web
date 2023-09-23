@@ -35,6 +35,10 @@ const [isAccesstoFrenchnationality, setIsAccesstoFrenchnationality] = useState(f
 const [isProfessional, setIsProfessional] = useState(false);
 const [accept, setAccept] = useState(false);
 
+const handleAcceptChange = (e) => {
+  setAccept(e.target.checked); 
+};
+
 const location = useLocation();
 const queryParams = new URLSearchParams(location.search);
 const dateidParam = queryParams.get('CourseDateID');
@@ -189,7 +193,7 @@ const countryOptions = countries.map((country) => ({
   label: country,
 }));
   
- 
+
 
   return (
   
@@ -677,8 +681,8 @@ className="form-control form-control-md"
  <div className="card-footer bg-white">
             	<div className="form-check mt-1 ms-1">
                 <input className="form-check-input" type="checkbox" required
-                value={accept} 
-                onChange={(e) => setAccept(e.target.value)}/>
+                checked={accept} 
+                onChange={handleAcceptChange}/>
                 <label className="form-check-label">
            J'ai lu et j'accepte les conditions générales du site<span className="text-danger">*</span>
           </label>

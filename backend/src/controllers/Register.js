@@ -37,7 +37,10 @@ export const upload = multer({ storage: storage });
 
 export const registerCandidate = asyncHandler(async (req, res) => {
   try {
+    console.log(req.body);
+     
     await Promise.all([
+    
       body('Title').notEmpty().isString().escape().run(req),
       body('PassportNumber').notEmpty().isString().escape().run(req),
       body('FirstName').notEmpty().isString().escape().run(req),
@@ -83,7 +86,7 @@ export const registerCandidate = asyncHandler(async (req, res) => {
       
     ];
 
-    if (req.body.accept === true) {
+    if (req.body.accept === "true") {
       cnx.query(sql, values, async (err, data) => {
         if (err) {
           console.error('Error inserting data:', err);
