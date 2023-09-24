@@ -50,22 +50,34 @@ function AdminProfileUpdate() {
     setEmailError('');
     setPasswordMatchError('');
     setPasswordStructureError('');
+    
+   
+    const partialUpdate = {};
 
-    if (!validateEmail(adminInfo.Email)) {
-      setEmailError('Please enter a valid email address.');
-      return;
+    if (adminInfo.Username !== '') {
+      partialUpdate.username = adminInfo.Username;
+    }
+    
+    if (adminInfo.Email !== '') {
+      if (!validateEmail(adminInfo.Email)) {
+        setEmailError('Please enter a valid email address.');
+        return;
+      }
+      partialUpdate.email = adminInfo.Email;
     }
 
-    if (newPassword !== confirmPassword) {
-      setPasswordMatchError('Passwords do not match.');
-      return;
-    }
-
-    if (!validatePassword(newPassword)) {
-      setPasswordStructureError(
-        'Password must be at least 8 characters long, contain both letters and digits, and have at least one capital letter.'
-      );
-      return;
+    if (newPassword !== '') {
+      if (newPassword !== confirmPassword) {
+        setPasswordMatchError('Passwords do not match.');
+        return;
+      }
+      if (!validatePassword(newPassword)) {
+        setPasswordStructureError(
+          'Password must be at least 8 characters long, contain both letters and digits, and have at least one capital letter.'
+        );
+        return;
+      }
+      partialUpdate.newPassword = newPassword;
     }
 
     const token = localStorage.getItem('token');
@@ -74,11 +86,7 @@ function AdminProfileUpdate() {
       const adminID = decoded.user.UserID;
 
       axios
-        .put(`http://localhost:8000/profile/${adminID}`, {
-          username: adminInfo.Username,
-          email: adminInfo.Email,
-          newPassword,
-        })
+        .put(`http://localhost:8000/profile/${adminID}`, partialUpdate)
         .then((response) => {
           setMessage(response.data.message);
           setTimeout(() => {

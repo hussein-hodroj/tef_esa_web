@@ -38,7 +38,7 @@ const SidebarAdmin = () => {
   return (
     <div>
     
-    <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
+    <div style={{ display: 'flex', height: '1400px', overflow: 'scroll initial' }}>
       <CDBSidebar textColor="#fff" backgroundColor="#000">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
@@ -68,7 +68,31 @@ const SidebarAdmin = () => {
         </CDBSidebarContent>
 
         <CDBSidebarFooter>
-          {/* Add your footer content here */}
+        <div
+              style={{
+                display: 'flex',
+                justifyContent: 'end', 
+                alignItems: 'center', 
+                height: '60px', 
+                position: 'fixed',
+                bottom: '0', 
+                width: '100%',
+                backgroundColor: 'transparent', 
+                zIndex: '1000', 
+              }}
+            >
+              <button
+                className="btn btn-light rounded-circle m-5"
+                onClick={() => {
+                  window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth',
+                  });
+                }}
+              >
+                <i className="fa fa-arrow-up"></i>
+              </button>
+            </div>
         </CDBSidebarFooter>
       </CDBSidebar>
     </div>
