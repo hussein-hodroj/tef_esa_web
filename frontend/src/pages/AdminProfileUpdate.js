@@ -104,9 +104,9 @@ function AdminProfileUpdate() {
     <div className="bg-light">
       <NavbarAdmin />
       <div className="d-flex">
-        <div className="col-md-3">
+        
           <SidebarAdmin />
-        </div>
+        
         <div className="container ">
           <div className="row">
             <div className="col-md-9 mt-5">
