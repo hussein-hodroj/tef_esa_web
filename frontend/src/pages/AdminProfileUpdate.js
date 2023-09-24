@@ -107,7 +107,7 @@ function AdminProfileUpdate() {
         
           <SidebarAdmin />
         
-        <div className="container ">
+        <div className="container m-5">
           <div className="row">
             <div className="col-md-9 mt-5">
               <h1>Update Admin Profile</h1>

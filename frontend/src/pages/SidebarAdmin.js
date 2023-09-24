@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import jwtDecode from 'jwt-decode';
 import {
   CDBSidebar,
@@ -10,10 +10,9 @@ import {
 } from 'cdbreact';
 import { useNavigate } from 'react-router-dom';
 
-
-
 const SidebarAdmin = () => {
   const navigate = useNavigate();
+  const [username, setUsername] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -22,63 +21,63 @@ const SidebarAdmin = () => {
       try {
         const decoded = jwtDecode(token);
         if (decoded.user.Role !== 'admin') {
-         
           navigate('/login');
+        } else {
+          setUsername(decoded.user.Username);
         }
       } catch (error) {
-       
         navigate('/login');
       }
     } else {
-
       navigate('/login');
     }
   }, [navigate]);
 
   return (
     <div>
-    
-    <div style={{ display: 'flex', height: '1400px', overflow: 'scroll initial' }}>
-      <CDBSidebar textColor="#fff" backgroundColor="#000">
-        <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-          <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
-            Admin
-          </a>
-        </CDBSidebarHeader>
+      <div style={{ display: 'flex', height: '1400px', overflow: 'scroll initial' }}>
+        <CDBSidebar textColor="#fff" backgroundColor="#000">
+          <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
+            <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
+              {username} 
+            </a>
+          </CDBSidebarHeader>
 
-        <CDBSidebarContent className="sidebar-content">
-          <CDBSidebarMenu>
-            <div onClick={() => navigate('/')} className="activeClicked">
-              <CDBSidebarMenuItem icon="columns" className='bg-black text-white'>Dashboard</CDBSidebarMenuItem>
-            </div>
-            <div onClick={() => navigate('/updatehome')} className="activeClicked">
-              <CDBSidebarMenuItem icon="table" className='bg-black text-white'>Home Update</CDBSidebarMenuItem>
-            </div>
-            <div onClick={() => navigate('/updateexam')} className="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line" className='bg-black text-white'>Exam update</CDBSidebarMenuItem>
-            </div>
-            <div onClick={() => navigate('/updatecourse')} className="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line" className='bg-black text-white'>Course update</CDBSidebarMenuItem>
-            </div>
-            <div onClick={() => navigate('/profile')} className="activeClicked">
+          <CDBSidebarContent className="sidebar-content">
+            <CDBSidebarMenu>
+              <div onClick={() => navigate('/')} className="activeClicked">
+                <CDBSidebarMenuItem icon="columns" className='bg-black text-white'>Dashboard</CDBSidebarMenuItem>
+              </div>
+              <div onClick={() => navigate('/updatehome')} className="activeClicked">
+                <CDBSidebarMenuItem icon="table" className='bg-black text-white'>Home Update</CDBSidebarMenuItem>
+              </div>
+              <div onClick={() => navigate('/updateexam')} className="activeClicked">
+                <CDBSidebarMenuItem icon="chart-line" className='bg-black text-white'>Exam update</CDBSidebarMenuItem>
+              </div>
+              <div onClick={() => navigate('/updatecourse')} className="activeClicked">
+                <CDBSidebarMenuItem icon="chart-line" className='bg-black text-white'>Course update</CDBSidebarMenuItem>
+              </div>
+              <div onClick={() => navigate('/profile')} className="activeClicked">
                 <CDBSidebarMenuItem icon="user" className='bg-black text-white'>Update Admin Profile</CDBSidebarMenuItem>
               </div>
+              <div onClick={() => navigate('/bigcalendar')} className="activeClicked">
+                <CDBSidebarMenuItem icon="calendar" className='bg-black text-white'>Calendar</CDBSidebarMenuItem>
+              </div>
+            </CDBSidebarMenu>
+          </CDBSidebarContent>
 
-          </CDBSidebarMenu>
-        </CDBSidebarContent>
-
-        <CDBSidebarFooter>
-        <div
+          <CDBSidebarFooter>
+            <div
               style={{
                 display: 'flex',
-                justifyContent: 'end', 
-                alignItems: 'center', 
-                height: '60px', 
+                justifyContent: 'end',
+                alignItems: 'center',
+                height: '60px',
                 position: 'fixed',
-                bottom: '0', 
+                bottom: '0',
                 width: '100%',
-                backgroundColor: 'transparent', 
-                zIndex: '1000', 
+                backgroundColor: 'transparent',
+                zIndex: '1000',
               }}
             >
               <button
@@ -93,11 +92,11 @@ const SidebarAdmin = () => {
                 <i className="fa fa-arrow-up"></i>
               </button>
             </div>
-        </CDBSidebarFooter>
-      </CDBSidebar>
+          </CDBSidebarFooter>
+        </CDBSidebar>
+      </div>
     </div>
-  </div>
-);
+  );
 };
 
 export default SidebarAdmin;
