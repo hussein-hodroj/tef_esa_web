@@ -166,3 +166,22 @@ export const getInfo = asyncHandler(async (req, res) => {
     res.status(500).json({ message: 'Failed to retrieve data' });
   }
 });
+
+export const getCandidates = asyncHandler(async (req, res) => {
+try{
+const get = "SELECT r.*, h.title, h.fees, h.Currency FROM registrations AS r INNER JOIN homeinfo AS h ON h.infoid = r.examId"
+
+cnx.query(get, (err, data) => {
+  if (err) {
+    console.error('Error retrieving data:', err);
+    return res.status(500).json({ message: 'Failed to retrieve data' });
+  }
+
+  return res.json(data);
+});
+} catch (error) {
+console.error('Error retrieving data:', error);
+res.status(500).json({ message: 'Failed to retrieve data' });
+}
+
+})
