@@ -17,6 +17,8 @@ import TEFCourse from './pages/TEFCourse.js'
 import HomeInfo from './pages/examupdate.js';
 import CourseInfo from './pages/courseupdate.js';
 import AdminProfileUpdate from './pages/AdminProfileUpdate.js';
+import BigCalendar from './pages/BigCalendar.jsx';
+
 
 function App() {
   return (
@@ -37,6 +39,7 @@ function App() {
       <Route path="/TEFAQ" element={< TEFAQ/>}/>
       <Route path="/TEFCourse" element={< TEFCourse/>}/>
       <Route path='/profile' element={<AdminProfileUpdate />} />
+      <Route path= '/bigcalendar' element={<BigCalendar/>} />
       </Routes>
     </BrowserRouter>
   );
