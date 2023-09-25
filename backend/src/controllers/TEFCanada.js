@@ -37,4 +37,15 @@ export const getTefCanadaDate = asyncHandler(async (req, res) => {
 });
 
 
+export const countRegistrationsByDate = asyncHandler(async (req, res) => {
+  const query = 'SELECT DATE_FORMAT(BookDate, "%Y-%m-%d") AS registration_date, COUNT(*) AS registration_count FROM registrations GROUP BY DATE_FORMAT(BookDate, "%Y-%m-%d")';
 
+  cnx.query(query, (err, results) => {
+    if (err) {
+      console.error('Error counting registrations:', err);
+      res.status(500).json({ message: 'Something went wrong' });
+    } else {
+      res.status(200).json(results);
+    }
+  });
+});
