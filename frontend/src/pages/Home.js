@@ -57,10 +57,10 @@ function Home() {
   }, []);
 
   return (
-    <div className="home-container">
+    <div className="home-container bg-light">
       <Header />
       
-      <main className="container mb-4 mt-4">
+      <main className="container mb-4 mt-4 ">
        
           {homepageData.map((item) => (
             <div key={item.homeid} className="row"> 
@@ -141,7 +141,7 @@ function Home() {
             </div>
             
           </div>
-          <div className="button-container my-2 text-center"> 
+          <div className="button-container my-4 text-center"> 
   <a href={item.link} rel="noopener noreferrer" className="btn btn-primary btn-md w-75 text-white" style={{ textDecoration: 'none' }}>
     Register
   </a>

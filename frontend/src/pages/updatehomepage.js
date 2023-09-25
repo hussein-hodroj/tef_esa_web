@@ -120,7 +120,7 @@ function HomeUpdate() {
         <SidebarAdmin />
       
 
-        <div className="home-update-container">
+        <div className="home-update-container m-5">
           <div className="section">
             <h1>Home Information</h1>
             <div className="input-grid">
