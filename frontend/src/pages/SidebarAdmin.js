@@ -35,7 +35,7 @@ const SidebarAdmin = () => {
 
   return (
     <div>
-      <div style={{ display: 'flex', height: '1400px', overflow: 'scroll initial' }}>
+      <div style={{ display: 'flex', height: '1450px', overflow: 'scroll initial' }}>
         <CDBSidebar textColor="#fff" backgroundColor="#000">
           <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
             <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
