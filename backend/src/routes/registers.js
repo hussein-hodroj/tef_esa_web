@@ -1,5 +1,5 @@
 import express from 'express';
-import {registerCandidate, getInfo, upload, getCandidates, updateInfo, getCandidateById, deleteCandidate} from '../controllers/register.js';
+import {registerCandidate, getInfo, upload, getCandidates, updateInfo, getCandidateById, deleteCandidate} from '../controllers/Register.js';
 
 const router = express.Router();
 router.get('/get', getInfo);
