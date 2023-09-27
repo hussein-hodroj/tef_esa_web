@@ -25,8 +25,10 @@ function DeleteCandidate({ openDelete, candidateId, setCandidate }) {
     <div className="modalBackgroundDeleteFeedback">
       <div className="modalContainerDeleteFeedback">
         <div className="CloseBtnDeleteFeedback d-flex justify-content-between">
-          <h1 className="text-white font-bold">Delete Candidate</h1>
-          <button onClick={() => openDelete(false)} className="text-white">X</button>
+        <h1 className="text-white font-bold delete-candidate-title">Delete Candidate</h1>
+
+        <button onClick={() => openDelete(false)} className="text-white" style={{ background: 'transparent' }}>X</button>
+
         </div>
         <div className="bodyDeleteFeedback">
           <h1 className="font-bold text-white">
