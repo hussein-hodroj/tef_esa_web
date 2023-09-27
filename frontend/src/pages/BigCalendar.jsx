@@ -9,7 +9,6 @@ import SidebarAdmin from './SidebarAdmin.js';
 import NavbarAdmin from './NavbarAdmin.js';
 
 
-
 const localizer = momentLocalizer(moment);
 
 
@@ -91,8 +90,16 @@ function Reservations() {
           <p >
             <strong >Nationality:</strong> {selectedEvent.Nationality}
           </p>
+          
+          <div class="button-container">
+      <button className="btn btn-primary py-1 px-3 d-flex justify-content-center items-center text-center">
+      <strong > More </strong>
+      </button>
+    </div>
          
         </div>
+       
+      
       </div>
       </div></div></div></div>
     );

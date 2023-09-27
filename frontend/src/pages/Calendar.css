@@ -5,6 +5,15 @@
 
     color: #080808; 
   }
+  .event-popup {
+    position: relative;
+  }
+  
+  .button-container {
+    position: absolute;
+    bottom: 70px; /* Adjust this value as needed to control the vertical position */
+    right: 10px; /* Adjust this value as needed to control the horizontal position */
+  }
   
   .custom-calendar {
    padding: 10px;
