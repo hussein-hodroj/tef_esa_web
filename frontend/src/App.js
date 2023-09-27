@@ -19,6 +19,7 @@ import CourseInfo from './pages/courseupdate.js';
 import AdminProfileUpdate from './pages/AdminProfileUpdate.js';
 import BigCalendar from './pages/BigCalendar.jsx';
 import CandidatesInfo from './pages/CandidatesInfo.jsx';
+import EmailTemplateUpdate from './pages/EmailTemplateUpdate.js';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
       <Route path='/profile' element={<AdminProfileUpdate />} />
       <Route path= '/bigcalendar' element={<BigCalendar/>} />
       <Route path= '/CandidatesInfo' element={<CandidatesInfo/>} />
+      <Route path= '/emailtemplateupdate' element={<EmailTemplateUpdate/>} />
       </Routes>
     </BrowserRouter>
   );
