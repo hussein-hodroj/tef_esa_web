@@ -6,6 +6,8 @@ import Calendar from 'react-calendar';
 import Axios from 'axios';
 import Header from '../pages/Header.js';
 import Footer from '../pages/Footer.js';
+import { format } from 'date-fns';
+
 
 const TEFAQ = () => {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -18,7 +20,8 @@ const TEFAQ = () => {
   const [isBookNowDisabled, setIsBookNowDisabled] = useState(true);
   const [disabledDates, setDisabledDates] = useState([]);
   const [numBookings, setNumBookings] = useState(1);
-  const [totalCost, setTotalCost] = useState(0); 
+  const [totalCost, setTotalCost] = useState(0);
+  const [formatDate, setFormatDate] = useState(null);
  
   const [selectedTests, setSelectedTests] = useState({
     comprehensionEcrite: false,
@@ -83,7 +86,10 @@ const TEFAQ = () => {
   }, [selectedTests, numBookings]);
 
   const handleDateClick = (date) => {
+    const formated = format(date, 'yyyy-MM-dd')
+    setFormatDate(formated);
     setSelectedDate(date);
+    
     setBookedDates([...bookedDates, date]);
     setIsBookNowDisabled(false);
   };
@@ -93,13 +99,25 @@ const TEFAQ = () => {
   };
 
   const handleBookNow = () => {
-    if (selectedDate && totalCost > 0) {
+    Axios
+      .get(`http://localhost:8000/register/date/${formatDate}`)
+      .then((response) => {
+        console.log(response.data.count)
+         if (response.data.count <= 20) {
+
+           if (selectedDate && totalCost > 0) {
       const queryParams = `date=${selectedDate.toISOString()}&tests=${JSON.stringify(
         selectedTests)}&cost=${totalCost}&fees=${fees}&infoid=${infoid}&Currency=${Currency}&title=${title}&type=${type} `;
       navigate(`/register?${queryParams}`);
-    } else {
-      alert('You have to choose at least one test to book a time.');
-    }
+      }else {
+        alert('You have to choose at least one test to book a time.');
+      }
+        }else{
+    alert("Nous n'avons plus de places disponibles pour cette journée");
+}
+      }) 
+      .catch((error) => console.log(error));
+    
   };
   
 

@@ -401,9 +401,61 @@ export const updatePaymentStatusAndStatus = asyncHandler(async (req, res) => {
           console.error('Error updating status:', updateErr);
           return res.status(500).json({ message: 'Failed to update status' });
         }
-
-        return res.json({ message: 'PaymentStatus and Status updated successfully' });
-      });
+        const getCandidateEmailSQL = "SELECT Email FROM registrations WHERE CandidateID = ?";
+  
+        cnx.query(getCandidateEmailSQL, [CandidateID], async (emailErr, emailData) => {
+          if (emailErr) {
+            console.error('Error fetching candidate email:', emailErr);
+            return res.status(500).json({ message: 'Failed to fetch candidate email' });
+          }
+      
+          if (emailData.length === 0) {
+            return res.status(404).json({ message: 'Candidate email not found' });
+          }
+      
+          const candidateEmail = emailData[0].Email;
+      
+          const getEmailContentSQL = "SELECT Subject, Body FROM emailtemplates WHERE TemplateID = ?";
+          const TemplateID = 2; 
+          
+          cnx.query(getEmailContentSQL, [TemplateID], async (err, templateData) => {
+            if (err) {
+              console.error('Error fetching email content:', err);
+              return res.status(500).json({ message: 'Failed to fetch email content' });
+            }
+          
+            const [template] = templateData;
+            const candidateEmailSubject = template.Subject; 
+            const candidateEmailContent = template.Body;
+          
+            const transporter = nodemailer.createTransport({
+              service: 'gmail', 
+              auth: {
+                user: 'get.bulk.leb@gmail.com',
+                pass: 'ujwymorrxolrbyxp',
+              },
+            });
+          
+            const candidateMailOptions = {
+              from: 'get.bulk.leb@gmail.com',
+              to: candidateEmail, 
+              subject: candidateEmailSubject, 
+              text: candidateEmailContent, 
+            };
+            const adminMailOptions = {
+              from: 'get.bulk.leb@gmail.com',
+              to: 'husseinhodroj2@gmail.com', 
+              subject: candidateEmailSubject, 
+              text: candidateEmailContent, 
+            };
+          
+            await transporter.sendMail(candidateMailOptions);
+            await transporter.sendMail(adminMailOptions);
+          
+            return res.json({ message: 'PaymentStatus and Status updated successfully' });
+          });
+        });
+      }); 
     });
   } catch (error) {
     console.error('Error updating status:', error);
@@ -453,4 +505,20 @@ export const rejectCandidateStatus = asyncHandler(async (req, res) => {
     console.error('Error updating status:', error);
     res.status(500).json({ message: 'Failed to update status' });
   }
+});
+
+
+export const lockdate = asyncHandler(async (req, res) => {
+  const sql = 'SELECT COUNT(*) AS count FROM registrations WHERE Status = "accepted" AND BookDate = ? AND examId IN (2, 3, 4)';
+  const { BookDate } = req.params;
+
+  cnx.query(sql, [BookDate], async (err, data) => {
+    if (err) {
+      console.error('Error querying data:', err);
+      return res.status(500).json({ message: 'Failed to count registrations' });
+    }
+
+    const count = data[0].count;
+    return res.json({ count });
+  });
 });

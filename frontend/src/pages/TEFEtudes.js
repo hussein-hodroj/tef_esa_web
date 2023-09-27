@@ -6,6 +6,7 @@ import Calendar from 'react-calendar';
 import Axios from 'axios';
 import Header from '../pages/Header.js';
 import Footer from '../pages/Footer.js';
+import { format } from 'date-fns';
 
 
 const TEFEtudes = () => {
@@ -19,6 +20,7 @@ const TEFEtudes = () => {
   const [calendarDates, setCalendarDates] = useState([]);
   const navigate = useNavigate();
   const [fees, setFees] = useState(null);
+  const [formatDate, setFormatDate] = useState(null);
 
   const [date, setdate] = useState(null);
   const [disabledDates, setDisabledDates] = useState([]);
@@ -58,6 +60,8 @@ const TEFEtudes = () => {
   }, [date]);
 
   const handleDateClick = (date) => {
+     const formated = format(date, 'yyyy-MM-dd')
+    setFormatDate(formated);
     setSelectedDate(date);
     setBookedDates([...bookedDates, date]);
     setIsBookNowDisabled(false);
@@ -68,13 +72,22 @@ const TEFEtudes = () => {
   };
 
   const handleBookNow = () => {
+    Axios
+    .get(`http://localhost:8000/register/date/${formatDate}`)
+    .then((response) => {
+      console.log(response.data.count)
+       if (response.data.count <= 20) {
     if (selectedDate) {
       const queryParams = `date=${selectedDate.toISOString()}
       &fees=${fees}&infoid=${infoid}&Currency=${Currency}&title=${title}&type=${type}`;
       navigate(`/register?${queryParams}`);
-    } else {
+    } else{
       alert('You have to choose at least one test to book a time.');
+  }
+    }else{
+        alert("Nous n'avons plus de places disponibles pour cette journée");
     }
+          })
   };
 
 

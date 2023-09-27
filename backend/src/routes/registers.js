@@ -2,7 +2,7 @@ import express from 'express';
 
 import {registerCandidate, getInfo, upload, getCandidates, updateInfo, getCandidateById,
  deleteCandidate, getStatus, updatePaymentStatusAndStatus,
- rejectCandidateStatus} from '../controllers/register.js';
+ rejectCandidateStatus, lockdate} from '../controllers/register.js';
 
 
 const router = express.Router();
@@ -15,6 +15,7 @@ router.delete('/delete/:id', deleteCandidate);
 router.get('/status', getStatus );
 router.put('/updatestatus/:CandidateID', updatePaymentStatusAndStatus );
 router.put('/updatereject/:CandidateID', rejectCandidateStatus);
+router.get('/date/:BookDate', lockdate);
 
 
 export default router;
