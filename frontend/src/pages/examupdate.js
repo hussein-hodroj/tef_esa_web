@@ -5,12 +5,16 @@ import AddHomeInfoModal from './AddHomeInfoModal.js';
 import './homeinfomodal.css';
 import NavbarAdmin from './NavbarAdmin.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import DeleteExamModal from './DeleteExamModal.js';
 
 function HomeInfo() {
   const [editableInfo, setEditableInfo] = useState([]);
   const [isUpdateSuccessful, setUpdateSuccessful] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteSuccessful, setDeleteSuccessful] = useState(false);
+  const [isDeleteExamModalOpen, setIsDeleteExamModalOpen] = useState(false);
+  const [deleteExamId, setDeleteExamId] = useState(null);
+  
 
   useEffect(() => {
     axios.get('http://localhost:8000/info/getHomeinfoData/exam')
@@ -61,22 +65,47 @@ function HomeInfo() {
     setEditableInfo(updatedData);
   };
 
-  const handleDelete = (id) => {
-    axios.delete(`http://localhost:8000/info/deleteHomeinfoData/${id}`)
+  const openDeleteExamModal = (id) => {
+    setDeleteExamId(id);
+    setIsDeleteExamModalOpen(true);
+  };
+
+ 
+  const closeDeleteExamModal = () => {
+    setIsDeleteExamModalOpen(false);
+  };
+
+  const handleDeleteExam = (id, event) => {
+    event.preventDefault(); 
+    setDeleteExamId(id);
+    setIsDeleteExamModalOpen(true);
+  };
+  
+
+  const confirmDeleteExam = () => {
+    axios
+      .delete(`http://localhost:8000/info/deleteHomeinfoData/${deleteExamId}`)
       .then((response) => {
         if (response.status === 200) {
           setDeleteSuccessful(true);
-          console.log('Delete successful');
+          console.log('Exam deleted successfully');
+  
           
-          setEditableInfo((prevState) => prevState.filter((item) => item.infoid !== id));
+          setEditableInfo((prevState) =>
+            prevState.filter((item) => item.infoid !== deleteExamId)
+          );
         } else {
           console.error('Delete error:', response.statusText);
         }
       })
       .catch((error) => {
-        console.error('Error deleting home info data:', error);
+        console.error('Error deleting exam info data:', error);
       });
+  
+  
+    setIsDeleteExamModalOpen(false);
   };
+
 
   useEffect(() => {
     if (isUpdateSuccessful) {
@@ -123,7 +152,7 @@ function HomeInfo() {
         )}
         <div className="row">
           {editableInfo.map((info) => (
-            <div className="col-lg-6 mb-4" key={info.infoid}>
+            <div className="col-lg-6 mb-4" key={info.infoid} style={{ width: '500px' }}>
               <form>
                 <div className="form-group mb-4">
                   <label>Title:</label>
@@ -188,9 +217,9 @@ function HomeInfo() {
                 </div>
                 <div className="d-flex justify-content-end">
                 <button
-                style={{ marginRight: '10px' }}
+                    style={{ marginRight: '10px' }}
                     className="btn btn-danger"
-                    onClick={() => handleDelete(info.infoid)}
+                    onClick={(event) => handleDeleteExam(info.infoid, event)}
                   >
                     Delete
                   </button>
@@ -206,6 +235,11 @@ function HomeInfo() {
             ))}
           </div>
           <AddHomeInfoModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+          <DeleteExamModal
+          isOpen={isDeleteExamModalOpen}
+          onClose={() => setIsDeleteExamModalOpen(false)}
+          onDelete={confirmDeleteExam} 
+        />
         </div>
       </div>
     </div>
