@@ -61,9 +61,3 @@ function ConfirmStatus({ close, CandidateId, setCandidates }) {
 };
 
 export default ConfirmStatus;
-
-
-
-
-
-   

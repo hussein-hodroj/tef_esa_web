@@ -59,9 +59,3 @@ function RejectStatus({ openDelete, CandidateId, setCandidates }) {
 };
 
 export default RejectStatus;
-
-
-
-
-
-   
