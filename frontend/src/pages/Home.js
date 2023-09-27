@@ -126,38 +126,35 @@ function Home() {
      
      
       <main className="container mb-4">
-  <div className="row examsection">
-    {homeinfoData.map((item) => (
-      <div key={item.infoid} className="col-sm-4 mb-4">
-        <div className="card mb-4 h-100">
-          <h2 className="title text-center my-2" style={{ fontSize: '18px', padding: '10px' }}>
-            {item.title}
-          </h2>
-          <div className="card-body">
-            {item.information.split('.').map((paragraph, index) => (
-              <p key={index} className="text-left">{paragraph.trim()}</p>
+          <div className="row examsection">
+            {homeinfoData.map((item) => (
+              <div key={item.infoid} className="col-sm-4 mb-4">
+                <div className="card mb-4 h-100">
+                  <h2 className="title text-center my-2" style={{ fontSize: '18px', padding: '10px' }}>
+                    {item.title}
+                  </h2>
+                  <div className="card-body">
+                    {item.information.split('.').map((paragraph, index) => (
+                      <p key={index} className="text-left">{paragraph.trim()}</p>
+                    ))}
+                    <div className="d-flex justify-content-between align-items-center mt-3">
+                      <h5 className="text-primary"><strong style={{ color: 'black' }}>Frais :</strong> {item.fees} {item.Currency}</h5>
+                    </div>
+                    
+                  </div>
+                  <div className="button my-4 text-center"> 
+                  <a href={item.link} rel="noopener noreferrer" className="btn btn-primary btn-md w-75 text-white" style={{ textDecoration: 'none' }}>
+                    Register
+                  </a>
+                </div>
+
+                </div>
+                
+              </div>
+              
             ))}
-            <div className="d-flex justify-content-between align-items-center mt-3">
-              <h5 className="text-primary"><strong style={{ color: 'black' }}>Frais :</strong> {item.fees} {item.Currency}</h5>
-            </div>
-            
           </div>
-          <div className="button-container my-4 text-center"> 
-  <a href={item.link} rel="noopener noreferrer" className="btn btn-primary btn-md w-75 text-white" style={{ textDecoration: 'none' }}>
-    Register
-  </a>
-</div>
-
-        </div>
-        
-      </div>
-      
-    ))}
-  </div>
-</main>
-
-
-
+      </main>
 
       <main className="container mb-4 ">
         <div className="row">
@@ -172,7 +169,7 @@ function Home() {
                 <div className="d-flex justify-content-between align-items-center mt-3">
                   <h5 className="text-primary"><strong style={{ color: 'black' }}>Frais :</strong> {item.fees} {item.Currency}</h5>
                 </div>
-                <div className="button-container mt-4">
+                <div className="button mt-4">
                   <a href={item.link} rel="noopener noreferrer" className="btn btn-primary btn-lg">
                     Register
                   </a>
@@ -182,6 +179,9 @@ function Home() {
           </div>
         </div>
       </main>
+
+
+      
       <hr/>
       <div>
         <ContactForm />
