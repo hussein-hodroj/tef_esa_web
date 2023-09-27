@@ -45,8 +45,8 @@ function AddHomeInfoModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay">
-      <div className="modal">
+    <div className="modal-overlay" >
+      <div className="modal" style={{ width: '500px' }}>
           <h2 className="mb-4 my-2">Add Home Info</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
@@ -132,8 +132,8 @@ function AddHomeInfoModal({ isOpen, onClose }) {
                 required
               />
             </div>
-            <div className="text-center mb-2">
-              <button type="button" className="btn btn-secondary" onClick={onClose}>
+            <div className="text-center mb-2 d-flex justify-content-end">
+              <button type="button" className="btn btn-secondary" onClick={onClose} style={{ marginRight: '10px' }}>
                 Cancel
               </button>
               {' '}
