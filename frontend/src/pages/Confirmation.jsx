@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {FaSearch, FaTimes, FaCheck, FaArrowLeft, FaArrowRight } from 'react-icons/fa/index.esm.js';
+import {FaSearch, FaTimes, FaCheck, FaArrowLeft, FaArrowRight, FaImage} from 'react-icons/fa/index.esm.js';
 import Reject from '../components/CandidateConfirm/Reject.js';
 import Confirm from '../components/CandidateConfirm/Confirm.js';
+import PassportImage from '../components/CandidateConfirm/PassportImage.js';
 import axios from 'axios';
 import SidebarAdmin from './SidebarAdmin.js';
 import NavbarAdmin from './NavbarAdmin.js';
@@ -11,11 +12,12 @@ function Confirmation() {
   const [Candidates, setCandidates] = useState([]);
   const [RejectStatus , setRejectStatus ] = useState(false);
   const [ConfirmStatus, setConfirmStatus] = useState(false);
+  const [isPassportImageOpen, setPassportImageOpen] = useState(false);
   const [SelectedCandidateId, setSelectedCandidateId] = useState(null);
-
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const CandidatesPerPage = 10;
+
    
   useEffect(() => {
     axios
@@ -58,6 +60,7 @@ function Confirmation() {
 <div>
 {RejectStatus && <Reject openDelete={setRejectStatus} CandidateId={SelectedCandidateId}  setCandidates={setCandidates}/>}
 {ConfirmStatus && <Confirm close={setConfirmStatus} CandidateId={SelectedCandidateId} setCandidates={setCandidates} />}
+{isPassportImageOpen && <PassportImage open={setPassportImageOpen} CandidateId={SelectedCandidateId}  />}
 
     <NavbarAdmin/>
  <div className='d-flex'>
@@ -100,6 +103,8 @@ Exam </th>
 Payment Status</th>
                                                <th scope="col px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider  border border-black" >
 Status</th>
+<th scope="col px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider  border border-black" >
+PassportPassportImage</th>
                                                 <th scope="col px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider  border border-black" >
 Action</th>
               </tr>
@@ -125,6 +130,12 @@ Action</th>
 {Candidate.PaymentStatus}</td>
                                                <td className="px-6 py-4 whitespace-nowrap border Border-white">
 {Candidate.Status}</td>
+                                               <td className="px-6 py-4  border Border-white">
+                                               <div className=" rounded d-flex justify-content-center align-items-center">
+    <button  className=" font-bold py-1 px-2 bg-primary border rounded border-primary " title="PassportImage"
+ onClick= {() => {setSelectedCandidateId(Candidate.CandidateID); setPassportImageOpen(true);
+ }} > <FaImage/></button>
+  </div></td>
 
 
                                                <td className="px-6 py-4 whitespace-nowrap border Border-white">
@@ -132,14 +143,14 @@ Action</th>
                       
                     <div className="d-flex align-items-center justify-content-center space-x-4">
                     <div className="bg-primary rounded hover:primary">
-    <button  className="text-white font-bold py-1 px-2 bg-primary border border-primary" title="delivered"
+    <button  className="text-white font-bold py-1 px-2 bg-primary border rounded border-primary" title="delivered"
  onClick= {() => { setSelectedCandidateId(Candidate.CandidateID); 
  console.log (SelectedCandidateId) ; setConfirmStatus(true);}} > <FaCheck /></button>
   </div>
 
   
   <div className="bg-danger rounded hover:bg-danger">
-    <button  className="text-white font-bold py-1 px-2 bg-danger border border-danger"  title="delete"
+    <button  className="text-white font-bold py-1 px-2 bg-danger border rounded border-danger"  title="delete"
  onClick= {() => { setSelectedCandidateId(Candidate.CandidateID); setRejectStatus(true);}} > <FaTimes /></button>
   </div>
 
