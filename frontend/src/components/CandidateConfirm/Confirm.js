@@ -31,16 +31,18 @@ function ConfirmStatus({ close, CandidateId, setCandidates }) {
   return (
     <div className = "modalBackgroundDeleteFeedback">
           <form onSubmit={(e)=>handleSubmit(e)}>
-      <div className= "modalContainerDeleteFeedback">
-        <div className = "CloseBtnDeleteFeedback  d-flex justify-content-between">
-        <h1 className="text-black font-bold "> Update Candidate Status: </h1>
-        <button onClick = {() => close(false) } className="text-white d-flex justify-content-end">  X  </button>
+      <div className= "modalContainerDeleteFeedback ">
+        <div className = "titleCloseBtn  d-flex justify-content-between my-3">
+        <h3 className="text-white font-bold "> Update Candidate Status: </h3>
+        <button onClick={() => close(false)} className="text-white">X</button>
+        
+        
         </div>
         <div className = "titleDeleteFeedback">
         </div>
         <div className = "bodyDeleteFeedback">
 
-                <h1 className="font-bold text-black d-flex justify-content-start align-items-start">Are you sure that candidate has paid the fees ?</h1>
+                <h4 className="font-bold text-white d-flex justify-content-start align-items-start">Are you sure that candidate has paid the fees ?</h4>
    
               </div>
              
@@ -59,9 +61,3 @@ function ConfirmStatus({ close, CandidateId, setCandidates }) {
 };
 
 export default ConfirmStatus;
-
-
-
-
-
-   

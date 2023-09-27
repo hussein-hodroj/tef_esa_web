@@ -6,6 +6,7 @@ import PassportImage from '../components/CandidateConfirm/PassportImage.js';
 import axios from 'axios';
 import SidebarAdmin from './SidebarAdmin.js';
 import NavbarAdmin from './NavbarAdmin.js';
+import { format, parseISO } from 'date-fns';
 
 function Confirmation() {
   
@@ -16,7 +17,7 @@ function Confirmation() {
   const [SelectedCandidateId, setSelectedCandidateId] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const CandidatesPerPage = 10;
+  const CandidatesPerPage = 5;
 
    
   useEffect(() => {
@@ -85,52 +86,53 @@ function Confirmation() {
             <table className="table">
                             <thead>
               <tr>
-                <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider border border-black">
+                <th>
 #</th>
-                                               <th scope="col px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider  border border-black" >
+                                               <th >
 First Name</th>
-                                               <th scope="col px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider  border border-black" >
+                                               <th >
 Last Name </th>
-                                               <th scope="col px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider  border border-black" >
+                                               <th >
 Email</th>
-                                               <th scope="col px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider  border border-black" >
+                                               <th >
 Phone Number</th>
-                                               <th scope="col px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider  border border-black" >
-Book Date</th>
-                                               <th scope="col px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider  border border-black" >
+                                               <th >
+BookDates  </th>
+                                               <th >
 Exam </th>
-                                               <th scope="col px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider  border border-black" >
+                                               <th >
 Payment Status</th>
-                                               <th scope="col px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider  border border-black" >
+                                               <th >
 Status</th>
-<th scope="col px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider  border border-black" >
-PassportPassportImage</th>
-                                                <th scope="col px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider  border border-black" >
+<th >
+Passport</th>
+                                                <th >
 Action</th>
               </tr>
             </thead>
             <tbody>
             {currentCandidates.map((Candidate, index) => (
                     <tr key={Candidate.CandidateID}  className={index % 2 === 0 ? 'table-row-even' : 'table-row-odd'}>
-                                              <td className="px-6 py-4 whitespace-nowrap border Border-white">
+                                              <td className=" py-4 whitespace-nowrap border Border-white">
                                               {(currentPage - 1) * CandidatesPerPage + index + 1}</td>
-                                               <td className="px-6 py-4 whitespace-nowrap border Border-white">
+                                               <td className=" py-4 whitespace-nowrap border Border-white">
 {Candidate.FirstName}</td>
-                                               <td className="px-6 py-4 whitespace-nowrap border Border-white">
+                                               <td className=" py-4 whitespace-nowrap border Border-white">
 {Candidate.LastName}</td>
-                                               <td className="px-6 py-4 whitespace-nowrap border Border-white">
+                                               <td className=" py-4 whitespace-nowrap border Border-white">
 {Candidate.Email}</td>
-                                               <td className="px-6 py-4 whitespace-nowrap border Border-white">
+                                               <td className=" py-4 whitespace-nowrap border Border-white">
 {Candidate.Phone}</td>
-                                               <td className="px-6 py-4  whitespace-nowrap border Border-white">
-{Candidate.BookDate}</td>
-                                               <td className="px-6 py-4 whitespace-nowrap border Border-white">
+                                               <td className=" py-4  whitespace-nowrap border Border-white">
+{format(parseISO(Candidate.BookDate),'yyyy-MM-dd')}
+</td>
+                                               <td className=" py-4 whitespace-nowrap border Border-white">
 {Candidate.title}</td>
-                                               <td className="px-6 py-4 whitespace-nowrap border Border-white">
+                                               <td className=" py-4 whitespace-nowrap border Border-white">
 {Candidate.PaymentStatus}</td>
-                                               <td className="px-6 py-4 whitespace-nowrap border Border-white">
+                                               <td className=" py-4 whitespace-nowrap border Border-white">
 {Candidate.Status}</td>
-                                               <td className="px-6 py-4  border Border-white">
+                                               <td className=" py-4  border Border-white">
                                                <div className=" rounded d-flex justify-content-center align-items-center">
     <button  className=" font-bold py-1 px-2 bg-primary border rounded border-primary " title="PassportImage"
  onClick= {() => {setSelectedCandidateId(Candidate.CandidateID); setPassportImageOpen(true);
@@ -143,14 +145,14 @@ Action</th>
                       
                     <div className="d-flex align-items-center justify-content-center space-x-4">
                     <div className="bg-primary rounded hover:primary">
-    <button  className="text-white font-bold py-1 px-2 bg-primary border rounded border-primary" title="delivered"
+    <button  className="text-white font-bold py-1 mx-2 bg-primary border rounded border-primary" title="delivered"
  onClick= {() => { setSelectedCandidateId(Candidate.CandidateID); 
  console.log (SelectedCandidateId) ; setConfirmStatus(true);}} > <FaCheck /></button>
   </div>
 
   
-  <div className="bg-danger rounded hover:bg-danger">
-    <button  className="text-white font-bold py-1 px-2 bg-danger border rounded border-danger"  title="delete"
+  <div className="bg-danger rounded hover:bg-danger mx-2">
+    <button  className="text-white font-bold py-1 mx-2  bg-danger border rounded border-danger"  title="delete"
  onClick= {() => { setSelectedCandidateId(Candidate.CandidateID); setRejectStatus(true);}} > <FaTimes /></button>
   </div>
 
@@ -165,21 +167,24 @@ Action</th>
           </table>
           </div>
           <div className='d-flex justify-content-center mt-4'>
-              <div className='d-flex items-center ml-auto'>
+              <div className='d-flex align-items-center ms-auto'>
                 <button
-                  className='px-4 py-2 bg-primary text-white rounded-l-lg hover:primary'
                   onClick={handlePreviousPage}
+                  disabled={currentPage === 1}
                 >
-                  <FaArrowLeft />
+                  <FaArrowLeft />Previous
                 </button>
-                <p className='text-md text-primary ml-4 mr-4'>
-                  Page {currentPage} of {Math.ceil(filteredCandidates.length / CandidatesPerPage)}
-                </p>
+                <span className='mx-2'>{`Page ${currentPage} of ${Math.ceil(
+                Candidates.length / CandidatesPerPage
+              )}`}</span>
                 <button
-                  className='px-4 py-2 bg-primary text-white rounded-r-lg hover:primary'
-                  onClick={handleNextPage}
+                   onClick={handleNextPage}
+                   disabled={
+                    currentPage ===
+                    Math.ceil(Candidates.length / CandidatesPerPage)
+                  }
                 >
-                  <FaArrowRight />
+                  Next<FaArrowRight />
                 </button>
               </div>
             </div>
@@ -196,8 +201,5 @@ Action</th>
 }
 
 export default Confirmation;
-
-
-
 
 
