@@ -121,20 +121,14 @@ function Popup ({ close, candidateId, setCandidates, candidates }) {
     }
   };
   return (
-    <div className = "modalBackground">
-<form onSubmit={(e)=>handleSubmit(e)}>
-        <div className= "modalContainer">
-        <div className = "titleCloseBtn d-flex justify-content-between mb-4 mt-4">
-  <h1 className="text-white font-bold d-flex justify-content-start align-items-start"
-   style ={{ display: "inline-block",
-   textAlign: "start",
-   width: "350px",
-   fontSize: "x-large"}}> Edit Candidate Profile: </h1>
-
-        <button onClick = {() => close(false) } className="text-white">  X  </button>
+    <div className="modalBackground">
+    <form onSubmit={(e) => handleSubmit(e)}>
+      <div className="modalContainer">
+        <div className="titleCloseBtn d-flex justify-content-between mb-4 mt-4">
+          <h1 className="text-white font-bold d-flex justify-content-start align-items-start" style={{ display: "inline-block", textAlign: "start", width: "350px", fontSize: "x-large" }}>Edit Candidate Profile:</h1>
+          <button onClick={() => close(false)} className="text-white">X</button>
         </div>
-     
-        <div className = "body">
+        <div className="body">
 
    <div className="d-flex justify-content-between">
         <div className="mb-2">
@@ -204,7 +198,7 @@ function Popup ({ close, candidateId, setCandidates, candidates }) {
         </div>
         <div className= 'd-flex justify-content-between'>
         <div className="mb-2">
-                <label className="block text-black text-sm font-bold mb-2 form-label" htmlFor="BookDate">
+                <label className="block text-white text-sm font-bold mb-2 form-label" htmlFor="BookDate">
             Book Date
           </label>
           <input
@@ -218,7 +212,7 @@ function Popup ({ close, candidateId, setCandidates, candidates }) {
              
               </div> 
               <div className="mb-2">
-                <label className="block text-black text-sm font-bold mb-2 form-label" htmlFor="PaymentStatus">
+                <label className="block text-white text-sm font-bold mb-2 form-label" htmlFor="PaymentStatus">
             Payment Status
           </label>
           <select
@@ -262,10 +256,9 @@ function Popup ({ close, candidateId, setCandidates, candidates }) {
               </div>
              
         
-          <div className = "footer">
-            <button onClick = {() => close(false) } id="cancelBtn"> Cancel </button>
-            <button type = "submit"> Save </button>
-
+              <div className="footer">
+            <button onClick={() => close(false)} id="cancelBtn" >Cancel</button>
+            <button type="submit">Save</button>
           </div>
 
       </div>
