@@ -33,7 +33,7 @@ const ForgotPassword = () => {
 
     try {
       await axios.post('http://localhost:8000/forget-password', { email });
-      setSuccessMessage('Password reset email sent successfully. Please check your email.');
+      setSuccessMessage('Reset email sent successfully. Please check your email.');
     } catch (error) {
       setErrorMessage('Error sending password reset email. Please try again.');
     }
@@ -49,10 +49,20 @@ const ForgotPassword = () => {
         background: '#f5f5f5',
       }}
     >
-      <div className="col-md-6" style={{ height: '350px' }}>
+      <div className="col-md-4" style={{ height: '350px' }}>
         <div className="card" style={{ height: '100%' }}>
           <div className="card-body mt-3">
             <h2 className="card-title text-center mb-5">Forgot Password</h2>
+            {errorMessage && (
+              <div className="alert alert-danger mt-2" role="alert">
+                {errorMessage}
+              </div>
+            )}
+            {successMessage && (
+              <div className="alert alert-success mt-2" role="alert">
+                {successMessage}
+              </div>
+            )}
             
             <div className="form-group mb-3">
               <input
@@ -64,17 +74,8 @@ const ForgotPassword = () => {
                 required
               />
             </div>
-            {errorMessage && (
-              <div className="alert alert-danger mt-2" role="alert">
-                {errorMessage}
-              </div>
-            )}
-            {successMessage && (
-              <div className="alert alert-success mt-2" role="alert">
-                {successMessage}
-              </div>
-            )}
-            <div className="text-center mt-4">
+            
+            <div className="text-center mt-5">
               <button className="btn btn-primary" onClick={handleForgotPassword}>
                 Send Reset Email
               </button>

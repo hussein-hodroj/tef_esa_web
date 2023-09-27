@@ -35,7 +35,7 @@ const SidebarAdmin = () => {
 
   return (
     <div>
-      <div style={{ display: 'flex', height: '1450px', overflow: 'scroll initial' }}>
+      <div style={{ display: 'flex', height: '1480px', overflow: 'scroll initial' }}>
         <CDBSidebar textColor="#fff" backgroundColor="#000">
           <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
             <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
@@ -68,7 +68,7 @@ const SidebarAdmin = () => {
               </div>
 
               <div onClick={() => navigate('/emailtemplateupdate')} className="activeClicked">
-                <CDBSidebarMenuItem icon="email" className='bg-black text-white'>Email Update</CDBSidebarMenuItem>
+                <CDBSidebarMenuItem icon="envelope" className='bg-black text-white'>Email Update</CDBSidebarMenuItem>
               </div>
 
             </CDBSidebarMenu>

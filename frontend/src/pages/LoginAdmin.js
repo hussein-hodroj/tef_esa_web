@@ -61,7 +61,7 @@ const LoginAdmin = () => {
         background: '#f5f5f5',
       }}
     >
-      <div className="col-md-6">
+      <div className="col-md-4 ">
         <div className="card">
           <div className="card-body mt-4">
             <h2 className="card-title text-center mb-4">Admin Login</h2>
