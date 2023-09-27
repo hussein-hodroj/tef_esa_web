@@ -191,7 +191,7 @@ function Popup ({ close, candidateId, setCandidates, candidates }) {
           <input
             className="shadow form-control border w-64 rounded py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
             id="BookDate"
-            type="input"
+            type="date"
             value={BookDate}
             name="BookDate"
             onChange={(e) => setBookDate(e.target.value)}
