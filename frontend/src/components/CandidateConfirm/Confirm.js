@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../Candidateinfo/DeleteCandidate.css'
 
-function ConfirmStatus({ close, CandidateID, setCandidates }) {
+function ConfirmStatus({ close, CandidateId, setCandidates }) {
     const handleSubmit = (e) => {
       e.preventDefault();
-      axios.put(`http://localhost:8000/register/status/${CandidateID}`, {
+      axios.put(`http://localhost:8000/register/updatestatus/${CandidateId}`, {
          headers: {
           'Content-Type': 'application/json',
         },
@@ -13,9 +13,9 @@ function ConfirmStatus({ close, CandidateID, setCandidates }) {
         .then((response) => {
   
           setCandidates(prevCandidates =>
-            prevCandidates.map(register => (register.CandidateID === CandidateID ? response.data : register))
+            prevCandidates.map(register => (register.CandidateID === CandidateId ? response.data : register))
           );
-          window.location.reload();
+          
           close(false);
 
         })

@@ -133,7 +133,8 @@ Action</th>
                     <div className="d-flex align-items-center justify-content-center space-x-4">
                     <div className="bg-primary rounded hover:primary">
     <button  className="text-white font-bold py-1 px-2 bg-primary border border-primary" title="delivered"
- onClick= {() => { setSelectedCandidateId(Candidate.CandidateID); setConfirmStatus(true);}} > <FaCheck /></button>
+ onClick= {() => { setSelectedCandidateId(Candidate.CandidateID); 
+ console.log (SelectedCandidateId) ; setConfirmStatus(true);}} > <FaCheck /></button>
   </div>
 
   

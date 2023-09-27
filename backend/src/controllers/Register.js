@@ -366,3 +366,91 @@ export const getStatus = asyncHandler(async (req, res) => {
   }
   
   })
+
+  
+export const updatePaymentStatusAndStatus = asyncHandler(async (req, res) => {
+  try {
+    const { CandidateID } = req.params;
+
+    if (!CandidateID) {
+      return res.status(400).json({ message: 'Candidate ID is required' });
+    }
+
+    const checkCandidateSQL = 'SELECT * FROM registrations WHERE CandidateID = ?';
+    cnx.query(checkCandidateSQL, [CandidateID], async (err, candidateData) => {
+      if (err) {
+        console.error('Error checking candidate:', err);
+        return res.status(500).json({ message: 'Failed to check candidate' });
+      }
+
+      if (candidateData.length === 0) {
+        return res.status(404).json({ message: 'Candidate not found' });
+      }
+
+      const candidate = candidateData[0];
+
+      if (candidate.Status !== 'in progress' || candidate.PaymentStatus !== 'progress') {
+        return res.status(400).json({ message: 'Candidate does not meet the required criteria' });
+      }
+
+      const updateStatusSQL = 'UPDATE registrations SET PaymentStatus = ?, Status = ? WHERE CandidateID = ?';
+      const updateValues = ['paid', 'accepted', CandidateID];
+
+      cnx.query(updateStatusSQL, updateValues, async (updateErr) => {
+        if (updateErr) {
+          console.error('Error updating status:', updateErr);
+          return res.status(500).json({ message: 'Failed to update status' });
+        }
+
+        return res.json({ message: 'PaymentStatus and Status updated successfully' });
+      });
+    });
+  } catch (error) {
+    console.error('Error updating status:', error);
+    res.status(500).json({ message: 'Failed to update status' });
+  }
+});
+
+
+export const rejectCandidateStatus = asyncHandler(async (req, res) => {
+  try {
+    const { CandidateID } = req.params;
+
+    if (!CandidateID) {
+      return res.status(400).json({ message: 'Candidate ID is required' });
+    }
+
+    const checkCandidateSQL = 'SELECT * FROM registrations WHERE CandidateID = ?';
+    cnx.query(checkCandidateSQL, [CandidateID], async (err, candidateData) => {
+      if (err) {
+        console.error('Error checking candidate:', err);
+        return res.status(500).json({ message: 'Failed to check candidate' });
+      }
+
+      if (candidateData.length === 0) {
+        return res.status(404).json({ message: 'Candidate not found' });
+      }
+
+      const candidate = candidateData[0];
+
+      if (candidate.Status !== 'in progress') {
+        return res.status(400).json({ message: 'Candidate is not in progress' });
+      }
+
+      const updateStatusSQL = 'UPDATE registrations SET Status = ? WHERE CandidateID = ?';
+      const updateValues = ['rejected', CandidateID];
+
+      cnx.query(updateStatusSQL, updateValues, async (updateErr) => {
+        if (updateErr) {
+          console.error('Error updating status:', updateErr);
+          return res.status(500).json({ message: 'Failed to update status' });
+        }
+
+        return res.json({ message: 'Status updated to rejected successfully' });
+      });
+    });
+  } catch (error) {
+    console.error('Error updating status:', error);
+    res.status(500).json({ message: 'Failed to update status' });
+  }
+});
