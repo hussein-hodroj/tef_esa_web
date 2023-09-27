@@ -57,12 +57,16 @@ const SidebarAdmin = () => {
               <div onClick={() => navigate('/updatecourse')} className="activeClicked">
                 <CDBSidebarMenuItem icon="chart-line" className='bg-black text-white'>Course update</CDBSidebarMenuItem>
               </div>
+              <div onClick={() => navigate('/status')} className="activeClicked">
+                <CDBSidebarMenuItem icon="calendar" className='bg-black text-white'>Update lockdates</CDBSidebarMenuItem>
+              </div>
               <div onClick={() => navigate('/profile')} className="activeClicked">
                 <CDBSidebarMenuItem icon="user" className='bg-black text-white'>Update Admin Profile</CDBSidebarMenuItem>
               </div>
               <div onClick={() => navigate('/bigcalendar')} className="activeClicked">
                 <CDBSidebarMenuItem icon="calendar" className='bg-black text-white'>Calendar</CDBSidebarMenuItem>
               </div>
+              
             </CDBSidebarMenu>
           </CDBSidebarContent>
 
