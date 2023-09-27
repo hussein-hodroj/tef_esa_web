@@ -56,7 +56,7 @@ function Popup ({ close, candidateId, setCandidates, candidates }) {
 
         const paymentStatusMapping = {
           'paid': 'enum_value_1',
-          'in progress': 'enum_value_2',
+          'progress' : 'enum_value_2',
           'refund': 'enum_value_3',
         };
         const mappedPaymentStatus = paymentStatusMapping[response.data.PaymentStatus];
@@ -87,7 +87,7 @@ function Popup ({ close, candidateId, setCandidates, candidates }) {
       formData.append('BookDate', BookDate);
       const reversePaymentStatusMapping = {
         'enum_value_1': 'paid',
-        'enum_value_2': 'in progress',
+        'enum_value_2': 'progress' ,
         'enum_value_3': 'refund',
       };
       const actualPaymentStatus = reversePaymentStatusMapping[PaymentStatus];
