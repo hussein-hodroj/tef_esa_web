@@ -52,10 +52,10 @@ const SidebarAdmin = () => {
                 <CDBSidebarMenuItem icon="table" className='bg-black text-white'>Home Update</CDBSidebarMenuItem>
               </div>
               <div onClick={() => navigate('/updateexam')} className="activeClicked">
-                <CDBSidebarMenuItem icon="chart-line" className='bg-black text-white'>Exam update</CDBSidebarMenuItem>
+                <CDBSidebarMenuItem icon="edit" className='bg-black text-white'>Exam update</CDBSidebarMenuItem>
               </div>
               <div onClick={() => navigate('/updatecourse')} className="activeClicked">
-                <CDBSidebarMenuItem icon="chart-line" className='bg-black text-white'>Course update</CDBSidebarMenuItem>
+                <CDBSidebarMenuItem icon="book" className='bg-black text-white'>Course update</CDBSidebarMenuItem>
               </div>
               <div onClick={() => navigate('/status')} className="activeClicked">
                 <CDBSidebarMenuItem icon="calendar" className='bg-black text-white'>Update lockdates</CDBSidebarMenuItem>
@@ -69,6 +69,12 @@ const SidebarAdmin = () => {
 
               <div onClick={() => navigate('/emailtemplateupdate')} className="activeClicked">
                 <CDBSidebarMenuItem icon="envelope" className='bg-black text-white'>Email Update</CDBSidebarMenuItem>
+              </div>
+              <div onClick={() => navigate('/Confirmation')} className="activeClicked">
+                <CDBSidebarMenuItem icon="check-circle" className='bg-black text-white'>Confirmation</CDBSidebarMenuItem>
+              </div>
+              <div onClick={() => navigate('/CandidatesInfo')} className="activeClicked">
+                <CDBSidebarMenuItem icon="users" className='bg-black text-white'>Candidates Info</CDBSidebarMenuItem>
               </div>
 
             </CDBSidebarMenu>
