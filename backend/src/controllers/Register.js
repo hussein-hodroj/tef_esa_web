@@ -347,3 +347,22 @@ export const deleteCandidate = asyncHandler(async (req, res) => {
     res.status(500).json({ message: 'Failed to delete candidate' });
   }
 });
+
+export const getStatus = asyncHandler(async (req, res) => {
+  try{
+  const get = "SELECT r.*, h.title FROM registrations AS r INNER JOIN homeinfo AS h ON h.infoid = r.examId WHERE Status='in progress' AND PaymentStatus= 'progress'"
+  
+  cnx.query(get, (err, data) => {
+    if (err) {
+      console.error('Error retrieving data:', err);
+      return res.status(500).json({ message: 'Failed to retrieve data' });
+    }
+  
+    return res.json(data);
+  });
+  } catch (error) {
+  console.error('Error retrieving data:', error);
+  res.status(500).json({ message: 'Failed to retrieve data' });
+  }
+  
+  })
