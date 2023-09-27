@@ -1,0 +1,25 @@
+
+  .modal-container {
+    position: fixed;
+    top: 25%;
+    left: 33%;
+    padding-top: 10%;
+    width: 60%;
+    height: 30px;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center; 
+   
+  }
+  
+  .modal {
+    font-weight: bold;
+    color: white;
+    background-color: #070707;
+    width: auto;
+    height: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  

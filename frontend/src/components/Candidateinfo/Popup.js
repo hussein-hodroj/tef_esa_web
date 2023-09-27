@@ -12,12 +12,14 @@ function Popup ({ close, candidateId, setCandidates, candidates }) {
   const [Email, setEmail] = useState('');
   const [Phone, setPhone] = useState('');
   const [BookDate, setBookDate] = useState('');
-  const [PaymentStatus, setPaymentStatus] = useState(null);
+  const [PaymentStatus, setPaymentStatus] = useState('');
   const [examId, setexamId] = useState([]);
   const [title,setTitle]=useState(null)
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
 
+  // setBookDate(formattedBookDate);
+  
   const validateForm = () => {
     
     const newErrors = {};
@@ -42,13 +44,23 @@ function Popup ({ close, candidateId, setCandidates, candidates }) {
     axios
       .get(`http://localhost:8000/register/getid/${candidateId}}`)
       .then(response =>{console.log(response)
-        
         setFirstName(response.data.FirstName)
         setLastName(response.data.LastName)
         setEmail(response.data.Email)
         setPhone(response.data.Phone)
-        setBookDate(new Date(response.data.BookDate).toISOString().substring(0, 10))
-        setPaymentStatus(response.data.PaymentStatus)
+       const formattedBookDate = format(
+          parseISO(response.data.BookDate),
+          'yyyy-MM-dd'
+        );
+        setBookDate(formattedBookDate);
+
+        const paymentStatusMapping = {
+          'paid': 'enum_value_1',
+          'in progress': 'enum_value_2',
+          'refund': 'enum_value_3',
+        };
+        const mappedPaymentStatus = paymentStatusMapping[response.data.PaymentStatus];
+        setPaymentStatus(mappedPaymentStatus || '');
         setexamId(response.data.examId)
         
     })
@@ -73,7 +85,14 @@ function Popup ({ close, candidateId, setCandidates, candidates }) {
       formData.append('Email', Email);
       formData.append('Phone', Phone);
       formData.append('BookDate', BookDate);
-      formData.append('PaymentStatus', PaymentStatus);
+      const reversePaymentStatusMapping = {
+        'enum_value_1': 'paid',
+        'enum_value_2': 'in progress',
+        'enum_value_3': 'refund',
+      };
+      const actualPaymentStatus = reversePaymentStatusMapping[PaymentStatus];
+
+      formData.append('PaymentStatus', actualPaymentStatus);
       formData.append('examId', examId);
       
   
@@ -202,14 +221,18 @@ function Popup ({ close, candidateId, setCandidates, candidates }) {
                 <label className="block text-black text-sm font-bold mb-2 form-label" htmlFor="PaymentStatus">
             Payment Status
           </label>
-          <input
-            className="shadow form-control border w-64 rounded py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-            id="PaymentStatus"
-            type="input"
-            value={PaymentStatus}
-            name="PaymentStatus"
-            onChange={(e) => setPaymentStatus(e.target.value)}
-          />  
+          <select
+  className="shadow form-control w-64 mb-2 border rounded py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+  id="PaymentStatus"
+  name="PaymentStatus"
+  value={PaymentStatus}
+  onChange={(e) => setPaymentStatus(e.target.value)}
+>
+  <option value="enum_value_1">paid</option>
+  <option value="enum_value_2">progress</option>
+  <option value="enum_value_3">refund</option>
+</select>
+
              
               </div>
               </div>   
