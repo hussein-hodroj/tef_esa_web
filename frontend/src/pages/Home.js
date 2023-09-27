@@ -3,6 +3,7 @@ import Header from '../pages/Header.js';
 import Footer from '../pages/Footer.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios'; 
+import ContactForm from './ContactForm.js';
 
 function Home() {
   const [homepageData, setHomepageData] = useState([]);
@@ -181,7 +182,10 @@ function Home() {
           </div>
         </div>
       </main>
-
+      <hr/>
+      <div>
+        <ContactForm />
+      </div>
       <Footer />
     </div>
   );
