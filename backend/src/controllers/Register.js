@@ -244,6 +244,8 @@ export const updateInfo = asyncHandler(async (req, res) => {
         return res.status(404).json({ message: 'Candidate not found' });
       }
 
+      const oldBookDate = candidateData[0].BookDate; 
+
       const updateCandidateSQL =
         'UPDATE registrations SET FirstName=?, LastName=?, Email=?, Phone=?, BookDate=?, PaymentStatus=?, examId=? WHERE CandidateID = ?';
 
@@ -264,6 +266,41 @@ export const updateInfo = asyncHandler(async (req, res) => {
           return res.status(500).json({ message: 'Failed to update candidate' });
         }
 
+     
+        if (oldBookDate !== BookDate) {
+          
+          const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: 'get.bulk.leb@gmail.com',
+              pass: 'ujwymorrxolrbyxp',
+            },
+          });
+
+          const emailSubject = 'Mise à jour de votre date de réservation';
+const emailContent = `
+Bonjour,
+
+Nous tenons à vous informer que votre date de réservation a été mise à jour avec succès. Voici les détails mis à jour :
+
+Nouvelle date de réservation : ${BookDate}
+
+Si vous avez des questions ou avez besoin d'informations supplémentaires, n'hésitez pas à nous contacter.
+
+Cordialement,
+Votre entreprise
+`; 
+
+          const emailOptions = {
+            from: 'get.bulk.leb@gmail.com',
+            to: Email,
+            subject: emailSubject,
+            text: emailContent,
+          };
+
+          await transporter.sendMail(emailOptions);
+        }
+
         return res.json({ message: 'Candidate information updated successfully' });
       });
     });
@@ -272,6 +309,7 @@ export const updateInfo = asyncHandler(async (req, res) => {
     res.status(500).json({ message: 'Failed to update candidate' });
   }
 });
+
 
 
 export const deleteCandidate = asyncHandler(async (req, res) => {
