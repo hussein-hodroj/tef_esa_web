@@ -167,6 +167,36 @@ export const getInfo = asyncHandler(async (req, res) => {
   }
 });
 
+export const getCandidateById = asyncHandler(async (req, res) => {
+  try {
+    const { CandidateID } = req.params;
+
+    if (!CandidateID) {
+      return res.status(400).json({ message: 'Candidate ID is required' });
+    }
+
+    const getCandidateSQL = 'SELECT * FROM registrations WHERE CandidateID = ?';
+    cnx.query(getCandidateSQL, [CandidateID], async (err, candidateData) => {
+      if (err) {
+        console.error('Error fetching candidate:', err);
+        return res.status(500).json({ message: 'Failed to fetch candidate' });
+      }
+
+      if (candidateData.length === 0) {
+        return res.status(404).json({ message: 'Candidate not found' });
+      }
+
+      const candidate = candidateData[0]; 
+
+      return res.json(candidate);
+    });
+  } catch (error) {
+    console.error('Error fetching candidate:', error);
+    res.status(500).json({ message: 'Failed to fetch candidate' });
+  }
+});
+
+
 export const getCandidates = asyncHandler(async (req, res) => {
 try{
 const get = "SELECT r.*, h.title, h.fees, h.Currency FROM registrations AS r INNER JOIN homeinfo AS h ON h.infoid = r.examId"
@@ -185,3 +215,97 @@ res.status(500).json({ message: 'Failed to retrieve data' });
 }
 
 })
+
+export const updateInfo = asyncHandler(async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {
+      FirstName,
+      LastName,
+      Email,
+      Phone,
+      BookDate,
+      PaymentStatus,
+      examId,
+    } = req.body;
+
+    if (!id) {
+      return res.status(400).json({ message: 'Candidate ID is required' });
+    }
+
+    const checkCandidateSQL = 'SELECT * FROM registrations WHERE CandidateID = ?';
+    cnx.query(checkCandidateSQL, [id], async (err, candidateData) => {
+      if (err) {
+        console.error('Error checking candidate:', err);
+        return res.status(500).json({ message: 'Failed to check candidate' });
+      }
+
+      if (candidateData.length === 0) {
+        return res.status(404).json({ message: 'Candidate not found' });
+      }
+
+      const updateCandidateSQL =
+        'UPDATE registrations SET FirstName=?, LastName=?, Email=?, Phone=?, BookDate=?, PaymentStatus=?, examId=? WHERE CandidateID = ?';
+
+      const updateValues = [
+        FirstName,
+        LastName,
+        Email,
+        Phone,
+        BookDate,
+        PaymentStatus,
+        examId,
+        id,
+      ];
+
+      cnx.query(updateCandidateSQL, updateValues, async (updateErr) => {
+        if (updateErr) {
+          console.error('Error updating candidate:', updateErr);
+          return res.status(500).json({ message: 'Failed to update candidate' });
+        }
+
+        return res.json({ message: 'Candidate information updated successfully' });
+      });
+    });
+  } catch (error) {
+    console.error('Error updating candidate:', error);
+    res.status(500).json({ message: 'Failed to update candidate' });
+  }
+});
+
+
+export const deleteCandidate = asyncHandler(async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({ message: 'Candidate ID is required' });
+    }
+
+    const checkCandidateSQL = 'SELECT * FROM registrations WHERE CandidateID = ?';
+    cnx.query(checkCandidateSQL, [id], async (err, candidateData) => {
+      if (err) {
+        console.error('Error checking candidate:', err);
+        return res.status(500).json({ message: 'Failed to check candidate' });
+      }
+
+      if (candidateData.length === 0) {
+        return res.status(404).json({ message: 'Candidate not found' });
+      }
+
+      const deleteCandidateSQL = 'DELETE FROM registrations WHERE CandidateID = ?';
+
+      cnx.query(deleteCandidateSQL, [id], async (deleteErr) => {
+        if (deleteErr) {
+          console.error('Error deleting candidate:', deleteErr);
+          return res.status(500).json({ message: 'Failed to delete candidate' });
+        }
+
+        return res.json({ message: 'Candidate deleted successfully' });
+      });
+    });
+  } catch (error) {
+    console.error('Error deleting candidate:', error);
+    res.status(500).json({ message: 'Failed to delete candidate' });
+  }
+});

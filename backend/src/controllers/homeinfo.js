@@ -10,6 +10,20 @@ const cnx = mysql.createConnection({
   password: process.env.DB_PASSWORD,
 });
 
+export const getTitle = asyncHandler(async (req, res) => {
+  const query = 'SELECT infoid, title FROM homeinfo';
+
+  cnx.query(query, (err, results) => {
+    if (err) {
+      console.error("Error fetching data from MySQL:", err);
+      res.status(500).json({ message: "Something went wrong" });
+    } else {
+      res.status(200).json(results);
+    }
+  });
+});
+
+
 
 export const getHomeinfoData = asyncHandler(async (req, res) => {
   const { type } = req.params; 
