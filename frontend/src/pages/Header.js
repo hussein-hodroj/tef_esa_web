@@ -28,7 +28,9 @@ function Header() {
         <div className="container h-100">
           <div className="row h-100 align-items-center">
             <div className="col-12 col-md-2">
+            <a href="/" style={{ textDecoration: 'none' }}>
               <img src={logo} alt="Logo" style={logoStyle} />
+              </a>
             </div>
           </div>
         </div>

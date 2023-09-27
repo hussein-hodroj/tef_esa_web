@@ -77,6 +77,19 @@ const SidebarAdmin = () => {
                 <CDBSidebarMenuItem icon="users" className='bg-black text-white'>Candidates Info</CDBSidebarMenuItem>
               </div>
 
+
+              <div onClick={() => navigate('/CandidatesInfo')} className="activeClicked">
+              <CDBSidebarMenuItem icon="user" className='bg-black text-white'>Candidate Info</CDBSidebarMenuItem>
+            </div>
+        
+              <div onClick={() => navigate('/Confirmation')} className="activeClicked">
+                <CDBSidebarMenuItem icon="check" className='bg-black text-white'>Confirmation</CDBSidebarMenuItem>
+              </div>
+
+          
+             
+
+
             </CDBSidebarMenu>
           </CDBSidebarContent>
 
