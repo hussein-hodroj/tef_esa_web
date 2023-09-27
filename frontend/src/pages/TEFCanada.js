@@ -104,7 +104,7 @@ const tileDisabled = ({ date, view }) => {
                 className="btn btn-transparent btn-label  "
                 onClick={handleButtonClick}
               >
-                <strong>Examens</strong>
+               <strong style={{ color: 'red' }}>Examens</strong>
               </button>
               <h5 className="h5 pt-2">
                 &gt; TEF Canada - Procédures d'immigration / Demande de
@@ -131,20 +131,21 @@ const tileDisabled = ({ date, view }) => {
               
               <div className="line my-5"></div>
               <div className="row p-2">
-                <div className="col-6">
-                  <div className=" inline">
-                    <strong>Cost: </strong>
-                  </div>
-                </div>
-                <div className="col-6 px-5 pb-2">
-                  <div className=" inline text-end ">
+                <div className="col-12">
+                  <div className=" text-end">
+                    <strong style={{fontWeight: 'bold'}}>Cost: </strong>                  
                     <strong>
-                      {Currency
-                        ? `${Currency} ${fees ? fees : 'Loading...'} `
-                        : 'Loading...'}
-                    </strong>
+                        <span style={{ color: 'blue' }}>
+                          {fees ? fees : 'Loading...'}
+                        </span>
+                        {' '}
+                        <span style={{ color: 'red' }}>
+                          {Currency ? Currency : 'Loading...'}
+                        </span>
+                      </strong>
                   </div>
                 </div>
+              
               </div>
 
               <div className="book-now text-end py-2">

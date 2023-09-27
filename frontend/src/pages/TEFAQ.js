@@ -151,7 +151,7 @@ const TEFAQ = () => {
         <div className="row">
           <div className="col d-flex align-items-center">
             <button className="btn btn-transparent btn-label" onClick={handleButtonClick}>
-              <strong>Examens</strong>
+            <strong style={{ color: 'red' }}>Examens</strong>
             </button>
             <h5 className="h5 pt-2">&gt; TEFAQ – Quebec</h5>
           </div>
@@ -208,16 +208,21 @@ const TEFAQ = () => {
              
             </div>
             <div className="row p-2">
-              <div className="col-6">
-                <div className="inline">
-                  <strong>Cost:</strong>
+              <div className="col-12">
+                <div className="text-end">
+                <strong style={{fontWeight: 'bold'}}>Cost: </strong>
+                <strong>
+                        <span style={{ color: 'blue' }}>
+                          {totalCost ? totalCost : 'Loading...'}
+                        </span>
+                        {' '}
+                        <span style={{ color: 'red' }}>
+                          {Currency ? Currency : 'Loading...'}
+                        </span>
+                      </strong>
                 </div>
               </div>
-              <div className="col-6 px-5 pb-2">
-                <div className="inline text-end">
-                  <strong> {Currency} {totalCost} </strong>
-                </div>
-              </div>
+              
             </div>
             <div className="row p-2">
              

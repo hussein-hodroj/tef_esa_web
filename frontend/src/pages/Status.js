@@ -4,7 +4,7 @@ import SidebarAdmin from './SidebarAdmin';
 import NavbarAdmin from './NavbarAdmin';
 import './Status.css';
 
-// import {  } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faTrash,
   faEdit,
@@ -13,7 +13,7 @@ import {
   faPlus,
   faChevronLeft,
   faChevronRight,
-} from 'react-icons/fa/index.esm.js';
+} from '@fortawesome/free-solid-svg-icons';
 
 function Status() {
   const [lockDates, setLockDates] = useState([]);
@@ -186,8 +186,9 @@ function Status() {
           <div className="mt-3 mb-3">
             <div className="d-flex justify-content-between mb-3 ">
               <h2>Update lockDate</h2>
-              <button className="btn btn-primary " onClick={handleAddClick}>
-                < faPlus /> Add
+             
+                <button className="btn btn-primary " onClick={handleAddClick}>
+                <FontAwesomeIcon icon={faPlus} /> Add
               </button>
             </div>
 
@@ -212,17 +213,18 @@ function Status() {
                       </td>
                       <td>{lockDate.status}</td>
                       <td style={{ display: 'flex', alignItems: 'center' }}>
-                      <button
+                      
+                         <button
                           onClick={() => openEditModal(lockDate)}
                           className="btn btn-primary ml-2"
                         >
-                          < faEdit />
+                          <FontAwesomeIcon icon={faEdit} />
                         </button>
                         <button
                           onClick={() => showDeleteConfirmation(lockDate.id)}
                           className="btn btn-danger mx-2"
                         >
-                          < faTrash />
+                          <FontAwesomeIcon icon={faTrash} />
                         </button>
                        
                       </td>
