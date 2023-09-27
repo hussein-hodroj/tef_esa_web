@@ -5,6 +5,8 @@ import NavbarAdmin from './NavbarAdmin.js';
 import { FaEdit, FaTrash,  FaArrowLeft, FaArrowRight, FaSearch } from 'react-icons/fa/index.esm.js';
 import Popup from '../components/Candidateinfo/Popup.js';
 import DeleteCandidate from '../components/Candidateinfo/DeleteCandidate.js'; 
+import { format, parseISO } from 'date-fns';
+
 
 function Candidate() {
   
@@ -113,7 +115,8 @@ function Candidate() {
                            <td className="px-6 py-4  border Border-white">
 {candidate.Phone}</td>
 <td className="px-6 py-4  border Border-white">
-{new Date(candidate.BookDate).toISOString().substring(0, 10)}</td>
+{format(parseISO(candidate.BookDate), 'yyyy-MM-dd')}
+</td>
                            <td className="px-6 py-4   border Border-white ">
                             {candidate.title}
                     </td>

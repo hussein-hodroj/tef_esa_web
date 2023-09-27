@@ -4,7 +4,7 @@ import SidebarAdmin from './SidebarAdmin';
 import NavbarAdmin from './NavbarAdmin';
 import './Status.css';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import {  } from '@fortawesome/react-fontawesome';
 import {
   faTrash,
   faEdit,
@@ -13,7 +13,7 @@ import {
   faPlus,
   faChevronLeft,
   faChevronRight,
-} from '@fortawesome/free-solid-svg-icons';
+} from 'react-icons/fa/index.esm.js';
 
 function Status() {
   const [lockDates, setLockDates] = useState([]);
@@ -187,7 +187,7 @@ function Status() {
             <div className="d-flex justify-content-between mb-3 ">
               <h2>Update lockDate</h2>
               <button className="btn btn-primary " onClick={handleAddClick}>
-                <FontAwesomeIcon icon={faPlus} /> Add
+                < faPlus /> Add
               </button>
             </div>
 
@@ -216,13 +216,13 @@ function Status() {
                           onClick={() => openEditModal(lockDate)}
                           className="btn btn-primary ml-2"
                         >
-                          <FontAwesomeIcon icon={faEdit} />
+                          < faEdit />
                         </button>
                         <button
                           onClick={() => showDeleteConfirmation(lockDate.id)}
                           className="btn btn-danger mx-2"
                         >
-                          <FontAwesomeIcon icon={faTrash} />
+                          < faTrash />
                         </button>
                        
                       </td>
@@ -237,7 +237,7 @@ function Status() {
               <div className="modal-container">
                 <div className="modal">
                   <h4>
-                    <FontAwesomeIcon icon={faTrash} /> Confirm Delete
+                    < faTrash /> Confirm Delete
                   </h4>
                   <p>Are you sure you want to delete this lockdate?</p>
                   <div className="text-left">
@@ -245,13 +245,13 @@ function Status() {
                       onClick={confirmDelete}
                       className="btn btn-danger mx-2"
                     >
-                      <FontAwesomeIcon icon={faCheck} /> Yes
+                      < faCheck/> Yes
                     </button>
                     <button
                       onClick={() => setShowDeleteModal(false)}
                       className="btn btn-secondary"
                     >
-                      <FontAwesomeIcon icon={faTimes} /> No
+                      < faTime /> No
                     </button>
                   </div>
                 </div>
@@ -366,14 +366,14 @@ function Status() {
                 onClick={handlePreviousPage}
                 disabled={currentPage === 1}
               >
-                <FontAwesomeIcon icon={faChevronLeft} /> Previous
+                < faChevonLeft/> Previous
               </button>
               <span className="mx-2">{`Page ${currentPage} of ${totalPages}`}</span>
               <button
                 onClick={handleNextPage}
                 disabled={currentPage === totalPages}
               >
-                Next <FontAwesomeIcon icon={faChevronRight} />
+                Next < faChevonRight/>
               </button>
             </div>
 
