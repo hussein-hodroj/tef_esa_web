@@ -15,6 +15,7 @@ import TEFCanada from './src/routes/TEFCanada.js';
 import TEFAQ from './src/routes/TEFAQ.js';
 import TEFCourse from './src/routes/TEFCourse.js';
 import adminProfileRoute from './src/routes/adminProfileUpdate.js'
+import status from './src/routes/Status.js';
 dotenv.config();
 
 const app = express();
@@ -36,7 +37,7 @@ app.use('/TEFCanada', TEFCanada);
 app.use('/TEFAQ', TEFAQ);
 app.use('/TEFCourse', TEFCourse);
 app.use('/',adminProfileRoute);
-
+app.use('/status',status);
 const cnx = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
