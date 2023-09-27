@@ -17,6 +17,9 @@ function Candidate() {
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1); 
     const candidatePerPage = 10;
+    const [selectedPaymentStatus, setSelectedPaymentStatus] = useState('');
+const [selectedBookDate, setSelectedBookDate] = useState('');
+
 
     useEffect(() => {
         axios
@@ -26,10 +29,31 @@ function Candidate() {
       }, []);
 
       const filteredCandidates = candidates?.filter((candidate) => {
-        if (!candidate.FirstName) return false; 
+        if (!candidate.FirstName) return false;
+      
         const searchTermLower = searchTerm.toLowerCase();
-        return candidate.FirstName.toLowerCase().includes(searchTermLower);
+        const paymentStatusMatch =
+          selectedPaymentStatus === '' ||
+          candidate.PaymentStatus.toLowerCase() === selectedPaymentStatus.toLowerCase();
+      
+        const bookDateMatch =
+          selectedBookDate === '' ||
+          format(parseISO(candidate.BookDate), 'yyyy-MM-dd') === selectedBookDate;
+      
+        return (
+          candidate.FirstName.toLowerCase().includes(searchTermLower) &&
+          paymentStatusMatch &&
+          bookDateMatch
+        );
       });
+      const handlePaymentStatusChange = (e) => {
+        setSelectedPaymentStatus(e.target.value);
+      };
+      
+      const handleBookDateChange = (e) => {
+        setSelectedBookDate(e.target.value);
+      };
+            
        const handlePreviousPage = () => {
         if (currentPage > 1) {
           setCurrentPage(currentPage - 1);
@@ -73,17 +97,39 @@ function Candidate() {
 
 
 <div>
-<div className=" mt-3 mb-3">
-           <FaSearch className="search-icon text-black ms-4 mt-2" size={25}/>
+<div className="mt-3 mb-3">
+  <FaSearch className="search-icon text-black ms-4 mt-2" size={25} />
+  <input
+    type="text"
+    placeholder="Search by name"
+    className="ms-4 p-1 rounded border border-black text-black"
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+  />
 
-            <input
-                type="text"
-                placeholder="Search by name"
-                className="ms-4 p-1 rounded border border-black text-black"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              </div>
+
+  <label className="ms-4 me-2">Payment Status:</label>
+  <select
+    className="border border-black rounded p-1"
+    value={selectedPaymentStatus}
+    onChange={handlePaymentStatusChange}
+  >
+    <option value="">All</option>
+    <option value="progress">progress</option>
+    <option value="Paid">Paid</option>
+    
+  </select>
+
+
+  <label className="ms-4 me-2">Book Date:</label>
+  <input
+    type="date"
+    className="border border-black rounded p-1"
+    value={selectedBookDate}
+    onChange={handleBookDateChange}
+  />
+</div>
+
       <div className="m-3">
    <table className="table ">
              
