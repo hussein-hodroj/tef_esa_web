@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import SidebarAdmin from '../pages/SidebarAdmin.js';
 import axios from 'axios';
-import AddHomeInfoModal from './AddHomeInfoModal.js'; 
+import AddHomeInfoModal from '../components/courseexam/AddHomeInfoModal.js'; 
 import './homeinfomodal.css';
 import NavbarAdmin from './NavbarAdmin.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import DeleteExamModal from './DeleteExamModal.js';
+import DeleteExamModal from '../components/courseexam/DeleteExamModal.js';
 
 function HomeInfo() {
   const [editableInfo, setEditableInfo] = useState([]);

@@ -122,15 +122,18 @@ function AddHomeInfoModal({ isOpen, onClose }) {
               <label htmlFor="type" className="form-label">
                 Type:
               </label>
-              <input
-                type="text"
-                id="type"
-                name="type"
-                value={formData.type}
-                onChange={handleInputChange}
-                className="form-control"
-                required
-              />
+              <select
+              id="type"
+              name="type"
+              value={formData.type}
+              onChange={handleInputChange}
+              className="form-select"
+              required
+            >
+              <option value="exam" default>Select type</option>
+              <option value="exam">Exam</option>
+              <option value="course">Course</option>
+            </select>
             </div>
             <div className="text-center mb-2 d-flex justify-content-end">
               <button type="button" className="btn btn-secondary" onClick={onClose} style={{ marginRight: '10px' }}>

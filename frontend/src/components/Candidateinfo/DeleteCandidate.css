@@ -21,11 +21,17 @@
   color: white;
 }
 
-.titleCloseBtn {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+.delete-candidate-title {
+  font-size: 24px;
+}
+
+.titleCloseBtn button {
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  cursor: pointer;
+  color: white;
+  padding: 0;
 }
 
 .titleCloseBtn h1 {
@@ -33,7 +39,6 @@
 }
 
 .titleCloseBtn button {
-  background-color: transparent;
   border: none;
   font-size: 25px;
   cursor: pointer;
