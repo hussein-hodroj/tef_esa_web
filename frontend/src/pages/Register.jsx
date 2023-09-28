@@ -130,6 +130,7 @@ const handleSubmit = (e) => {
       })
       .then((response) => {
         console.log(response.data);
+        alert("the date is the same");
       })
       .catch((error) => {
         console.log(error);
