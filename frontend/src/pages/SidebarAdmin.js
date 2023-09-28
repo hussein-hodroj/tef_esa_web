@@ -78,9 +78,7 @@ const SidebarAdmin = () => {
               </div>
 
 
-              <div onClick={() => navigate('/CandidatesInfo')} className="activeClicked">
-              <CDBSidebarMenuItem icon="user" className='bg-black text-white'>Candidate Info</CDBSidebarMenuItem>
-            </div>
+              
         
               
 
