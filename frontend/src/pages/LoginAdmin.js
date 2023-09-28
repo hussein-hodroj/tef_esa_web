@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-
+import logo from '../assets/logo1.png';
 const LoginAdmin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -52,19 +52,35 @@ const LoginAdmin = () => {
   };
 
   return (
+    <div className="home-container bg-light" 
+      style={{
+        background: `url('https://www.esa.edu.lb/azure/files/ContentFiles/14WelcomeImage.jpg')`,
+        backgroundSize: 'cover'
+    }}
+    >
+      
     <div
       style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: '100vh',
-        background: '#f5f5f5',
+        
       }}
     >
+      
       <div className="col-md-4 ">
-        <div className="card">
-          <div className="card-body mt-4">
-            <h2 className="card-title text-center mb-4">Admin Login</h2>
+        <div className="card" style={{
+            background: 'rgba(255, 255, 255, 0.7)', 
+          }}>
+        
+          <div className="card-body ">
+            <h2 className="card-title text-start mb-4"><img
+                src={logo} 
+                alt="Logo"
+                style={{ width: '60px', height: 'auto' }}
+                className='m-5'
+              />Admin Login</h2>
             {emailError && <div className="alert alert-danger mb-3">{emailError}</div>}
             <div className={`form-group mb-3 ${emailError ? 'has-error' : ''}`}>
               <input
@@ -96,6 +112,7 @@ const LoginAdmin = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

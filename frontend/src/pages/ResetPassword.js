@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import logo from '../assets/logo1.png';
 function ResetPassword() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -58,18 +58,29 @@ function ResetPassword() {
   };
 
   return (
+    <div className="home-container bg-light" 
+      style={{
+        background: `url('https://www.esa.edu.lb/azure/files/ContentFiles/14WelcomeImage.jpg')`,
+        backgroundSize: 'cover'
+    }}
+    >
     <div
       style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: '100vh',
-        background: '#f5f5f5',
       }}
     >
       <div className="col-md-4">
-        <div className="card">
-          <div className="card-header">Reset Password</div>
+        <div className="card" style={{ 
+           background: 'rgba(255, 255, 255, 0.7)', }}>
+          <div className="card-header"><h2><img
+                src={logo} 
+                alt="Logo"
+                style={{ width: '60px', height: 'auto' }}
+                className='mx-2 my-2 '
+              />Reset Password </h2></div>
           <div className="card-body">
             {message && (
               <div
@@ -110,6 +121,7 @@ function ResetPassword() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
