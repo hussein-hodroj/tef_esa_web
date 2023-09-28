@@ -1,12 +1,14 @@
 import React from 'react'
 import './Reservations.css'
-import { useState, useEffect } from 'react';
+import { useState, useEffect} from 'react';
 import axios from 'axios';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import SidebarAdmin from './SidebarAdmin.js';
 import NavbarAdmin from './NavbarAdmin.js';
+import { Link } from 'react-router-dom';
+
 
 
 const localizer = momentLocalizer(moment);
@@ -62,42 +64,44 @@ function Reservations() {
      <div className="h-full w-full ml-56 mt-14 mb-10 ">
       <div className="p-6 gap-4">
       <div className="event-popup-overlay">
-        <div className="event-popup">
-          <button className="close-btn" onClick={handleClosePopup}>
-            &times;
-          </button>
-          <h2 > {`${selectedEvent.FirstName} ${selectedEvent.LastName}`}</h2>  <br/>
-          <p >
-            <strong >Exam:</strong> {selectedEvent.title }
-          </p>
-          <p >
-            <strong >Currency:</strong> {selectedEvent.Currency}
-          </p>
-          <p >
-            <strong >Fees:</strong> {selectedEvent.fees}
-          </p>
-          <p >
-            <strong >Date:</strong>{' '}
-            {moment(selectedEvent.formattedDate).format('YYYY-MM-DD')}
-          </p>
-          
-           <p >
-            <strong >Phone Number:</strong> {selectedEvent.Phone}
-          </p>
-          <p >
-            <strong >Email:</strong> {selectedEvent.Email}
-          </p>
-          <p >
-            <strong >Nationality:</strong> {selectedEvent.Nationality}
-          </p>
-          
-          <div class="button-container">
-      <button className="btn btn-primary py-1 px-3 d-flex justify-content-center items-center text-center">
-      <strong > More </strong>
-      </button>
+  <div className="event-popup">
+    <button className="close-btn" onClick={handleClosePopup}>
+      &times;
+    </button>
+    <h2>{`${selectedEvent.FirstName} ${selectedEvent.LastName}`}</h2> <br />
+    <p>
+      <strong>Exam:</strong> {selectedEvent.title}
+    </p>
+    <p>
+      <strong>Currency:</strong> {selectedEvent.Currency}
+    </p>
+    <p>
+      <strong>Fees:</strong> {selectedEvent.fees}
+    </p>
+    <p>
+      <strong>Date:</strong>{' '}
+      {moment(selectedEvent.formattedDate).format('YYYY-MM-DD')}
+    </p>
+
+    <p>
+      <strong>Phone Number:</strong> {selectedEvent.Phone}
+    </p>
+    <p>
+      <strong>Email:</strong> {selectedEvent.Email}
+    </p>
+    <p>
+      <strong>Nationality:</strong> {selectedEvent.Nationality}
+    </p>
+
+    <div className="button-container d-flex justify-content-end align-items-end ">
+      <Link
+        to={`/InfoId/${selectedEvent.CandidateID}`}
+        className="btn btn-primary py-1 px-3 text-center"
+      >
+        <strong>More</strong>
+      </Link>
     </div>
-         
-        </div>
+  </div>
        
       
       </div>

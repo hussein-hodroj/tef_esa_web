@@ -8,6 +8,17 @@
   .event-popup {
     position: relative;
   }
+  .rbc-header.time{
+    display:none;
+
+  }
+   .rbc-agenda-time-cell {
+    display:none;
+  }
+
+  .rbc-time-content .rbc-time-gutter:nth-child(1) .rbc-timeslot-group{
+display:none;
+  }
   
   .button-container {
     position: absolute;

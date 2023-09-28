@@ -24,6 +24,7 @@ import EmailTemplateUpdate from './pages/EmailTemplateUpdate.js';
 
 import Status from './pages/Status.js';
 import Confirmation from './pages/Confirmation.jsx';
+import InfoId from './pages/InfoId.jsx';
 
 function App() {
   return (
@@ -51,6 +52,8 @@ function App() {
 
       <Route path='/status' element={<Status/>} />
       <Route path= '/Confirmation' element={<Confirmation/>} />
+      <Route path= '/InfoId/:CandidateID' element={<InfoId/>} />
+
 
       </Routes>
     </BrowserRouter>
