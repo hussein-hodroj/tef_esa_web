@@ -7,7 +7,8 @@ import axios from 'axios';
 import SidebarAdmin from './SidebarAdmin.js';
 import NavbarAdmin from './NavbarAdmin.js';
 import { format, parseISO } from 'date-fns';
-
+import Photo from "../components/CandidateConfirm/PassportImage.js"
+import Modal from 'react-modal';
 function Confirmation() {
   
   const [Candidates, setCandidates] = useState([]);
@@ -16,6 +17,8 @@ function Confirmation() {
   const [isPassportImageOpen, setPassportImageOpen] = useState(false);
   const [SelectedCandidateId, setSelectedCandidateId] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isModalOpen, setModalOpen] = useState(false);
+
   const [currentPage, setCurrentPage] = useState(1);
   const CandidatesPerPage = 5;
 
@@ -37,7 +40,12 @@ function Confirmation() {
       
     );
   });
-
+  const closeModal = () => {
+    setModalOpen(false); 
+  };
+  const openModal = () => {
+    setModalOpen(true);
+  };
     const handlePreviousPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
@@ -83,78 +91,84 @@ function Confirmation() {
               
               </div>
             <div className="m-3">
+              {/* <div className='row '>
+                <div className='col-12 d-flex justify-content-center align-items-center '>   
+                  {isModalOpen && (
+                          <Photo
+                            open={closeModal}
+                            CandidateId={SelectedCandidateId}
+                          />
+                        )}
+                        </div>
+              </div> */}
             <table className="table">
                             <thead>
               <tr>
-                <th>
-#</th>
-                                               <th >
-First Name</th>
-                                               <th >
-Last Name </th>
-                                               <th >
-Email</th>
-                                               <th >
-Phone Number</th>
-                                               <th >
-BookDates  </th>
-                                               <th >
-Exam </th>
-                                               <th >
-Payment Status</th>
-                                               <th >
-Status</th>
-<th >
-Passport</th>
-                                                <th >
-Action</th>
+                   <th> #</th>
+                   <th > First Name</th>
+                   <th > Last Name </th>                                
+                   <th >Email</th>                   
+                   <th >Phone Number</th>
+                   <th >BookDates  </th>  
+                   <th >Exam </th>
+                   <th >Payment Status</th>       
+                   <th >Status</th>    
+                    <th > Passport</th>
+                    <th >Action</th>
               </tr>
+              
             </thead>
+            
             <tbody>
             {currentCandidates.map((Candidate, index) => (
-                    <tr key={Candidate.CandidateID}  className={index % 2 === 0 ? 'table-row-even' : 'table-row-odd'}>
+
+                              <tr key={Candidate.CandidateID}  className={index % 2 === 0 ? 'table-row-even' : 'table-row-odd'}>
                                               <td className=" py-4 whitespace-nowrap border Border-white">
                                               {(currentPage - 1) * CandidatesPerPage + index + 1}</td>
-                                               <td className=" py-4 whitespace-nowrap border Border-white">
-{Candidate.FirstName}</td>
-                                               <td className=" py-4 whitespace-nowrap border Border-white">
-{Candidate.LastName}</td>
-                                               <td className=" py-4 whitespace-nowrap border Border-white">
-{Candidate.Email}</td>
-                                               <td className=" py-4 whitespace-nowrap border Border-white">
-{Candidate.Phone}</td>
+                                               <td className=" py-4 whitespace-nowrap border Border-white">{Candidate.FirstName}</td>
+                                               <td className=" py-4 whitespace-nowrap border Border-white">{Candidate.LastName}</td>
+                                               <td className=" py-4 whitespace-nowrap border Border-white">{Candidate.Email}</td>
+                                               <td className=" py-4 whitespace-nowrap border Border-white">{Candidate.Phone}</td>
                                                <td className=" py-4  whitespace-nowrap border Border-white">
-{format(parseISO(Candidate.BookDate),'yyyy-MM-dd')}
-</td>
-                                               <td className=" py-4 whitespace-nowrap border Border-white">
-{Candidate.title}</td>
-                                               <td className=" py-4 whitespace-nowrap border Border-white">
-{Candidate.PaymentStatus}</td>
-                                               <td className=" py-4 whitespace-nowrap border Border-white">
-{Candidate.Status}</td>
+                                                {format(parseISO(Candidate.BookDate),'yyyy-MM-dd')}
+                                              </td>
+                                         
+                                               <td className=" py-4 whitespace-nowrap border Border-white">{Candidate.title}</td>
+                                               <td className=" py-4 whitespace-nowrap border Border-white">{Candidate.PaymentStatus}</td>
+                                               <td className=" py-4 whitespace-nowrap border Border-white">{Candidate.Status}</td>
                                                <td className=" py-4  border Border-white">
                                                <div className=" rounded d-flex justify-content-center align-items-center">
-    <button  className=" font-bold py-1 px-2 bg-primary border rounded border-primary " title="PassportImage"
- onClick= {() => {setSelectedCandidateId(Candidate.CandidateID); setPassportImageOpen(true);
- }} > <FaImage/></button>
-  </div></td>
+                                            
+
+                                               <button
+  className="font-bold py-1 px-2 bg-primary border rounded border-primary"
+  title="PassportImage"
+  onClick={() => {
+    setSelectedCandidateId(Candidate.CandidateID);
+    openModal(true); 
+  }}
+>
+  <FaImage />
+</button> 
+
+
+                                            </div></td>
 
 
                                                <td className="px-6 py-4 whitespace-nowrap border Border-white">
 
-                      
                     <div className="d-flex align-items-center justify-content-center space-x-4">
                     <div className="bg-primary rounded hover:primary">
-    <button  className="text-white font-bold py-1 mx-2 bg-primary border rounded border-primary" title="delivered"
- onClick= {() => { setSelectedCandidateId(Candidate.CandidateID); 
- console.log (SelectedCandidateId) ; setConfirmStatus(true);}} > <FaCheck /></button>
-  </div>
+                        <button  className="text-white font-bold py-1 mx-2 bg-primary border rounded border-primary" title="delivered"
+                    onClick= {() => { setSelectedCandidateId(Candidate.CandidateID); 
+                    console.log (SelectedCandidateId) ; setConfirmStatus(true);}} > <FaCheck /></button>
+                      </div>
 
   
-  <div className="bg-danger rounded hover:bg-danger mx-2">
-    <button  className="text-white font-bold py-1 mx-2  bg-danger border rounded border-danger"  title="delete"
- onClick= {() => { setSelectedCandidateId(Candidate.CandidateID); setRejectStatus(true);}} > <FaTimes /></button>
-  </div>
+                    <div className="bg-danger rounded hover:bg-danger mx-2">
+                      <button  className="text-white font-bold py-1 mx-2  bg-danger border rounded border-danger"  title="delete"
+                  onClick= {() => { setSelectedCandidateId(Candidate.CandidateID); setRejectStatus(true);}} > <FaTimes /></button>
+                    </div>
 
   
 
@@ -164,6 +178,8 @@ Action</th>
                   </tr>
                 ))}
               </tbody>
+    
+
           </table>
           </div>
           <div className='d-flex justify-content-center mt-4'>
@@ -188,6 +204,65 @@ Action</th>
                 </button>
               </div>
             </div>
+
+            <Modal
+                    isOpen={isModalOpen}
+                    onRequestClose={closeModal}
+                    contentLabel="Modal Image"
+                    className="modal-content"
+                    overlayClassName="modal-overlay"
+                  >
+                    {/* Close button */}
+                    <button className="close-button" onClick={closeModal}>
+                      &times;
+                    </button>
+                    <Photo
+        
+                            CandidateId={SelectedCandidateId}
+                          />
+                    
+                   
+                  </Modal>
+                  <style>
+        {`
+          
+          .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+          }
+
+          .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.5); 
+          }
+
+          .modal-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+          }
+
+          .modal-image {
+            max-width: 100%;
+            max-height: 100%;
+          }
+
+          .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 10px;
+          }
+        `}
+      </style>
 
           </div>
         </div>

@@ -30,11 +30,9 @@ function Photo({ open, CandidateId}) {
     <div className="bg bg-white d-flex align-items-center">
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="container w-auto h-auto">
-          <div className="CloseButton d-flex justify-content-between">
+          <div className="titleCloseBtn  d-flex justify-content-between">
             <h1 className="text-black font-bold">PassportPhoto</h1>
-            <button onClick={() => open(false)} className=" d-flex justify-content-end">
-              X
-            </button>
+          
           </div>
           <div className="title"></div>
           <div className="body">
@@ -43,8 +41,8 @@ function Photo({ open, CandidateId}) {
                 src={`/uploads/${candidate.PassportPhoto}`}
                 alt="Passport Photo"
                 style={{
-                  width: '200px',
-                  height: '150px',
+                  width: '70%',
+                  height: '70%',
                 }}
               />
             )}
