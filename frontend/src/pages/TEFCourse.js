@@ -67,16 +67,21 @@ const TEFCourse = () => {
     navigate('/');
   };
 
-  const handleBookNow = () => {
 
-    if (selectedDate ) {
-      const queryParams = `date=${selectedDate.toISOString()}
-      &fees=${fees}&infoid=${infoid}&Currency=${Currency}&title=${title}&type=${type}`;
+  const handleBookNow = () => {
+    if (selectedDate) {
+      const year = selectedDate.getFullYear();
+      const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
+      const day = String(selectedDate.getDate()).padStart(2, '0');
+      const formattedDate = `${year}-${month}-${day}`;
+      const queryParams = `date=${formattedDate}&fees=${fees}&infoid=${infoid}&Currency=${Currency}&title=${title}&type=${type}`;
       navigate(`/register?${queryParams}`);
     } else {
       alert('You have to choose at least one test to book a time.');
     }
   };
+  
+  
   
   const tileDisabled = ({ date, view }) => {
     if (view === 'month') {

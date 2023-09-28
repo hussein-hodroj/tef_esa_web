@@ -43,6 +43,7 @@ const TEFCanada = () => {
         const disabledDates = response.data.map((item) => new Date(item.day));
         setDisabledDates(disabledDates);
         setdate(response.data);
+        
       })
       .catch((error) => {
         console.error('Error fetching fees data:', error);
@@ -70,8 +71,9 @@ const TEFCanada = () => {
     .then((response) => {
       console.log(response.data.count)
        if (response.data.count <= 20) {
+   
     if (selectedDate) {
-      const queryParams = `date=${selectedDate.toISOString()}&fees=${fees}&infoid=${infoid}&Currency=${Currency}&title=${title}&type=${type} `;
+      const queryParams = `date=${formatDate}&fees=${fees}&infoid=${infoid}&Currency=${Currency}&title=${title}&type=${type} `;
       navigate(`/register?${queryParams}`);
     }else{
     alert('You have to choose at least one test to book a time.');

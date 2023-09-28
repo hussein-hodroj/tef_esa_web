@@ -104,9 +104,9 @@ const TEFAQ = () => {
       .then((response) => {
         console.log(response.data.count)
          if (response.data.count <= 20) {
-
+    
            if (selectedDate && totalCost > 0) {
-      const queryParams = `date=${selectedDate.toISOString()}&tests=${JSON.stringify(
+      const queryParams = `date=${formatDate}&tests=${JSON.stringify(
         selectedTests)}&cost=${totalCost}&fees=${fees}&infoid=${infoid}&Currency=${Currency}&title=${title}&type=${type} `;
       navigate(`/register?${queryParams}`);
       }else {
@@ -127,19 +127,7 @@ const TEFAQ = () => {
       [testName]: !selectedTests[testName],
     });
   };
-  // const tileDisabled = ({ date, view }) => {
-  //   if (view === 'month') {
-     
-  //     return !disabledDates.some((disabledDate) => {
-  //       return (
-  //         date.getDate() === disabledDate.getDate() &&
-  //         date.getMonth() === disabledDate.getMonth() &&
-  //         date.getFullYear() === disabledDate.getFullYear()
-  //       );
-  //     });
-  //   }
-  //   return false;
-  // };
+
   const tileDisabled = ({ date, view }) => {
     if (view === 'month') {
   

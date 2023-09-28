@@ -55,7 +55,7 @@ const TEFEtudes = () => {
 
   useEffect(() => {
     console.log('***********', date);
-    console.log('***********', disabledDates);
+   
 
   }, [date]);
 
@@ -78,7 +78,9 @@ const TEFEtudes = () => {
       console.log(response.data.count)
        if (response.data.count <= 20) {
     if (selectedDate) {
-      const queryParams = `date=${selectedDate.toISOString()}
+    
+
+      const queryParams = `date=${formatDate}
       &fees=${fees}&infoid=${infoid}&Currency=${Currency}&title=${title}&type=${type}`;
       navigate(`/register?${queryParams}`);
     } else{
