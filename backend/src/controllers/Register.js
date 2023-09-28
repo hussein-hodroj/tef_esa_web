@@ -175,7 +175,7 @@ export const getCandidateById = asyncHandler(async (req, res) => {
       return res.status(400).json({ message: 'Candidate ID is required' });
     }
 
-    const getCandidateSQL = 'SELECT * FROM registrations WHERE CandidateID = ?';
+    const getCandidateSQL = 'SELECT r.* , h.title FROM registrations AS r INNER JOIN homeinfo AS h ON r.examId=infoid WHERE CandidateID = ?';
     cnx.query(getCandidateSQL, [CandidateID], async (err, candidateData) => {
       if (err) {
         console.error('Error fetching candidate:', err);
